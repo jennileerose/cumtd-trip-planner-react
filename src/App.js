@@ -1,13 +1,15 @@
 import './App.css';
 import logo from './images/mock-logo.png'
+import Header from './header'
 
 function App() {
   return (
     <div id="content" class="content-styling">
-   <header role="banner" class="header-styling">
+   {/* <header role="banner" class="header-styling">
     <img class="logo-placement flex-item" alt="Mock logo with bus, map marker, disability, location and information icons" src={logo}/>
   <h2 class="header-text flex-item">Accessible CUMTD Trip Planner</h2>
-  </header>
+  </header> */}
+  <Header />
    <nav role="navigation" class="nav-styling">
       <ul class="nav-link-list">
          <li><a href="index.html">Plan Trip</a></li>
