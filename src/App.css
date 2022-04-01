@@ -259,7 +259,7 @@ I have tried to make it clear in my comments what classes are used where and why
       display: flex;
       flex-flow: row wrap;
       justify-content: space-around;
-      background-color: #22527d;
+      background-color: #0c1d2c;
       color: #ffffff;
       padding: 0.75em;
       font-size: 0.75em;
@@ -282,9 +282,9 @@ I have tried to make it clear in my comments what classes are used where and why
       background: #bbbbbb;
   }
   
-  .rates-table {
+  /* .rates-table {
       margin: 0.75em;
-  }
+  } */
   
   p {
       padding: 0.5em;
