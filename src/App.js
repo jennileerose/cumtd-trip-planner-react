@@ -1,58 +1,59 @@
 import './App.css';
-import logo from './images/mock-logo.png'
+import Header from './sections/header'
+import Footer from './sections/footer'
+import React, { useState, useEffect} from 'react';
+import { GET_ROUTES, GET_ROUTE_BY_ID } from './api';
 
 function App() {
+   const [routes, setRoutes] = useState({})
+   // const [selectedRoute, setSelectedRoute] = useState('')
+   const data = null
+   
+   useEffect(() => {
+      fetch(GET_ROUTES)
+       .then(resp => resp.json())
+       .then(data => setRoutes(data))
+      }, [data])
+
+   const SelectRoute = (routeID) => {
+      const routeIDProp = routeID.replace(/\s/g, '%20')
+      const url = GET_ROUTE_BY_ID + routeIDProp
+      console.log(url)
+      // useEffect(() => {
+      //    fetch(url)
+      //  .then(resp => resp.json())
+      //  .then(data => setSelectedRoute(data))
+      // }, [data])
+      // console.log(selectedRoute)
+   }
+
   return (
-    <div id="content" class="content-styling">
-   <header role="banner" class="header-styling">
-    <img class="logo-placement flex-item" alt="Mock logo with bus, map marker, disability, location and information icons" src={logo}/>
-  <h2 class="header-text flex-item">Accessible CUMTD Trip Planner</h2>
-  </header>
-   <nav role="navigation" class="nav-styling">
-      <ul class="nav-link-list">
-         <li><a href="index.html">Plan Trip</a></li>
-      </ul>
-   </nav>
-   <main role="main" class="main-styling" tabindex="1">
-      <div class="flex-item">
-         <h1>Trip Planner</h1>
-      </div>
-   </main>
-   <footer role="contentinfo" class="footer-styling">
-      <div>
-         <ul class="footer-link-list">
-            <li><a href="index.html">Plan Trip</a></li>
-         </ul>
-      </div>
-      <div class="copyright-statement">
-         <p>Copyright <i class="far fa-copyright" aria-label="copyright symbol"></i> 2019, Jennilee Benda - Data fetched from <a href="https://developer.cumtd.com/" target="_blank">CUMTD API</a> and this is not an offically <a href="https://mtd.org/" target="_blank">CUTMD</a> approved application. Background genereated on <a href="http://patternico.com/" target="_blank">Seamless Pattern Maker</a></p>
-      </div>
-      <div class="social-media-links">
-         <ul class="social-media-links">
-            <li><a href="http://www.jennileerose.com" target="_blank"><i class="fas fa-globe" aria-label="My website"></i></a></li>
-            <li><a href="http://www.twitter.com/JenniLRose" target="_blank"><i class="fab fa-twitter" aria-label="Twitter Profile Link @JenniLRose"></i></a></li>
-            <li><a href="http://www.linkedin.com/jennileerose" target="_blank"><i aria-label="LinkedIn Link for Jennilee Rose Benda" class="fab fa-linkedin"></i></a></li>
-            <li><a href="https://www.facebook.com/JennileeRoseDesigns/" target="_blank"><i aria-label="Facebook Profile Link for Jennilee Rose Designs" class="fab fa-facebook"></i></a></li>
-         </ul>
-      </div>
-   </footer>
-</div>
-    // <div className="App">
-    //   <header className="App-header">
-    //     <img src={logo} className="App-logo" alt="logo" />
-    //     <p>
-    //       Edit <code>src/App.js</code> and save to reload.
-    //     </p>
-    //     <a
-    //       className="App-link"
-    //       href="https://reactjs.org"
-    //       target="_blank"
-    //       rel="noopener noreferrer"
-    //     >
-    //       Learn React
-    //     </a>
-    //   </header>
-    // </div>
+   <div id="content" className="content-styling">
+      <Header />
+         <nav role="navigation" className="nav-styling">
+            <ul className="nav-link-list">
+               <li><a href="index.html">Plan Trip</a></li>
+            </ul>
+         </nav>
+         <main role="main" className="main-styling" tabIndex="1">
+            <div className="flex-item">
+               <h1>Trip Planner</h1>
+               <h2>This app is a work in progress...return soon for more features!</h2>
+               <label className="input-label" htmlFor="route-dropdown">Routes</label>
+               <select id="route-dropdown" onChange={(e) => {SelectRoute(e.target.value)}}>
+               {routes.routes !== undefined && 
+                  routes.routes.map((route, index) => (
+                     <option key={index} value={route.route_id}>{route.route_long_name}</option>
+                  ))
+               }
+               </select>
+               <div id="route-info">
+                  {/* {selectedRoute !== undefined && {selectedRoute.route_long_name}} */}
+               </div>
+            </div>
+         </main>
+         <Footer />
+   </div>
   );
 }
 
