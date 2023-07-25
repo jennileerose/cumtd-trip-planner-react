@@ -19,3 +19,23 @@ code {
     background-repeat: repeat;
     font-family: "Helvetica", "Arial", sans-serif;
 }
+
+a.statement-link:hover {
+  font-weight: bold;
+  border: 1px solid #c7ddf0;
+  color: #c7ddf0;
+}
+
+a.statement-link:focus {
+  font-weight: bold;
+  border: 1px solid #c7ddf0;
+  color: #c7ddf0;
+}
+
+a.statement-link:visited {
+  color: #c7ddf0;
+}
+
+.statement-link {
+  color: #c7ddf0;
+}

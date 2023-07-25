@@ -267,10 +267,6 @@ I have tried to make it clear in my comments what classes are used where and why
   
   .copyright-statement {
       margin: auto;
-
-      a {
-        color: #fff;
-      }
   }
   
   tr:nth-child(even) {

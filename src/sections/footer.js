@@ -9,7 +9,7 @@ const Footer = () => {
            </ul>
         </div>
         <div className="copyright-statement">
-           <p>Copyright <span className="far fa-copyright" aria-label="copyright symbol"></span> 2023, Jennilee Benda - Data fetched from <a href="https://developer.cumtd.com/" rel="noreferrer" target="_blank" className="statment-link">CUMTD API</a> and this is not an offically <a href="https://mtd.org/" rel="noreferrer" target="_blank" className="statment-link">CUTMD</a> approved application. Background genereated on <a href="http://patternico.com/" rel="noreferrer" target="_blank" className="statment-link">Seamless Pattern Maker</a></p>
+           <p>Copyright <span className="far fa-copyright" aria-label="copyright symbol"></span> 2023, Jennilee Benda - Data fetched from <a href="https://developer.cumtd.com/" rel="noreferrer" target="_blank" className="statement-link">CUMTD API</a> and this is not an offically <a href="https://mtd.org/" rel="noreferrer" target="_blank" className="statement-link">CUTMD</a> approved application. Background genereated on <a href="http://patternico.com/" rel="noreferrer" target="_blank" className="statement-link">Seamless Pattern Maker</a></p>
         </div>
         <div className="social-media-links">
            <ul className="social-media-links">
