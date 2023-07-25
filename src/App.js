@@ -6,7 +6,7 @@ import { GET_ROUTES, GET_ROUTE_BY_ID } from './api';
 
 function App() {
    const [routes, setRoutes] = useState({})
-   const [selectedRoute, setSelectedRoute] = useState('')
+   // const [selectedRoute, setSelectedRoute] = useState('')
    const data = null
    
    useEffect(() => {
