@@ -2,29 +2,100 @@ import './App.css';
 import Header from './sections/header'
 import Footer from './sections/footer'
 import React, { useState, useEffect} from 'react';
-import { GET_ROUTES, GET_ROUTE_BY_ID } from './api';
+import { GET_ROUTES } from './api';
+import { CUMTDRoute, RouteDetails } from './types';
 
 function App() {
-   const [routes, setRoutes] = useState({})
-   // const [selectedRoute, setSelectedRoute] = useState('')
+   const [routes, setRoutes] = useState<CUMTDRoute>()
+   const [selectedRoute, setSelectedRoute] = useState<RouteDetails>({
+      routeColor: 'none',
+      routeID: 'none',
+      routeLongName: 'no routes found',
+      routeShortName: '',
+      routeTextColor: 'none'
+   })
    const data = null
+
+   const setDataAsType = (data: any) => {
+      if(data !== null || data !== undefined) {
+         let routeListObject = {} as CUMTDRoute
+         let tempRouteInfo = {} as RouteDetails
+         const tempRouteArray = [] as RouteDetails[]
+         tempRouteArray.push({
+            routeColor: 'none',
+            routeID: 'none',
+            routeLongName: 'Select A Route',
+            routeShortName: 'none',
+            routeTextColor: 'none' 
+         })
+         data.routes.forEach((routeData: any) => {
+            tempRouteInfo = {
+               routeColor: routeData.route_color,
+               routeID: routeData.route_id,
+               routeLongName: routeData.route_long_name,
+               routeShortName: routeData.route_short_name,
+               routeTextColor: routeData.route_text_color 
+            }
+            tempRouteArray.push(tempRouteInfo)
+         })
+         routeListObject = {
+            time: data.time,
+            changesetID: data.changeset_id,
+            newChangeset: data.new_changeset,
+            status: data.status,
+            rqst: data.rqst,
+            routes: tempRouteArray
+         }
+         setRoutes(routeListObject)
+      } else {
+         setRoutes({
+            time: '',
+            changesetID: '',
+            newChangeset: false,
+            status: {
+               code: 500,
+               msg: 'error',
+            },
+            rqst: {
+               method: 'none',
+               params: {
+                     routeID: 'no routes found'
+               }
+            },
+            routes: [
+               {
+                  routeColor: 'none',
+                  routeID: 'none',
+                  routeLongName: 'no routes found',
+                  routeShortName: '',
+                  routeTextColor: 'none'
+               } 
+            ]
+         })
+      }
+   }
    
    useEffect(() => {
       fetch(GET_ROUTES)
        .then(resp => resp.json())
-       .then(data => setRoutes(data))
+       .then(data => setDataAsType(data))
       }, [data])
 
-   const SelectRoute = (routeID) => {
-      const routeIDProp = routeID.replace(/\s/g, '%20')
-      const url = GET_ROUTE_BY_ID + routeIDProp
-      console.log(url)
-      // useEffect(() => {
-      //    fetch(url)
-      //  .then(resp => resp.json())
-      //  .then(data => setSelectedRoute(data))
-      // }, [data])
-      // console.log(selectedRoute)
+   const SelectRoute = (routeArrayIndex: string) => {
+      const index = Number(routeArrayIndex)
+      let routeInfo = {} as RouteDetails
+      if(routes !== undefined) {
+         routeInfo =  routes.routes[index]
+      } else {
+         routeInfo = {
+            routeColor: 'none',
+            routeID: 'none',
+            routeLongName: 'no routes found',
+            routeShortName: 0,
+            routeTextColor: 'none'
+         } 
+      }
+      setSelectedRoute(routeInfo)
    }
 
   return (
@@ -35,20 +106,23 @@ function App() {
                <li><a href="index.html">Plan Trip</a></li>
             </ul>
          </nav>
-         <main role="main" className="main-styling" tabIndex="1">
+         <main role="main" className="main-styling" tabIndex={1}>
             <div className="flex-item">
                <h1>Trip Planner</h1>
                <h2>This app is a work in progress...return soon for more features!</h2>
-               <label className="input-label" htmlFor="route-dropdown">Routes</label>
-               <select id="route-dropdown" onChange={(e) => {SelectRoute(e.target.value)}}>
-               {routes.routes !== undefined && 
-                  routes.routes.map((route, index) => (
-                     <option key={index} value={route.route_id}>{route.route_long_name}</option>
-                  ))
-               }
-               </select>
+               {routes !== undefined && (
+                  <>
+                  <label className="input-label" htmlFor="route-dropdown">Routes</label>
+                  <select id="route-dropdown" onChange={(e) => { SelectRoute(e.target.value); } }>
+                    {routes.routes !== undefined &&
+                       routes.routes.map((route, index) => (
+                          <option key={index} value={index}>{route.routeLongName}</option>
+                       ))}
+                  </select>
+                  </>
+               )}
                <div id="route-info">
-                  {/* {selectedRoute !== undefined && {selectedRoute.route_long_name}} */}
+                  <p>{selectedRoute.routeLongName} {selectedRoute.routeShortName}</p>
                </div>
             </div>
          </main>
