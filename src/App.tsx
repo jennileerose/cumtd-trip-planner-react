@@ -4,6 +4,7 @@ import Footer from './sections/footer'
 import React, { useState, useEffect} from 'react';
 import { GET_ROUTES } from './api';
 import { CUMTDRoute, RouteDetails } from './types';
+import Navigation from './sections/navigation';
 
 function App() {
    const [routes, setRoutes] = useState<CUMTDRoute>()
@@ -101,32 +102,28 @@ function App() {
   return (
    <div id="content" className="content-styling">
       <Header />
-         <nav role="navigation" className="nav-styling">
-            <ul className="nav-link-list">
-               <li><a href="index.html">Plan Trip</a></li>
-            </ul>
-         </nav>
-         <main role="main" className="main-styling" tabIndex={1}>
-            <div className="flex-item">
-               <h1>Trip Planner</h1>
-               <h2>This app is a work in progress...return soon for more features!</h2>
-               {routes !== undefined && (
-                  <>
-                  <label className="input-label" htmlFor="route-dropdown">Routes</label>
-                  <select id="route-dropdown" onChange={(e) => { SelectRoute(e.target.value); } }>
-                    {routes.routes !== undefined &&
-                       routes.routes.map((route, index) => (
-                          <option key={index} value={index}>{route.routeLongName}</option>
-                       ))}
-                  </select>
-                  </>
-               )}
-               <div id="route-info">
-                  <p>{selectedRoute.routeLongName} {selectedRoute.routeShortName}</p>
-               </div>
+      <Navigation />
+      <main role="main" className="main-styling" tabIndex={1}>
+         <div className="flex-item">
+            <h1>Trip Planner</h1>
+            <h2>This app is a work in progress...return soon for more features!</h2>
+            {routes !== undefined && (
+               <>
+               <label className="input-label" htmlFor="route-dropdown">Routes</label>
+               <select id="route-dropdown" onChange={(e) => { SelectRoute(e.target.value); } }>
+                  {routes.routes !== undefined &&
+                     routes.routes.map((route, index) => (
+                        <option key={index} value={index}>{route.routeLongName}</option>
+                     ))}
+               </select>
+               </>
+            )}
+            <div id="route-info">
+               <p>{selectedRoute.routeLongName} {selectedRoute.routeShortName}</p>
             </div>
-         </main>
-         <Footer />
+         </div>
+      </main>
+      <Footer />
    </div>
   );
 }
