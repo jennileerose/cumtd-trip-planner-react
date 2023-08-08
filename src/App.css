@@ -42,3 +42,12 @@
       height: 100vh;
   }
 
+  .input-label {
+    font-weight: bold;
+    margin-right: 0.5em;
+  }
+
+  .route-data {
+    padding: 0.25em !important;
+    margin: 0;
+  }

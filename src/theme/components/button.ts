@@ -168,5 +168,40 @@ export default {
                 color: mode(colors.coolWhite, colors.richBlack)(props),
             },
         }),
+        primary: (props: Dict<any>) => ({
+            padding: '0.25em',
+            marginLeft: '0.5em',
+            border: '1p solid',
+            borderColor: colors.gray,
+            borderRadius: '0',
+            fontSize: '1em',
+            bg: mode(
+                colors.UCLABlue,
+                colors.indigoDye
+            )(props),
+            color: mode(colors.coolWhite, colors.coolWhite)(props),
+            _hover: {
+                bg: mode(
+                    colors.indigoDye,
+                    colors.UCLABlue
+                )(props),
+                color: mode(colors.coolWhite, colors.richBlack)(props),
+            },
+            _active: {
+                bg: mode(
+                    colors.indigoDye,
+                    colors.UCLABlue
+                )(props),
+                color: mode(colors.coolWhite, colors.richBlack)(props),
+                transform: 'scale(0.98)',
+            },
+            _focus: {
+                bg: mode(
+                    colors.indigoDye,
+                    colors.UCLABlue
+                )(props),
+                color: mode(colors.coolWhite, colors.richBlack)(props),
+            },
+        }),
     },
 }
