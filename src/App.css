@@ -1,486 +1,56 @@
-/* --- PLEASE NOTE: ------
-
-The reason I use classes more often than element or IDs as styling
-selectors is that I have had it drilled into my head (not just by my employer,
-though that's the biggest source of this) that you do not use element or ID selectors
-unless you ABSOLUTELY HAVE TO in order to make something work. Classes are simpler to me.
-Often times I'm working in libraries where all styling is done by classes.
-
-I have tried to make it clear in my comments what classes are used where and why. If there is confusion, please let me know and I will edit my comments.
-
- -----*/
-
 /*-------- Main Styling for full desktop screens greater than 800px --------*/
 
     /* items styled by element that are not tables. */
-    h1 {
-      font-size: 2.441em;
+  h1 {
+      font-weight: bold !important;
+      font-size: 2.441em !important;
   }
-  
+
   h2 {
-      font-size: 1.953em;
+    font-weight: bold !important;
+    font-size: 1.953em !important;
   }
-  
+
   h3 {
-      font-size: 1.563em;
+      font-weight: bold !important;
+      font-size: 1.563em !important;
   }
-  
-  /* Classes for larger size windows*/
-  
-  styling for the main body of the page
-  .body-styles {
-      background-color: #0c1d2c;
-      /* background-image: url('./images/background.png'); */
+
+  /* styling for the main body of the page */
+  .light-body-styles {
+      background-color: #DBE9F5;
       background-image: url('/src/images/background.png');
       background-repeat: repeat;
       font-family: "Helvetica", "Arial", sans-serif;
+      min-height: 100vh;
+      max-height: 100%;
+      width: 100%;
   }
-  
+  .dark-body-styles {
+    background-color: #122A40;
+    background-image: url('/src/images/dark_background.png');
+    background-repeat: repeat;
+    font-family: "Helvetica", "Arial", sans-serif;
+    min-height: 100vh;
+    max-height: 100%;
+    width: 100%;
+}
+
   /*styling for the content inside the page body*/
   .content-styling {
       margin-left: auto;
       margin-right: auto;
       width: 65%;
-      background-color: #000000;
+      min-height: 100vh;
+      max-height: 100%;
   }
-  
-  /*styling for the header - uses flexbox for responsiveness*/
-  .header-styling {
-      background-color: #0c1d2c;
-      display: flex;
-      flex-flow: row wrap;
-      justify-content: space-around;
-  }
-  
-  /*styles the header text*/
-  .header-text {
-      color: #ffffff;
-      margin: auto;
-      text-align: center;
-      font-size: 1.75em;
-      font-weight: bold;
-  }
-  
-  /*styling for placement of the logo on the left side of the header*/
-  .logo-placement {
-      margin-left: 0;
-      margin-right: auto;
-      margin-top: auto;
-      margin-bottom: auto;
-      width: 15%;
-      height: 15%;
-  }
-  
-  /*styling for the main content of each page*/
-  .main-styling {
-      background-color: #ffffff;
-      color: #000000;
-      padding: 2.5em;
-      overflow: auto;
-      display: -webkit-box;
-      display: -moz-box;
-      display: -ms-flexbox;
-      display: -webkit-flex;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-  }
-  
-  .flex-item {
-      margin: auto;
-  }
-  
-  /*styling for the navigation bar - uses flexbox for responsiveness*/
-  .nav-styling {
-      /*background-color: #0c1d2c;*/
-      background-color: #22527d;
-      padding: 0.05em;
-  }
-  
-  a:visited {
-      color: #dbe9f5;
-  }
-  
-  /*styling for link lists and the social media links
-  in the header and footer
-  They behave similarly
-  but the hover/focus elements for links
-  are different in each one*/
-  .nav-link-list,
-  .footer-link-list{
-      list-style: none;
-      margin: 0;
-      display: -webkit-box;
-      display: -moz-box;
-      display: -ms-flexbox;
-      display: -webkit-flex;
-      display: flex;
-      -webkit-flex-flow: row wrap;
-      justify-content: flex-start;
-  }
-  
-  .nav-link-list li:first-of-type a,
-  .footer-link-list li:first-of-type a{
-      border-left: 1px solid #c7ddf0;
-  }
-  
-  .nav-link-list a,
-  .footer-link-list a{
-      text-decoration: none;
-      display: block;
-      padding: 1em;
-      color: white;
-      border-right: 1px solid #c7ddf0;
-  }
-  
-  .nav-link-list a:hover {
-      background-color: #327ab9;
-      color: #ffffff;
-  }
-  
-  .nav-link-list a:focus {
-      background-color: #327ab9;
-      color: #ffffff;
-      padding: 0.5em;
-      font-size: 1.5em;
-  }
-  
-  .footer-link-list a:hover,
-  .social-media-links a:hover {
-      background-color: #327ab9;
-      color: #ffffff;
-  }
-  
-  .footer-link-list a:focus,
-  .social-media-links a:focus {
-      background-color: #327ab9;
-      color: #ffffff;
-      padding: 0.5em;
-      font-size: 1.5em;
-  }
-  
-  .social-media-links > li {
-      display: inline;
-      margin: auto;
-      padding-right: 0.5em;
-      padding-left: 0.5em;
-  }
-  
-  .social-media-links > li > a {
-      margin: auto;
-      font-weight: bold;
-      color: #ffffff;
-  }
-  
-  .social-media-links {
-      list-style: none;
-      margin: auto;
-      width: fit-content;
-      font-size: 1.25em;
-  }
-  
-  /*---- button styling for submit and cancel buttons ----*/
-  
-  .submit-button {
-       -moz-box-shadow: 0 0 0 0 #660033;
-       -webkit-box-shadow: 0 0 0 0 #660033;
-       box-shadow: 0 0 0 0 #660033;
-       background-color:#660033;
-       -moz-border-radius:4px;
-       -webkit-border-radius:4px;
-       border-radius:4px;
-       border:1px solid #660033;
-       display:inline-block;
-       cursor:pointer;
-       color:#ffffff;
-       font-family: "Helvetica", "Arial", sans-serif;
-       font-size:14px;
-       font-weight:bold;
-       padding:0.5em 1em;
-       text-decoration:none;
-       text-shadow:0 1px 0 #330000;
-   }
-  
-  .submit-button:hover {
-      background-color:#330000;
-  }
-  
-  .submit-button:focus {
-      background-color:#330000;
-  }
-  
-  .submit-button:active {
-      position:relative;
-      top:1px;
-  }
-  
-  .reset-button {
-      -moz-box-shadow: 0 0 0 0 #888888;
-      -webkit-box-shadow: 0 0 0 0 #888888;
-      box-shadow: 0 0 0 0 #888888;
-      background-color:#888888;
-      -moz-border-radius:4px;
-      -webkit-border-radius:4px;
-      border-radius:4px;
-      border:1px solid #888888;
-      display:inline-block;
-      cursor:pointer;
-      color:#ffffff;
-      font-family: "Helvetica", "Arial", sans-serif;
-      font-size:14px;
-      font-weight:bold;
-      padding:0.5em 1em;
-      text-decoration:none;
-      text-shadow:0 1px 0 #555555;
-  }
-  
-  .reset-button:hover {
-      background-color:#666666;
-      color: #ffffff
-  }
-  
-  .reset-button:focus {
-      background-color:#666666;
-      color: #ffffff
-  }
-  
-  .reset-button:active {
-      position:relative;
-      top:1px;
-  }
-  
-  /* ---- end link lists styling --- */
-  
-  .footer-styling {
-      display: -webkit-box;
-      display: -moz-box;
-      display: -ms-flexbox;
-      display: -webkit-flex;
-      display: flex;
-      flex-flow: row wrap;
-      justify-content: space-around;
-      background-color: #0c1d2c;
-      color: #ffffff;
-      padding: 0.75em;
-      font-size: 0.75em;
-  }
-  
-  .copyright-statement {
-      margin: auto;
-  }
-  
-  tr:nth-child(even) {
-      background-color: #f2f2f2
-  }
-  
-  td, th {
-      border: solid 1px #cccccc;
-      padding: 0.25em;
-  }
-  
-  th {
-      background: #bbbbbb;
-  }
-  
-  /* .rates-table {
-      margin: 0.75em;
-  } */
-  
-  p {
-      padding: 0.5em;
-  }
-  
-  .bio {
-      display: -webkit-box;
-      display: -moz-box;
-      display: -ms-flexbox;
-      display: -webkit-flex;
-      display: flex;
-      flex-flow: row wrap;
-      justify-content: space-around;
-      margin-top: 1em;
-  }
-  
-  .bio-image {
-      margin: auto;
-  }
-  
-  .bio-text {
-      margin: auto;
-      width: 65%;
-      height: fit-content;
-  }
-  
-  .form-container {
-      margin: 1em;
-  }
-  
+
   .input-label {
-      padding: 0.25em;
-      font-weight: bold;
-  }
-  
-  .text-input > input {
-      padding: 0.25em;
-      border-radius: 2px;
-      height: 1em;
-      /*background-color: #0c1d2c;*/
-  }
-  
-  .textarea-input {
-      padding: 0.25em;
-      border-radius: 2px;
-  }
-  
-  /*-------- Begin Breakpoint responsive styling -----------*/
-  
-  @media all and (max-width: 800px) {
-      .nav-link-list,
-      .footer-link-list{
-          justify-content: space-around;
-      }
-  
-      .content-styling {
-          margin-left: auto;
-          margin-right: auto;
-          width: 75%;
-          background-color: #000000;
-      }
-  }
-  
-  @media all and (max-width: 600px) {
-      .nav-link-list,
-      .footer-link-list{
-          -webkit-flex-flow: column wrap;
-          flex-flow: column wrap;
-          padding: 0;
-      }
-      .nav-link-list a,
-      .footer-link-list a{
-          text-align: center;
-          padding: 10px;
-          border-top: 1px solid #ff66ff;
-          border-bottom: 1px solid #ff66ff;
-          border-right: none;
-      }
-  
-  
-      .nav-link-list li:first-of-type a,
-      .footer-link-list li:first-of-type a{
-          border-top: 1px solid #ff66ff;
-          border-left: none;
-          border-right: none;
-      }
-  
-      .content-styling {
-          margin-left: auto;
-          margin-right: auto;
-          width: 85%;
-          background-color: #000000;
-      }
-  }
-  
-  /* this is CSS for making my table more responsive. I got the example from
-  https://css-tricks.com/responsive-data-table-roundup/ - I used the first example.
-   */
-  
-  @media
-  only screen
-  and (max-width: 760px), (min-device-width: 768px)
-  and (max-device-width: 1024px)  {
-  
-      /* Moves tables into single-line style */
-      table, thead, tbody, th, td, tr {
-          display: block;
-      }
-  
-      .magenta {
-          background-color: #ff00ff !important;
-      }
-  
-      /* Hide table headers*/
-      thead tr {
-          position: absolute;
-          top: -9999px;
-          left: -9999px;
-      }
-  
-      tr {
-          margin: 0 0 1rem 0;
-      }
-  
-      tr:nth-child(odd) {
-          background: #ccc;
-      }
-  
-      /* Normal table view styling*/
-      td {
-          border: none;
-          border-bottom: 1px solid #eee;
-          position: relative;
-          padding-left: 50%;
-      }
-  
-      td:before {
-          /*td as a Table header styling*/
-          position: absolute;
-          top: 0;
-          left: 6px;
-          width: 45%;
-          padding-right: 10px;
-          white-space: nowrap;
-          font-weight: bold;
-      }
-  
-      /*
-          This does the header labels when the table transforms
-      */
-      td:nth-of-type(1):before { content: "Service"; }
-      td:nth-of-type(2):before { content: "Description"; }
-      td:nth-of-type(3):before { content: "Regular Fee"; }
-      td:nth-of-type(4):before { content: "Non-Profit Fee"; }
-  }
-  
-  .errmsg p {
-      color:  red;
-      font-weight: bold;
+    font-weight: bold;
+    margin-right: 0.5em;
   }
 
-/* .App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+  .route-data {
+    padding: 0.25em !important;
+    margin: 0;
   }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-} */
