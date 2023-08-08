@@ -27,10 +27,18 @@ const Navigation = () => {
                     </Box>
                     <Box>
                         <Button
-                            variant="mainNavigationEnd"
+                            variant="mainNavigationStart"
                             onClick={() => history.push('/route-info')}
                         >
                             Route Information
+                        </Button>
+                    </Box>
+                    <Box>
+                        <Button
+                            variant="mainNavigationEnd"
+                            onClick={() => history.push('/departures-by-stop')}
+                        >
+                            Departures By Stop
                         </Button>
                     </Box>
                     <Spacer />

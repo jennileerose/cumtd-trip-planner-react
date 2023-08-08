@@ -15,64 +15,62 @@ export default {
             borderColor: 'coolWhite',
             margin: '0',
             bg: mode(
-                colors.yinMnBlue,
-                colors.onyx
+                colors.carolinaBlue,
+                colors.yinMnBlue
             )(props),
-            color: mode(colors.coolWhite, colors.coolWhite)(props),
+            color: mode(colors.richBlack, colors.coolWhite)(props),
             _hover: {
                 bg: mode(
-                    colors.prussianBlue,
-                    colors.UCLABlue
+                    colors.yinMnBlue,
+                    colors.carolinaBlue
                 )(props),
-                color: mode(colors.coolWhite, colors.coolWhite)(props),
+                color: mode(colors.coolWhite, colors.richBlack)(props),
             },
             _active: {
                 bg: mode(
-                    colors.prussianBlue,
-                    colors.UCLABlue
+                    colors.yinMnBlue,
+                    colors.carolinaBlue
                 )(props),
-                color: mode(colors.coolWhite, colors.coolWhite)(props),
+                color: mode(colors.coolWhite, colors.richBlack)(props),
                 transform: 'scale(0.98)',
             },
             _focus: {
                 bg: mode(
-                    colors.prussianBlue,
-                    colors.UCLABlue
+                    colors.yinMnBlue,
+                    colors.carolinaBlue
                 )(props),
-                color: mode(colors.coolWhite, colors.coolWhite)(props),
+                color: mode(colors.coolWhite, colors.richBlack)(props),
             },
         }),
         mainNavigationEnd: (props: Dict<any>) => ({
             padding: '0.5em',
-            // borderRight: '1px solid',
-            // borderColor: 'coolWhite',
             margin: '0',
             bg: mode(
-                colors.UCLABlue,
-                colors.prussianBlue
+                colors.carolinaBlue,
+                colors.yinMnBlue
             )(props),
-            color: mode(colors.coolWhite, colors.coolWhite)(props),
+            color: mode(colors.richBlack, colors.coolWhite)(props),
             _hover: {
                 bg: mode(
-                    colors.prussianBlue,
-                    colors.UCLABlue
+                    colors.yinMnBlue,
+                    colors.carolinaBlue
                 )(props),
-                color: mode(colors.coolWhite, colors.coolWhite)(props),
+                color: mode(colors.coolWhite, colors.richBlack)(props),
             },
             _active: {
                 bg: mode(
-                    colors.prussianBlue,
-                    colors.UCLABlue
+                    colors.yinMnBlue,
+                    colors.carolinaBlue
                 )(props),
-                color: mode(colors.coolWhite, colors.coolWhite)(props),
+                color: mode(colors.coolWhite, colors.richBlack)(props),
                 transform: 'scale(0.98)',
             },
             _focus: {
                 bg: mode(
-                    colors.prussianBlue,
-                    colors.UCLABlue
+                    colors.yinMnBlue,
+                    colors.carolinaBlue
                 )(props),
-                color: mode(colors.coolWhite, colors.coolWhite)(props),
+                color: mode(colors.coolWhite, colors.richBlack)(props),
             },
         }),
         footerNavigationStart: (props: Dict<any>) => ({
@@ -81,62 +79,93 @@ export default {
             borderColor: 'coolWhite',
             margin: '0',
             bg: mode(
-                colors.yinMnBlue,
-                colors.prussianBlue
+                colors.carolinaBlue,
+                colors.indigoDye
             )(props),
-            color: mode(colors.coolWhite, colors.coolWhite)(props),
+            color: mode(colors.indigoDye, colors.coolWhite)(props),
             _hover: {
                 bg: mode(
-                    colors.prussianBlue,
-                    colors.yinMnBlue
+                    colors.indigoDye,
+                    colors.carolinaBlue
                 )(props),
-                color: mode(colors.coolWhite, colors.coolWhite)(props),
+                color: mode(colors.coolWhite, colors.richBlack)(props),
             },
             _active: {
                 bg: mode(
-                    colors.prussianBlue,
-                    colors.yinMnBlue
+                    colors.indigoDye,
+                    colors.carolinaBlue
                 )(props),
-                color: mode(colors.coolWhite, colors.coolWhite)(props),
+                color: mode(colors.coolWhite, colors.richBlack)(props),
                 transform: 'scale(0.98)',
             },
             _focus: {
                 bg: mode(
-                    colors.prussianBlue,
-                    colors.yinMnBlue
+                    colors.indigoDye,
+                    colors.carolinaBlue
                 )(props),
-                color: mode(colors.coolWhite, colors.coolWhite)(props),
+                color: mode(colors.coolWhite, colors.richBlack)(props),
             },
         }),
         footerNavigationEnd: (props: Dict<any>) => ({
             padding: '0.25em',
             margin: '0',
             bg: mode(
-                colors.yinMnBlue,
-                colors.prussianBlue
+                colors.carolinaBlue,
+                colors.indigoDye
             )(props),
-            color: mode(colors.coolWhite, colors.coolWhite)(props),
+            color: mode(colors.indigoDye, colors.coolWhite)(props),
             _hover: {
                 bg: mode(
-                    colors.prussianBlue,
-                    colors.yinMnBlue
+                    colors.indigoDye,
+                    colors.carolinaBlue
                 )(props),
-                color: mode(colors.coolWhite, colors.coolWhite)(props),
+                color: mode(colors.coolWhite, colors.richBlack)(props),
             },
             _active: {
                 bg: mode(
-                    colors.prussianBlue,
-                    colors.yinMnBlue
+                    colors.indigoDye,
+                    colors.carolinaBlue
                 )(props),
-                color: mode(colors.coolWhite, colors.coolWhite)(props),
+                color: mode(colors.coolWhite, colors.richBlack)(props),
                 transform: 'scale(0.98)',
             },
             _focus: {
                 bg: mode(
-                    colors.prussianBlue,
-                    colors.yinMnBlue
+                    colors.indigoDye,
+                    colors.carolinaBlue
                 )(props),
-                color: mode(colors.coolWhite, colors.coolWhite)(props),
+                color: mode(colors.coolWhite, colors.richBlack)(props),
+            },
+        }),
+        socialMedia: (props: Dict<any>) => ({
+            padding: '0.5em',
+            margin: '0',
+            bg: mode(
+                colors.carolinaBlue,
+                colors.indigoDye
+            )(props),
+            color: mode(colors.indigoDye, colors.coolWhite)(props),
+            _hover: {
+                bg: mode(
+                    colors.indigoDye,
+                    colors.carolinaBlue
+                )(props),
+                color: mode(colors.coolWhite, colors.richBlack)(props),
+            },
+            _active: {
+                bg: mode(
+                    colors.indigoDye,
+                    colors.carolinaBlue
+                )(props),
+                color: mode(colors.coolWhite, colors.richBlack)(props),
+                transform: 'scale(0.98)',
+            },
+            _focus: {
+                bg: mode(
+                    colors.indigoDye,
+                    colors.carolinaBlue
+                )(props),
+                color: mode(colors.coolWhite, colors.richBlack)(props),
             },
         }),
     },

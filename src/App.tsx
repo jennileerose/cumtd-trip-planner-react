@@ -6,6 +6,7 @@ import React from 'react';
 import HomeView from './sections/ContentSections/HomeView';
 import RouteInformation from './sections/ContentSections/RouteInformation';
 import BasicTripPlanner from './sections/ContentSections/BasicTripPlanner';
+import CheckDeparturesByStop from './sections/ContentSections/CheckDeparturesByStop';
 
 const App = () => (
    <ChakraProvider theme={theme}>
@@ -19,6 +20,9 @@ const App = () => (
             </Route>
             <Route path="/basic-trip-planner">
                <BasicTripPlanner />
+            </Route>
+            <Route path="/departures-by-stop">
+               <CheckDeparturesByStop />
             </Route>
          </Switch>
       </Router>
