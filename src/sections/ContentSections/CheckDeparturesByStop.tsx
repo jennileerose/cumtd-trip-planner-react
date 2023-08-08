@@ -274,6 +274,16 @@ export default function CheckDeparturesByStop(): ReactElement {
               <Box>
                 <h3>{selectedStop.stopName}</h3>
               </Box>
+              {departureData !== undefined &&
+              <Box>
+                  <Button
+                    aria-label="refresh departure list"
+                    variant="primary"
+                    onClick={() => getDeparturesByStop(selectedStop.stopID)}
+                  >
+                    <span className="fas fa-sync-alt"></span> Refresh
+                  </Button>
+              </Box>}
               <Box>
                 <div id="map" />
                 {/* <StopMap stopPoints={selectedStop.stopPoints} stopName={selectedStop.stopName} /> */}
