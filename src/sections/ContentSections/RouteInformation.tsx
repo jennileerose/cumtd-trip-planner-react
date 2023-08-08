@@ -5,7 +5,7 @@ import Navigation from '../navigation'
 import React, { useState, useEffect, ReactElement } from 'react'
 import { GET_ROUTES } from '../../api'
 import { CUMTDRoute, RouteDetails } from '../../types'
-import { Container, useColorMode, Select } from '@chakra-ui/react'
+import { Container, useColorMode, Select, Flex, Box } from '@chakra-ui/react'
 import { colors } from '../../theme/colors'
 
 export default function RouteInformation(): ReactElement {
@@ -105,20 +105,27 @@ export default function RouteInformation(): ReactElement {
                <p>Please select a route from the drop-down menu</p>
                {routes !== undefined && (
                   <>
-                  <label className="input-label" htmlFor="route-dropdown">Routes</label>
-                  <Select
-                     bg={colorMode.colorMode === 'light' ? colors.AliceBlue: colors.prussianBlue}
-                     border="1px solid"
-                     borderColor={colorMode.colorMode === 'light' ? colors.richBlack: colors.coolWhite}
-                     color={colorMode.colorMode === 'light' ? colors.richBlack: colors.coolWhite}
-                     placeholder='Select A Route'
-                     id="route-dropdown"
-                     onChange={(e) => { SelectRoute(e.target.value); }}
-                  >
-                     {routes.routes.map((route, index) => (
-                        <option key={index} value={index}>{route.routeLongName}</option>
-                     ))}
-                  </Select>
+                  <Flex direction="row" flexWrap="wrap">
+                     <Box>
+                        <label className="input-label" htmlFor="route-dropdown">Routes</label>
+                     </Box>
+                     <Box>
+                        <Select
+                           className="dropdown-option"
+                           bg={colorMode.colorMode === 'light' ? colors.AliceBlue: colors.prussianBlue}
+                           border="1px solid"
+                           borderColor={colorMode.colorMode === 'light' ? colors.richBlack: colors.coolWhite}
+                           color={colorMode.colorMode === 'light' ? colors.richBlack: colors.coolWhite}
+                           placeholder='Select A Route'
+                           id="route-dropdown"
+                           onChange={(e) => { SelectRoute(e.target.value); }}
+                        >
+                           {routes.routes.map((route, index) => (
+                              <option key={index} value={index}>{route.routeLongName}</option>
+                           ))}
+                        </Select>
+                     </Box>
+                  </Flex>
                   </>
                )}
                <div id="route-info">
