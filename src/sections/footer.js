@@ -8,7 +8,7 @@ const Footer = () => {
     return (
         <footer role="contentinfo">
          <Container variant="footer">
-         <Flex direction="row" className="footer-link-list">
+         <Flex direction="row" flexWrap="wrap">
             <Box>
                <Button
                   variant="footerNavigationStart"

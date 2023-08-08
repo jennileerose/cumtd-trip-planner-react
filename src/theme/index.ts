@@ -14,13 +14,14 @@ const config: ThemeConfig = {
 
 const styles: Styles = {
     global: (props) => ({
-        // body: {
-            // fontFamily: 'Helvetica, Arial, sans-serif',
+        body: {
+            fontFamily: 'Helvetica, Arial, sans-serif',
+            width: '100%',
             // bgColor: mode(colors.AliceBlue, colors.richBlack)(props),
             // backgroundImage: mode(lightBgImageURL, darkBgImageURL)(props),
             // backgroundRepeat: 'repeat',
             // color: mode(colors.richBlack, colors.coolWhite)(props),
-        // },
+        },
         p: {
             margin: '1em',
         },

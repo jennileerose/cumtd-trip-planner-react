@@ -240,12 +240,13 @@ export default function CheckDeparturesByStop(): ReactElement {
             <p>Please select a stop from the drop-down menu</p>
             {stops !== undefined && (
                <>
-               <Flex direction="row">
+               <Flex direction="row" flexWrap="wrap">
                 <Box>
                   <label className="input-label" htmlFor="route-dropdown">Stops</label>
                 </Box>
                 <Box>
                   <Select
+                    className="dropdown-option"
                     bg={colorMode.colorMode === 'light' ? colors.AliceBlue: colors.prussianBlue}
                     border="1px solid"
                     borderColor={colorMode.colorMode === 'light' ? colors.richBlack: colors.coolWhite}
