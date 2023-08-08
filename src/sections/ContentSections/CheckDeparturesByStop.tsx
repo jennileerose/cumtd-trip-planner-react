@@ -8,8 +8,8 @@ import { useColorMode } from '@chakra-ui/react'
 import { CUMTDStop, DepartureDetails, RouteDeparture, StopDetails } from '../../types'
 import { colors } from '../../theme/colors'
 // import StopMap from './StopMap'
-import { getStopCoords } from './utils'
-import L, { LatLngExpression } from 'leaflet';
+// import { getStopCoords } from './utils'
+// import L, { LatLngExpression } from 'leaflet';
 
 export default function CheckDeparturesByStop(): ReactElement {
   const colorMode = useColorMode()
