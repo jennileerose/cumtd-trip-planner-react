@@ -1,10 +1,11 @@
-import '../../App.css'
+// import '../../App.css'
 import Header from '../header'
 import Footer from '../footer'
 import Navigation from '../navigation'
 import React, { useState, useEffect, ReactElement } from 'react'
 import { GET_ROUTES } from '../../api'
 import { CUMTDRoute, RouteDetails } from '../../types'
+import { Container } from '@chakra-ui/react'
 
 export default function RouteInformation(): ReactElement {
   const [routes, setRoutes] = useState<CUMTDRoute>()
@@ -102,8 +103,8 @@ export default function RouteInformation(): ReactElement {
     <div id="content" className="content-styling">
       <Header />
       <Navigation />
-      <main role="main" className="main-styling" tabIndex={1}>
-         <div className="flex-item">
+      <main role="main">
+         <Container variant="mainContent">
             <h2>Trip Planner</h2>
             <p>Please select a route from the drop-down menu</p>
             {routes !== undefined && (
@@ -120,7 +121,7 @@ export default function RouteInformation(): ReactElement {
             <div id="route-info">
                <p>{selectedRoute.routeLongName} {selectedRoute.routeShortName}</p>
             </div>
-         </div>
+         </Container>
       </main>
       <Footer />
    </div>

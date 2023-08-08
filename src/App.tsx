@@ -3,7 +3,7 @@ import { ChakraProvider } from '@chakra-ui/react'
 import theme from './theme'
 import { HashRouter as Router, Route, Switch } from 'react-router-dom'
 import React from 'react';
-import LandingPage from './sections/ContentSections/LandingPage';
+import HomeView from './sections/ContentSections/HomeView';
 import RouteInformation from './sections/ContentSections/RouteInformation';
 import BasicTripPlanner from './sections/ContentSections/BasicTripPlanner';
 
@@ -12,7 +12,7 @@ const App = () => (
       <Router>
          <Switch>
             <Route path="/" exact>
-               <LandingPage />
+               <HomeView />
             </Route>
             <Route path="/route-info">
                <RouteInformation />

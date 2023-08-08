@@ -1,7 +1,7 @@
 /* eslint-disable import/no-anonymous-default-export */
 import { mode } from '@chakra-ui/theme-tools'
 import { Dict } from '@chakra-ui/utils'
-import { darkColors, lightColors } from '../colors'
+import { colors } from '../colors'
 
 export default {
     baseStyle: {
@@ -15,31 +15,31 @@ export default {
             borderColor: 'coolWhite',
             margin: '0',
             bg: mode(
-                lightColors.mainAccentColor,
-                darkColors.mainAccentColor
+                colors.yinMnBlue,
+                colors.onyx
             )(props),
-            color: mode(lightColors.coolWhite, darkColors.coolWhite)(props),
+            color: mode(colors.coolWhite, colors.coolWhite)(props),
             _hover: {
                 bg: mode(
-                    darkColors.mainAccentColor,
-                    lightColors.mainAccentColor
+                    colors.prussianBlue,
+                    colors.UCLABlue
                 )(props),
-                color: mode(lightColors.coolWhite, darkColors.coolWhite)(props),
+                color: mode(colors.coolWhite, colors.coolWhite)(props),
             },
             _active: {
                 bg: mode(
-                    darkColors.mainAccentColor,
-                    lightColors.mainAccentColor
+                    colors.prussianBlue,
+                    colors.UCLABlue
                 )(props),
-                color: mode(lightColors.coolWhite, darkColors.coolWhite)(props),
+                color: mode(colors.coolWhite, colors.coolWhite)(props),
                 transform: 'scale(0.98)',
             },
             _focus: {
                 bg: mode(
-                    darkColors.mainAccentColor,
-                    lightColors.mainAccentColor
+                    colors.prussianBlue,
+                    colors.UCLABlue
                 )(props),
-                color: mode(lightColors.coolWhite, darkColors.coolWhite)(props),
+                color: mode(colors.coolWhite, colors.coolWhite)(props),
             },
         }),
         mainNavigationEnd: (props: Dict<any>) => ({
@@ -48,31 +48,31 @@ export default {
             // borderColor: 'coolWhite',
             margin: '0',
             bg: mode(
-                lightColors.mainAccentColor,
-                darkColors.mainAccentColor
+                colors.UCLABlue,
+                colors.prussianBlue
             )(props),
-            color: mode(lightColors.coolWhite, darkColors.coolWhite)(props),
+            color: mode(colors.coolWhite, colors.coolWhite)(props),
             _hover: {
                 bg: mode(
-                    darkColors.mainAccentColor,
-                    lightColors.mainAccentColor
+                    colors.prussianBlue,
+                    colors.UCLABlue
                 )(props),
-                color: mode(lightColors.coolWhite, darkColors.coolWhite)(props),
+                color: mode(colors.coolWhite, colors.coolWhite)(props),
             },
             _active: {
                 bg: mode(
-                    darkColors.mainAccentColor,
-                    lightColors.mainAccentColor
+                    colors.prussianBlue,
+                    colors.UCLABlue
                 )(props),
-                color: mode(lightColors.coolWhite, darkColors.coolWhite)(props),
+                color: mode(colors.coolWhite, colors.coolWhite)(props),
                 transform: 'scale(0.98)',
             },
             _focus: {
                 bg: mode(
-                    darkColors.mainAccentColor,
-                    lightColors.mainAccentColor
+                    colors.prussianBlue,
+                    colors.UCLABlue
                 )(props),
-                color: mode(lightColors.coolWhite, darkColors.coolWhite)(props),
+                color: mode(colors.coolWhite, colors.coolWhite)(props),
             },
         }),
         footerNavigationStart: (props: Dict<any>) => ({
@@ -81,62 +81,62 @@ export default {
             borderColor: 'coolWhite',
             margin: '0',
             bg: mode(
-                lightColors.secondaryAccentColor,
-                darkColors.secondaryAccentColor
+                colors.yinMnBlue,
+                colors.prussianBlue
             )(props),
-            color: mode(lightColors.coolWhite, darkColors.coolWhite)(props),
+            color: mode(colors.coolWhite, colors.coolWhite)(props),
             _hover: {
                 bg: mode(
-                    darkColors.secondaryAccentColor,
-                    lightColors.secondaryAccentColor
+                    colors.prussianBlue,
+                    colors.yinMnBlue
                 )(props),
-                color: mode(lightColors.coolWhite, darkColors.coolWhite)(props),
+                color: mode(colors.coolWhite, colors.coolWhite)(props),
             },
             _active: {
                 bg: mode(
-                    darkColors.secondaryAccentColor,
-                    lightColors.secondaryAccentColor
+                    colors.prussianBlue,
+                    colors.yinMnBlue
                 )(props),
-                color: mode(lightColors.coolWhite, darkColors.coolWhite)(props),
+                color: mode(colors.coolWhite, colors.coolWhite)(props),
                 transform: 'scale(0.98)',
             },
             _focus: {
                 bg: mode(
-                    darkColors.secondaryAccentColor,
-                    lightColors.secondaryAccentColor
+                    colors.prussianBlue,
+                    colors.yinMnBlue
                 )(props),
-                color: mode(lightColors.coolWhite, darkColors.coolWhite)(props),
+                color: mode(colors.coolWhite, colors.coolWhite)(props),
             },
         }),
         footerNavigationEnd: (props: Dict<any>) => ({
             padding: '0.25em',
             margin: '0',
             bg: mode(
-                lightColors.secondaryAccentColor,
-                darkColors.secondaryAccentColor
+                colors.yinMnBlue,
+                colors.prussianBlue
             )(props),
-            color: mode(lightColors.coolWhite, darkColors.coolWhite)(props),
+            color: mode(colors.coolWhite, colors.coolWhite)(props),
             _hover: {
                 bg: mode(
-                    darkColors.secondaryAccentColor,
-                    lightColors.secondaryAccentColor
+                    colors.prussianBlue,
+                    colors.yinMnBlue
                 )(props),
-                color: mode(lightColors.coolWhite, darkColors.coolWhite)(props),
+                color: mode(colors.coolWhite, colors.coolWhite)(props),
             },
             _active: {
                 bg: mode(
-                    darkColors.secondaryAccentColor,
-                    lightColors.secondaryAccentColor
+                    colors.prussianBlue,
+                    colors.yinMnBlue
                 )(props),
-                color: mode(lightColors.coolWhite, darkColors.coolWhite)(props),
+                color: mode(colors.coolWhite, colors.coolWhite)(props),
                 transform: 'scale(0.98)',
             },
             _focus: {
                 bg: mode(
-                    darkColors.secondaryAccentColor,
-                    lightColors.secondaryAccentColor
+                    colors.prussianBlue,
+                    colors.yinMnBlue
                 )(props),
-                color: mode(lightColors.coolWhite, darkColors.coolWhite)(props),
+                color: mode(colors.coolWhite, colors.coolWhite)(props),
             },
         }),
     },

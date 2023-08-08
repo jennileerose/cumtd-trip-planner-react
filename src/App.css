@@ -1,78 +1,59 @@
-/* --- PLEASE NOTE: ------
-
-The reason I use classes more often than element or IDs as styling
-selectors is that I have had it drilled into my head (not just by my employer,
-though that's the biggest source of this) that you do not use element or ID selectors
-unless you ABSOLUTELY HAVE TO in order to make something work. Classes are simpler to me.
-Often times I'm working in libraries where all styling is done by classes.
-
-I have tried to make it clear in my comments what classes are used where and why. If there is confusion, please let me know and I will edit my comments.
-
- -----*/
-
 /*-------- Main Styling for full desktop screens greater than 800px --------*/
 
     /* items styled by element that are not tables. */
-    h1 {
-      font-size: 2.441em;
+  h1 {
+      font-weight: bold;
+      font-size: 2.441em !important;
   }
   
   h2 {
-      font-size: 1.953em;
+    font-weight: bold;  
+    font-size: 1.953em !important;
   }
   
   h3 {
-      font-size: 1.563em;
+      font-weight: bold;
+      font-size: 1.563em !important;
   }
   
   /* Classes for larger size windows*/
-  
-  styling for the main body of the page
-  .body-styles {
-      background-color: #0c1d2c;
-      /* background-image: url('./images/background.png'); */
-      background-image: url('/src/images/background.png');
-      background-repeat: repeat;
-      font-family: "Helvetica", "Arial", sans-serif;
-  }
   
   /*styling for the content inside the page body*/
   .content-styling {
       margin-left: auto;
       margin-right: auto;
       width: 65%;
-      background-color: #000000;
   }
   
   /*styling for the header - uses flexbox for responsiveness*/
-  .header-styling {
+  /* .header-styling {
       background-color: #0c1d2c;
       display: flex;
       flex-flow: row wrap;
       justify-content: space-around;
-  }
+  } */
   
   /*styles the header text*/
-  .header-text {
+  /* .header-text {
       color: #ffffff;
       margin: auto;
       text-align: center;
       font-size: 1.75em;
       font-weight: bold;
-  }
+  } */
   
   /*styling for placement of the logo on the left side of the header*/
-  .logo-placement {
+  /* .logo-placement {
       margin-left: 0;
       margin-right: auto;
       margin-top: auto;
       margin-bottom: auto;
       width: 15%;
       height: 15%;
-  }
+  } */
   
   /*styling for the main content of each page*/
-  .main-styling {
+  /* .main-styling {
       background-color: #ffffff;
       color: #000000;
       padding: 2.5em;
@@ -84,18 +65,18 @@ I have tried to make it clear in my comments what classes are used where and why
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
-  }
+  } */
   
   .flex-item {
       margin: auto;
   }
   
   /*styling for the navigation bar - uses flexbox for responsiveness*/
-  .nav-styling {
+  /* .nav-styling { */
       /*background-color: #0c1d2c;*/
-      background-color: #22527d;
+      /* background-color: #22527d;
       padding: 0.05em;
-  }
+  } */
   
   a:visited {
       color: #dbe9f5;
