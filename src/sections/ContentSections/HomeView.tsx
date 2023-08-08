@@ -17,6 +17,7 @@ export default function HomeView(): ReactElement {
           <div className="flex-item">
               <h2>Welcome to my CUMTD Trip Planner</h2>
               <p>This is a trip planner designed using the Champaign-Urbana Mass Transit District API and it is designed to be accessible to WCAG 2.0 A level standard.</p>
+              <p>It was started in June 2023 so it's still very much a work in progress.</p>
           </div>
           </Container>
         </main>
