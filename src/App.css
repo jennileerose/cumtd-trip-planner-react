@@ -126,7 +126,7 @@ I have tried to make it clear in my comments what classes are used where and why
   
   .nav-link-list a,
   .footer-link-list a{
-      text-decoration: none;
+      text-decoration: underline;
       display: block;
       padding: 1em;
       color: white;
@@ -134,11 +134,13 @@ I have tried to make it clear in my comments what classes are used where and why
   }
   
   .nav-link-list a:hover {
+      text-decoration: underline;
       background-color: #327ab9;
       color: #ffffff;
   }
   
   .nav-link-list a:focus {
+      text-decoration: underline;
       background-color: #327ab9;
       color: #ffffff;
       padding: 0.5em;
@@ -252,12 +254,12 @@ I have tried to make it clear in my comments what classes are used where and why
   /* ---- end link lists styling --- */
   
   .footer-styling {
-      display: -webkit-box;
+      /* display: -webkit-box;
       display: -moz-box;
       display: -ms-flexbox;
       display: -webkit-flex;
       display: flex;
-      flex-flow: row wrap;
+      flex-flow: row wrap; */
       justify-content: space-around;
       background-color: #0c1d2c;
       color: #ffffff;

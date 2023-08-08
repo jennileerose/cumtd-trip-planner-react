@@ -21,21 +21,25 @@ code {
 }
 
 a.statement-link:hover {
+  text-decoration: underline;
   font-weight: bold;
   border: 1px solid #c7ddf0;
   color: #c7ddf0;
 }
 
 a.statement-link:focus {
+  text-decoration: underline;
   font-weight: bold;
   border: 1px solid #c7ddf0;
   color: #c7ddf0;
 }
 
 a.statement-link:visited {
+  text-decoration: underline;
   color: #c7ddf0;
 }
 
 .statement-link {
+  text-decoration: underline;
   color: #c7ddf0;
 }
