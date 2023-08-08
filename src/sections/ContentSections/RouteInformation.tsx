@@ -120,12 +120,11 @@ export default function RouteInformation(): ReactElement {
                      color={colorMode.colorMode === 'light' ? colors.richBlack: colors.coolWhite}
                      placeholder='Select A Route'
                      id="route-dropdown"
-                     onChange={(e) => { SelectRoute(e.target.value); } }
+                     onChange={(e) => { SelectRoute(e.target.value); }}
                   >
-                     {routes.routes !== undefined &&
-                        routes.routes.map((route, index) => (
-                           <option key={index} value={index}>{route.routeLongName}</option>
-                        ))}
+                     {routes.routes.map((route, index) => (
+                        <option key={index} value={index}>{route.routeLongName}</option>
+                     ))}
                   </Select>
                   </>
                )}
