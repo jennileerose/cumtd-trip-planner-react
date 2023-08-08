@@ -195,22 +195,22 @@ export default function CheckDeparturesByStop(): ReactElement {
     }
   }
 
-  const setUpMap = () => {
-    if(selectedStop !== undefined && selectedStop.stopID !== 'none') {
-      const stopCoordinates = getStopCoords(selectedStop.stopPoints)
-        console.log(selectedStop, stopCoordinates)
-        const map = L.map('map').setView(stopCoordinates[0], 0);
-        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-          maxZoom: 19,
-          attribution:
-            '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-        }).addTo(map);
-        const stopMarker = L.marker(stopCoordinates[0]).addTo(map);
-        stopMarker
-        .bindPopup('<p>' + selectedStop.stopName + '</p>')
-        .openPopup();
-      }
-  }
+  // const setUpMap = () => {
+  //   if(selectedStop !== undefined && selectedStop.stopID !== 'none') {
+  //     const stopCoordinates = getStopCoords(selectedStop.stopPoints)
+  //       console.log(selectedStop, stopCoordinates)
+  //       const map = L.map('map').setView(stopCoordinates[0], 0);
+  //       L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  //         maxZoom: 19,
+  //         attribution:
+  //           '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+  //       }).addTo(map);
+  //       const stopMarker = L.marker(stopCoordinates[0]).addTo(map);
+  //       stopMarker
+  //       .bindPopup('<p>' + selectedStop.stopName + '</p>')
+  //       .openPopup();
+  //     }
+  // }
 
   // useEffect(() => {
   //   if(selectedStop !== undefined && selectedStop.stopID !== 'none') {
@@ -252,7 +252,10 @@ export default function CheckDeparturesByStop(): ReactElement {
                     color={colorMode.colorMode === 'light' ? colors.richBlack: colors.coolWhite}
                     placeholder='Select A Stop'
                     id="route-dropdown"
-                    onChange={(e) => { selectStop(e.target.value); setUpMap(); }}
+                    onChange={(e) => {
+                      selectStop(e.target.value);
+                      // setUpMap();
+                    }}
                   >
                     {stops.stops !== undefined &&
                       stops.stops.map((stop, index) => (

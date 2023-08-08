@@ -22,7 +22,8 @@
       background-image: url('/src/images/background.png');
       background-repeat: repeat;
       font-family: "Helvetica", "Arial", sans-serif;
-      height: 100vh;
+      min-height: 100vh;
+      max-height: 100%;
       width: 100%;
   }
   .dark-body-styles {
@@ -30,7 +31,8 @@
     background-image: url('/src/images/dark_background.png');
     background-repeat: repeat;
     font-family: "Helvetica", "Arial", sans-serif;
-    height: 100vh;
+    min-height: 100vh;
+    max-height: 100%;
     width: 100%;
 }
 
@@ -39,7 +41,8 @@
       margin-left: auto;
       margin-right: auto;
       width: 65%;
-      height: 100vh;
+      min-height: 100vh;
+      max-height: 100%;
   }
 
   .input-label {

@@ -8,7 +8,7 @@ const Navigation = () => {
     return (
         <nav role="navigation">
             <Container variant="navigation">
-                <Flex direction="row" className="nav-link-list">
+                <Flex direction="row" className="nav-link-list" flexWrap="wrap">
                     <Box>
                         <Button
                             variant="mainNavigationStart"
