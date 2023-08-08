@@ -177,9 +177,9 @@ export default {
             fontSize: '1em',
             bg: mode(
                 colors.UCLABlue,
-                colors.indigoDye
+                colors.carolinaBlue
             )(props),
-            color: mode(colors.coolWhite, colors.coolWhite)(props),
+            color: mode(colors.coolWhite, colors.richBlack)(props),
             _hover: {
                 bg: mode(
                     colors.indigoDye,
