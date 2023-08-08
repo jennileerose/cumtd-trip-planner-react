@@ -25,13 +25,6 @@ export default function RouteInformation(): ReactElement {
          let routeListObject = {} as CUMTDRoute
          let tempRouteInfo = {} as RouteDetails
          const tempRouteArray = [] as RouteDetails[]
-         // tempRouteArray.push({
-         //    routeColor: 'none',
-         //    routeID: 'none',
-         //    routeLongName: 'Select A Route',
-         //    routeShortName: 'none',
-         //    routeTextColor: 'none'
-         // })
          data.routes.forEach((routeData: any) => {
             tempRouteInfo = {
                routeColor: routeData.route_color,
