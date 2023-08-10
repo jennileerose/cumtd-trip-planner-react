@@ -2,10 +2,10 @@ import Header from '../header'
 import Footer from '../footer'
 import Navigation from '../navigation'
 import React, { ReactElement, useState, useEffect } from 'react'
-import { Container, Select, Flex, Box, Button, Spacer } from '@chakra-ui/react'
+import { Container, Select, Flex, Box, Button, Spacer, Input } from '@chakra-ui/react'
 import { GET_ALL_STOPS, GET_DEPARTURE_BY_STOP } from '../../api'
 import { useColorMode } from '@chakra-ui/react'
-import { CUMTDStop, DepartureDetails, RouteDeparture, StopDetails } from '../../types'
+import { CUMTDStop, DepartureDetails, RouteDeparture, StopDetails, StopSearchDetails} from '../../types'
 import { colors } from '../../theme/colors'
 // import StopMap from './StopMap'
 // import { getStopCoords } from './utils'
@@ -13,6 +13,8 @@ import { colors } from '../../theme/colors'
 
 export default function CheckDeparturesByStop(): ReactElement {
   const colorMode = useColorMode()
+  const [value, setValue] = useState<string>('')
+  const [searchResults, setSearchResults] = useState<StopSearchDetails[]>()
   const [stops, setStops] = useState<CUMTDStop>()
   const [selectedStop, setSelectedStop] = useState<StopDetails>({
     stopID: 'none',
@@ -30,12 +32,13 @@ export default function CheckDeparturesByStop(): ReactElement {
   const [departureData, setDepartureData] = useState<RouteDeparture>()
 
   const setStopDataAsType = (data: any) => {
-    console.log(data)
+    // console.log(data)
     if(data !== null || data !== undefined) {
       let stopListObject = {} as CUMTDStop
       let tempStopInfo = {} as StopDetails
+      const tempSearchResults = [] as StopSearchDetails[]
       const tempStopArray = [] as StopDetails[]
-      data.stops.forEach((stopListData: any) => {
+      data.stops.forEach((stopListData: any, stopListIndex: number) => {
         tempStopInfo = {
             stopID: stopListData.stop_id,
             stopName: stopListData.stop_name,
@@ -43,6 +46,11 @@ export default function CheckDeparturesByStop(): ReactElement {
             stopPoints: stopListData.stop_points
          }
          tempStopArray.push(tempStopInfo)
+         tempSearchResults.push({
+          key: stopListData.stop_id,
+          index: stopListIndex,
+          value: stopListData.stop_name
+         })
       })
       stopListObject = {
          time: data.time,
@@ -53,6 +61,7 @@ export default function CheckDeparturesByStop(): ReactElement {
          stops: tempStopArray
       }
       setStops(stopListObject)
+      setSearchResults(tempSearchResults)
    } else {
       setStops({
          time: '',
@@ -87,7 +96,7 @@ export default function CheckDeparturesByStop(): ReactElement {
     }, [stopData])
 
   const selectStop = (stopArrayIndex: string) => {
-    console.log(stopArrayIndex)
+    // console.log(stopArrayIndex)
     const index = Number(stopArrayIndex)
     let stopInfo = {} as StopDetails
     if(stops !== undefined) {
@@ -107,6 +116,7 @@ export default function CheckDeparturesByStop(): ReactElement {
       }
     }
     setSelectedStop(stopInfo)
+    setValue(stopInfo.stopName)
   }
 
   const getDeparturesByStop = (stopID: string) => {
@@ -195,6 +205,22 @@ export default function CheckDeparturesByStop(): ReactElement {
     }
   }
 
+  const searchStops = (searchValue: string) => {
+    const tempArray = [] as StopSearchDetails[]
+    if(stops !== undefined) {
+      stops.stops.forEach((searchStop, searchStopIndex) => {
+        if(searchStop.stopName.includes(searchValue)) {
+          tempArray.push({
+            key: searchStop.stopID,
+            index: searchStopIndex,
+            value: searchStop.stopName
+          })
+        }
+      })
+    }
+    setSearchResults(tempArray)
+  }
+
   // const setUpMap = () => {
   //   if(selectedStop !== undefined && selectedStop.stopID !== 'none') {
   //     const stopCoordinates = getStopCoords(selectedStop.stopPoints)
@@ -240,9 +266,62 @@ export default function CheckDeparturesByStop(): ReactElement {
             <p>Please select a stop from the drop-down menu</p>
             {stops !== undefined && (
                <>
-               <Flex direction="row" flexWrap="wrap">
+               <Flex direction="column">
+                <Box>
+                  <Flex direction="row" flexWrap="wrap">
+                    <Box>
+                      <label className="input-label" htmlFor="stop-search"> Search Stops</label>
+                    </Box>
+                    <Box>
+                      <Input
+                        id="stop-search"
+                        value={value}
+                        placeholder="Search stops..."
+                        onChange={(e) => {
+                          setValue(e.target.value)
+                          searchStops(e.target.value)
+                        }}
+                      />
+                    </Box>
+                    <Box>
+                  <Select
+                    className="dropdown-option"
+                    bg={colorMode.colorMode === 'light' ? colors.AliceBlue: colors.prussianBlue}
+                    border="1px solid"
+                    borderColor={colorMode.colorMode === 'light' ? colors.richBlack: colors.coolWhite}
+                    color={colorMode.colorMode === 'light' ? colors.richBlack: colors.coolWhite}
+                    // placeholder='Select A Stop'
+                    id="route-dropdown"
+                    onChange={(e) => {
+                      selectStop(e.target.value);
+                      // setUpMap();
+                    }}
+                  >
+                    {searchResults !== undefined && value !== '' &&
+                      searchResults.map((stop) => (
+                          <option onClick={() => selectStop(stop.index.toString()) } key={stop.key} value={stop.index}>{stop.value}</option>
+                      ))}
+                  </Select>
+                </Box>
+                <Box>
+                  <Button variant="primary" onClick={() => getDeparturesByStop(selectedStop.stopID)}>Get Routes</Button>
+                </Box>
+                  </Flex>
+                </Box>
+               </Flex>
+               {/* <Flex direction="row" flexWrap="wrap">
                 <Box>
                   <label className="input-label" htmlFor="route-dropdown">Stops</label>
+                </Box>
+                 <Box>
+                  <Input
+                    value={value}
+                    placeholder="Search stops..."
+                    onChange={(e) => {
+                      setValue(e.target.value)
+                      searchStops(e.target.value)
+                    }}
+                  />
                 </Box>
                 <Box>
                   <Select
@@ -251,23 +330,23 @@ export default function CheckDeparturesByStop(): ReactElement {
                     border="1px solid"
                     borderColor={colorMode.colorMode === 'light' ? colors.richBlack: colors.coolWhite}
                     color={colorMode.colorMode === 'light' ? colors.richBlack: colors.coolWhite}
-                    placeholder='Select A Stop'
+                    // placeholder='Select A Stop'
                     id="route-dropdown"
                     onChange={(e) => {
                       selectStop(e.target.value);
                       // setUpMap();
                     }}
                   >
-                    {stops.stops !== undefined &&
-                      stops.stops.map((stop, index) => (
-                          <option key={index} value={index}>{stop.stopName}</option>
+                    {searchResults !== undefined && value !== '' &&
+                      searchResults.map((stop) => (
+                          <option onClick={() => selectStop(stop.index.toString()) } key={stop.key} value={stop.index}>{stop.value}</option>
                       ))}
                   </Select>
                 </Box>
                 <Box>
                   <Button variant="primary" onClick={() => getDeparturesByStop(selectedStop.stopID)}>Get Routes</Button>
                 </Box>
-               </Flex>
+               </Flex> */}
                </>
             )}
             <Flex direction="column" id="stop-info">

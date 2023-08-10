@@ -105,3 +105,9 @@ export type RouteDeparture = {
     },
     departures: DepartureDetails[]
 }
+
+export type StopSearchDetails = {
+    key: string,
+    index: number,
+    value: string
+}
