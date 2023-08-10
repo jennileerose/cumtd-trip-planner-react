@@ -1,9 +1,9 @@
 import { extendTheme, ThemeConfig } from '@chakra-ui/react'
 import {
-    // mode,
+    mode,
     Styles
 } from '@chakra-ui/theme-tools'
-// import { colors } from './colors'
+import { colors } from './colors'
 import * as components from './components'
 
 
@@ -25,6 +25,13 @@ const styles: Styles = {
         p: {
             margin: '1em',
         },
+        input: {
+            bgColor: mode(colors.AliceBlue, colors.richBlack)(props),
+            border: '1px solid',
+            borderColor: mode(colors.richBlack, colors.coolWhite),
+            marginLeft: '1em',
+            marginRight: '1em'
+        }
     }),
 }
 

@@ -208,15 +208,28 @@ export default function CheckDeparturesByStop(): ReactElement {
   const searchStops = (searchValue: string) => {
     const tempArray = [] as StopSearchDetails[]
     if(stops !== undefined) {
-      stops.stops.forEach((searchStop, searchStopIndex) => {
-        if(searchStop.stopName.includes(searchValue)) {
-          tempArray.push({
-            key: searchStop.stopID,
-            index: searchStopIndex,
-            value: searchStop.stopName
-          })
-        }
-      })
+      if(searchValue !== '') {
+        stops.stops.forEach((searchStop, searchStopIndex) => {
+          if(searchStop.stopName.includes(searchValue) || searchStop.stopName.toLowerCase().includes(searchValue)) {
+            tempArray.push({
+              key: searchStop.stopID,
+              index: searchStopIndex,
+              value: searchStop.stopName
+            })
+          }
+        })
+        console.log(tempArray)
+      } else {
+        stops.stops.forEach((searchStop, searchStopIndex) => {
+          // if(searchStop.stopName.includes(searchValue)) {
+            tempArray.push({
+              key: searchStop.stopID,
+              index: searchStopIndex,
+              value: searchStop.stopName
+            })
+          // }
+        })
+      }
     }
     setSearchResults(tempArray)
   }
@@ -290,14 +303,14 @@ export default function CheckDeparturesByStop(): ReactElement {
                     border="1px solid"
                     borderColor={colorMode.colorMode === 'light' ? colors.richBlack: colors.coolWhite}
                     color={colorMode.colorMode === 'light' ? colors.richBlack: colors.coolWhite}
-                    // placeholder='Select A Stop'
+                    placeholder='Select Stop'
                     id="route-dropdown"
                     onChange={(e) => {
                       selectStop(e.target.value);
                       // setUpMap();
                     }}
                   >
-                    {searchResults !== undefined && value !== '' &&
+                    {searchResults !== undefined &&
                       searchResults.map((stop) => (
                           <option onClick={() => selectStop(stop.index.toString()) } key={stop.key} value={stop.index}>{stop.value}</option>
                       ))}
