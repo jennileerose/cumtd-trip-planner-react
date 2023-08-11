@@ -13,6 +13,7 @@ import { colors } from '../../theme/colors'
 
 export default function CheckDeparturesByStop(): ReactElement {
   const colorMode = useColorMode()
+  const [depatureDataStopHeader, setDepartureDataStopHeader] = useState<string>('No Stop Selected')
   const [value, setValue] = useState<string>('')
   const [searchResults, setSearchResults] = useState<StopSearchDetails[]>()
   const [stops, setStops] = useState<CUMTDStop>()
@@ -184,6 +185,7 @@ export default function CheckDeparturesByStop(): ReactElement {
         departures: tempDepartureArray
       }
       console.log(departureListObject.departures)
+      setDepartureDataStopHeader(selectedStop.stopName)
       setDepartureData(departureListObject)
     } else {
       setDepartureData({
@@ -206,6 +208,8 @@ export default function CheckDeparturesByStop(): ReactElement {
   }
 
   const searchStops = (searchValue: string) => {
+    setDepartureData(undefined)
+    setDepartureDataStopHeader('No Stop Selected')
     const tempArray = [] as StopSearchDetails[]
     if(stops !== undefined) {
       if(searchValue !== '') {
@@ -276,14 +280,14 @@ export default function CheckDeparturesByStop(): ReactElement {
       <main role="main">
         <Container variant="mainContent">
          <h2>Departures By Stop</h2>
-            <p>Please select a stop from the drop-down menu</p>
+            <p>Please select a stop from the drop-down menu, use the text box to filter based on a stop name.</p>
             {stops !== undefined && (
                <>
                <Flex direction="column">
                 <Box>
                   <Flex direction="row" flexWrap="wrap">
                     <Box>
-                      <label className="input-label" htmlFor="stop-search"> Search Stops</label>
+                      <label className="input-label" htmlFor="stop-search"> Filter Stops</label>
                     </Box>
                     <Box>
                       <Input
@@ -322,49 +326,11 @@ export default function CheckDeparturesByStop(): ReactElement {
                   </Flex>
                 </Box>
                </Flex>
-               {/* <Flex direction="row" flexWrap="wrap">
-                <Box>
-                  <label className="input-label" htmlFor="route-dropdown">Stops</label>
-                </Box>
-                 <Box>
-                  <Input
-                    value={value}
-                    placeholder="Search stops..."
-                    onChange={(e) => {
-                      setValue(e.target.value)
-                      searchStops(e.target.value)
-                    }}
-                  />
-                </Box>
-                <Box>
-                  <Select
-                    className="dropdown-option"
-                    bg={colorMode.colorMode === 'light' ? colors.AliceBlue: colors.prussianBlue}
-                    border="1px solid"
-                    borderColor={colorMode.colorMode === 'light' ? colors.richBlack: colors.coolWhite}
-                    color={colorMode.colorMode === 'light' ? colors.richBlack: colors.coolWhite}
-                    // placeholder='Select A Stop'
-                    id="route-dropdown"
-                    onChange={(e) => {
-                      selectStop(e.target.value);
-                      // setUpMap();
-                    }}
-                  >
-                    {searchResults !== undefined && value !== '' &&
-                      searchResults.map((stop) => (
-                          <option onClick={() => selectStop(stop.index.toString()) } key={stop.key} value={stop.index}>{stop.value}</option>
-                      ))}
-                  </Select>
-                </Box>
-                <Box>
-                  <Button variant="primary" onClick={() => getDeparturesByStop(selectedStop.stopID)}>Get Routes</Button>
-                </Box>
-               </Flex> */}
                </>
             )}
             <Flex direction="column" id="stop-info">
               <Box>
-                <h3>{selectedStop.stopName}</h3>
+                <h3>{depatureDataStopHeader}</h3>
               </Box>
               {departureData !== undefined &&
               <Box>
