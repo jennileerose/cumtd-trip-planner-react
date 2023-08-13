@@ -111,3 +111,20 @@ export type StopSearchDetails = {
     index: number,
     value: string
 }
+
+export type TripInfo = {
+    trip_id: string,
+    trip_headsign: string,
+    route_id: string,
+    block_id: string,
+    direction: string,
+    service_id: string,
+    shape_id: string
+}
+
+export type TimeTableInfo = {
+    routeID: string,
+    direction: string,
+    departureTime: string,
+    
+}

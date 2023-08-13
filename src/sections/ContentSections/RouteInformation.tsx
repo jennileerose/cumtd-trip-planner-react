@@ -3,9 +3,9 @@ import Header from '../header'
 import Footer from '../footer'
 import Navigation from '../navigation'
 import React, { useState, useEffect, ReactElement } from 'react'
-import { GET_ROUTES } from '../../api'
+import { GET_ROUTES, GET_TRIPS_BY_ROUTE } from '../../api'
 import { CUMTDRoute, RouteDetails } from '../../types'
-import { Container, useColorMode, Select, Flex, Box } from '@chakra-ui/react'
+import { Container, useColorMode, Select, Flex, Box, Button } from '@chakra-ui/react'
 import { colors } from '../../theme/colors'
 
 export default function RouteInformation(): ReactElement {
@@ -19,6 +19,13 @@ export default function RouteInformation(): ReactElement {
       routeTextColor: 'none'
    })
    const data = null
+   const [tripData, setTripData] = useState()
+
+   const fetchTripsByRoute = () => {
+      fetch(GET_TRIPS_BY_ROUTE + selectedRoute.routeID)
+      .then(resp => resp.json())
+      .then(data => setTripData(data))
+   }
 
    const setDataAsType = (data: any) => {
       if(data !== null || data !== undefined) {
@@ -128,8 +135,12 @@ export default function RouteInformation(): ReactElement {
                   </Flex>
                   </>
                )}
+               <Button variant="primary" onClick={() => fetchTripsByRoute()}>Get Trips</Button>
                <div id="route-info">
                   <p>{selectedRoute.routeLongName} {selectedRoute.routeShortName}</p>
+                  {tripData !== undefined && (
+                     <p>{JSON.stringify(tripData)}</p>
+                  )}
                </div>
             </Container>
          </main>
