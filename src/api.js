@@ -7,3 +7,4 @@ export const GET_DEPARTURE_BY_STOP = 'https://developer.cumtd.com/api/v2.2/json/
 export const GET_ALL_STOPS = 'https://developer.cumtd.com/api/v2.2/json/getstops?key=3dc733f835924ef58aba4003302c18c5'
 export const GET_STOP_BY_ID = 'https://developer.cumtd.com/api/v2.2/json/getstop?key=3dc733f835924ef58aba4003302c18c5&stop_id='
 export const GET_TRIPS_BY_ROUTE = 'https://developer.cumtd.com/api/v2.2/json/gettripsbyroute?key=3dc733f835924ef58aba4003302c18c5&route_id='
+export const GET_STOPTIMES_BY_TRIP = 'https://developer.cumtd.com/api/v2.2/json/getstoptimesbytrip?key=3dc733f835924ef58aba4003302c18c5&trip_id='

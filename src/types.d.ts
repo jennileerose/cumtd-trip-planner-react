@@ -126,5 +126,11 @@ export type TimeTableInfo = {
     routeID: string,
     direction: string,
     departureTime: string,
-    
+}
+
+export type StopTimesByTrip = {
+    arrivalTimes: string,
+    departureTime: string,
+    stop_sequence: string,
+    stop_point: StopPoint
 }

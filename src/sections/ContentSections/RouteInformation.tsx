@@ -3,8 +3,8 @@ import Header from '../header'
 import Footer from '../footer'
 import Navigation from '../navigation'
 import React, { useState, useEffect, ReactElement } from 'react'
-import { GET_ROUTES, GET_TRIPS_BY_ROUTE } from '../../api'
-import { CUMTDRoute, RouteDetails } from '../../types'
+import { GET_ROUTES, GET_TRIPS_BY_ROUTE, GET_STOPTIMES_BY_TRIP } from '../../api'
+import { CUMTDRoute, RouteDetails, TripInfo, StopTimesByTrip, StopPoint } from '../../types'
 import { Container, useColorMode, Select, Flex, Box, Button } from '@chakra-ui/react'
 import { colors } from '../../theme/colors'
 
@@ -19,12 +19,86 @@ export default function RouteInformation(): ReactElement {
       routeTextColor: 'none'
    })
    const data = null
-   const [tripData, setTripData] = useState()
+   const [rawTripData, setRawTripData] = useState()
+   const [tripData, setTripData] = useState<TripInfo[]>()
+   const [rawStopByTripData, setRawStopByTripData] = useState<any>()
+   const [stopsByTripData, setStopsByTripData] = useState()
 
    const fetchTripsByRoute = () => {
       fetch(GET_TRIPS_BY_ROUTE + selectedRoute.routeID)
       .then(resp => resp.json())
-      .then(data => setTripData(data))
+      .then(data => setRawTripData(data))
+   }
+
+   const fetchStopTimesByTrip = (tripID: string) => {
+      fetch(GET_STOPTIMES_BY_TRIP + tripID)
+      .then(resp => resp.json())
+      .then(data => setRawStopByTripData(data))
+   }
+
+   // setting trip IDs into data from JSON string
+   const structureTripData = (data: any) => {
+      const tempTripsArray = [] as TripInfo[]
+      if(data !== null || data !== undefined) {
+         console.log(data.trips)
+         data.trips.forEach((tripData: any) =>{
+            tempTripsArray.push({
+               trip_id: tripData.trip_id,
+               trip_headsign: tripData.trip_headsign,
+               route_id: tripData.route_id,
+               block_id: tripData.block_id,
+               direction: tripData.direction,
+               service_id: tripData.service_id,
+               shape_id: tripData.shape_id
+            })
+         })
+         console.log('temp trip array', tempTripsArray)
+      }
+      else {
+         tempTripsArray.push({
+            trip_id: '',
+            trip_headsign: 'No trips found',
+            route_id: '',
+            block_id: '',
+            direction: '',
+            service_id: '',
+            shape_id: ''
+         })
+      }
+      setTripData(tempTripsArray)
+   }  
+   
+   const getTripIDs = () => {
+      // fetch trips here
+      fetchTripsByRoute()
+      // re-structure the data here
+      if(rawTripData !== undefined) {
+         structureTripData(rawTripData)
+      }
+   }
+   
+   const getStopTimesByTrips = () => {
+      if(tripData !== undefined) {
+         if(tripData[0].trip_id !== '') {
+            getStopTimesByTrips()
+            console.log(tripData)
+            const StopsByTripArray = [] as StopTimesByTrip[]
+            tripData.forEach((trip: TripInfo) => {
+               fetchStopTimesByTrip(trip.trip_id)
+               if (rawStopByTripData !== undefined) {
+                  console.log(rawStopByTripData.stop_times)
+               } else {
+                  console.log('no stop times')
+               }
+            })
+         }
+      }
+   }
+
+   // called via button after selecting a route
+   const getTimetableData = () => {
+      getTripIDs()
+      getStopTimesByTrips()
    }
 
    const setDataAsType = (data: any) => {
@@ -135,12 +209,21 @@ export default function RouteInformation(): ReactElement {
                   </Flex>
                   </>
                )}
-               <Button variant="primary" onClick={() => fetchTripsByRoute()}>Get Trips</Button>
+               <Button variant="primary" onClick={() => getTimetableData()}>Check Data</Button>
                <div id="route-info">
                   <p>{selectedRoute.routeLongName} {selectedRoute.routeShortName}</p>
-                  {tripData !== undefined && (
-                     <p>{JSON.stringify(tripData)}</p>
+                   {rawStopByTripData !== undefined && (
+                     <p>{JSON.stringify(rawStopByTripData)}</p>
                   )}
+                  {/* {tripData !== undefined && 
+                     <>
+                        <p>{tripData[0].trip_id}</p>
+                        <p>{tripData[0].trip_headsign}</p>
+                     </>
+                  } */}
+                  {/* {rawTripData !== undefined && (
+                     <p>{JSON.stringify(rawTripData)}</p>
+                  )} */}
                </div>
             </Container>
          </main>
