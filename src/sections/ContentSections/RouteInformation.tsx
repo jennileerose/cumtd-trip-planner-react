@@ -20,7 +20,7 @@ export default function RouteInformation(): ReactElement {
       routeTextColor: 'none'
    })
    const data = null
-   const [rawTripData, setRawTripData] = useState<any>()
+   // const [rawTripData, setRawTripData] = useState<any>()
    // const [tripData, setTripData] = useState<TripInfo[]>()
    // const [rawStopByTripData, setRawStopByTripData] = useState<any>()
    // const [stopsByTripData, setStopsByTripData] = useState()
@@ -29,8 +29,35 @@ export default function RouteInformation(): ReactElement {
    const getTimetableData = () => {
       // load in trips text file and parse into object array
       // console.log(tripDataByRouteID[0])
+      let routeIDs = [] as string[]
       console.log(selectedRoute.routeID)
-      const tripData = getTripData(selectedRoute.routeID)
+      if(selectedRoute.routeID === 'GREEN' || 
+         selectedRoute.routeID === 'YELLOW' || 
+         selectedRoute.routeID === 'ORANGE' || 
+         selectedRoute.routeID === 'GOLD' ) {
+            switch (selectedRoute.routeID) {
+               case 'GREEN': 
+                  routeIDs.push('GREEN')
+                  routeIDs.push('GREENHOPPER')
+                  break;
+               case 'YELLOW':
+                  routeIDs.push('YELLOW')
+                  routeIDs.push('YELLOWHOPPER')
+                  break;
+               case 'ORANGE':
+                  routeIDs.push('ORANGE')
+                  routeIDs.push('ORANGEHOPPER')
+                  break;
+               case 'GOLD':
+                  routeIDs.push('GOLD')
+                  routeIDs.push('GOLDWHOPPER')
+                  break;
+            }
+         } else {
+            routeIDs.push(selectedRoute.routeID)
+         }
+      const tripData = getTripData(routeIDs)
+      console.log(tripData)
       // load in stops text file and parse into object array
       // get trip IDs for route 
    }

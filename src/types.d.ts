@@ -55,6 +55,35 @@ export type CUMTDStop = {
     stops: StopDetails[]
 }
 
+export type StopDetailsFromStaticData = {
+    stop_id:  string,
+    stop_code:  string,
+    stop_name:  string,
+    stop_desc:  string,
+    stop_lat:  string,
+    stop_lon:  string,
+    zone_id:  string,
+    stop_url:  string,
+    location_type:  string,
+    parent_station: string,
+    stop_timezone:  string,
+    wheelchair_boarding:  string,
+    platform_code:  string
+}
+
+export type StopTimesByTrip = {
+    trip_id:  string,
+    arrival_time:  string,
+    departure_time:  string,
+    stop_id:  string,
+    stop_sequence:  number,
+    stop_headsign:  string,
+    pickup_type:  number,
+    drop_off_type:  number,
+    timepoint:  number,
+    stop_details: StopDetailsFromStaticData[]
+}
+
 export type tripDetails = {
     tripID: string,
     tripHeadSign: string,
@@ -63,6 +92,7 @@ export type tripDetails = {
     direction: string,
     serviceID: string,
     shapeID: string,
+    stopTimesByTrip: StopTimesByTrip[]
 }
 
 export type DepartureDetails = {
@@ -126,11 +156,4 @@ export type TimeTableInfo = {
     routeID: string,
     direction: string,
     departureTime: string,
-}
-
-export type StopTimesByTrip = {
-    arrivalTimes: string,
-    departureTime: string,
-    stop_sequence: string,
-    stop_point: StopPoint
 }
