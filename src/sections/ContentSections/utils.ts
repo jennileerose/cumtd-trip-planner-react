@@ -547,3 +547,11 @@ export function getTripData(routeIDs: SubRoutes[]): TripDataBySubRouteType[] {
   return tripDataByRoutes
 
 }
+
+// takes the full list of trip data and pares it down to just the timepoint stops
+export function getTimetableStopData(fullTripsList: TripDataBySubRouteType): TripDataBySubRouteType[] {
+  console.log(fullTripsList)
+  let timetableStops = [] as TripDataBySubRouteType[]
+
+  return timetableStops
+}
