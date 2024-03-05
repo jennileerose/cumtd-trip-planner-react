@@ -4,114 +4,31 @@ import Footer from '../footer'
 import Navigation from '../navigation'
 import React, { useState, useEffect, ReactElement } from 'react'
 import { GET_ROUTES } from '../../api'
-import { CUMTDRoute, RouteDetails, TripInfo, StopTimesByTrip, StopPoint } from '../../types'
+import { BasicRoutes } from '../../types'
 import { Container, useColorMode, Select, Flex, Box, Button } from '@chakra-ui/react'
 import { colors } from '../../theme/colors'
-import {getTripData} from './utils'
+import {getTripData, getRouteList, getSubRoutesList} from './utils'
 
 export default function RouteInformation(): ReactElement {
    const colorMode = useColorMode()
-   const [routes, setRoutes] = useState<CUMTDRoute>()
-   const [selectedRoute, setSelectedRoute] = useState<RouteDetails>({
-      routeColor: 'none',
+   const [routes, setRoutes] = useState<BasicRoutes[]>()
+   const [selectedRoute, setSelectedRoute] = useState<BasicRoutes>({
       routeID: 'none',
       routeLongName: 'no routes found',
-      routeShortName: '',
-      routeTextColor: 'none'
    })
    const data = null
-   // const [rawTripData, setRawTripData] = useState<any>()
-   // const [tripData, setTripData] = useState<TripInfo[]>()
-   // const [rawStopByTripData, setRawStopByTripData] = useState<any>()
-   // const [stopsByTripData, setStopsByTripData] = useState()
 
    // called via button after selecting a route
    const getTimetableData = () => {
-      // load in trips text file and parse into object array
-      // console.log(tripDataByRouteID[0])
-      let routeIDs = [] as string[]
-      console.log(selectedRoute.routeID)
-      if(selectedRoute.routeID === 'GREEN' || 
-         selectedRoute.routeID === 'YELLOW' || 
-         selectedRoute.routeID === 'ORANGE' || 
-         selectedRoute.routeID === 'GOLD' ) {
-            switch (selectedRoute.routeID) {
-               case 'GREEN': 
-                  routeIDs.push('GREEN')
-                  routeIDs.push('GREENHOPPER')
-                  break;
-               case 'YELLOW':
-                  routeIDs.push('YELLOW')
-                  routeIDs.push('YELLOWHOPPER')
-                  break;
-               case 'ORANGE':
-                  routeIDs.push('ORANGE')
-                  routeIDs.push('ORANGEHOPPER')
-                  break;
-               case 'GOLD':
-                  routeIDs.push('GOLD')
-                  routeIDs.push('GOLDWHOPPER')
-                  break;
-            }
-         } else {
-            routeIDs.push(selectedRoute.routeID)
-         }
-      const tripData = getTripData(routeIDs)
-      console.log(tripData)
-      // load in stops text file and parse into object array
-      // get trip IDs for route 
+      // get all the subroutes based on the selected Base routes color
+      const routeIDsAndTypes = getSubRoutesList(selectedRoute.routeID)
+      // get the data and organize it
+      let tripData = getTripData(routeIDsAndTypes)
+      console.log('selected trip data', tripData)
    }
 
    const setDataAsType = (data: any) => {
-      if(data !== null || data !== undefined) {
-         let routeListObject = {} as CUMTDRoute
-         let tempRouteInfo = {} as RouteDetails
-         const tempRouteArray = [] as RouteDetails[]
-         data.routes.forEach((routeData: any) => {
-            tempRouteInfo = {
-               routeColor: routeData.route_color,
-               routeID: routeData.route_id,
-               routeLongName: routeData.route_long_name,
-               routeShortName: routeData.route_short_name,
-               routeTextColor: routeData.route_text_color
-            }
-            tempRouteArray.push(tempRouteInfo)
-         })
-         routeListObject = {
-            time: data.time,
-            changesetID: data.changeset_id,
-            newChangeset: data.new_changeset,
-            status: data.status,
-            rqst: data.rqst,
-            routes: tempRouteArray
-         }
-         setRoutes(routeListObject)
-      } else {
-         setRoutes({
-            time: '',
-            changesetID: '',
-            newChangeset: false,
-            status: {
-               code: 500,
-               msg: 'error',
-            },
-            rqst: {
-               method: 'none',
-               params: {
-                     routeID: 'no routes found'
-               }
-            },
-            routes: [
-               {
-                  routeColor: 'none',
-                  routeID: 'none',
-                  routeLongName: 'no routes found',
-                  routeShortName: '',
-                  routeTextColor: 'none'
-               }
-            ]
-         })
-      }
+      setRoutes(getRouteList())
    }
 
    useEffect(() => {
@@ -122,16 +39,13 @@ export default function RouteInformation(): ReactElement {
 
    const SelectRoute = (routeArrayIndex: string) => {
       const index = Number(routeArrayIndex)
-      let routeInfo = {} as RouteDetails
+      let routeInfo = {} as BasicRoutes
       if(routes !== undefined) {
-         routeInfo =  routes.routes[index]
+         routeInfo =  routes[index]
       } else {
          routeInfo = {
-            routeColor: 'none',
             routeID: 'none',
             routeLongName: 'no routes found',
-            routeShortName: 0,
-            routeTextColor: 'none'
          }
       }
       setSelectedRoute(routeInfo)
@@ -162,7 +76,7 @@ export default function RouteInformation(): ReactElement {
                            id="route-dropdown"
                            onChange={(e) => { SelectRoute(e.target.value); }}
                         >
-                           {routes.routes.map((route, index) => (
+                           {routes.map((route, index) => (
                               <option key={index} value={index}>{route.routeLongName}</option>
                            ))}
                         </Select>
@@ -172,19 +86,10 @@ export default function RouteInformation(): ReactElement {
                )}
                <Button variant="primary" onClick={() => getTimetableData()}>Check Data</Button>
                <div id="route-info">
-                  <p>{selectedRoute.routeLongName} {selectedRoute.routeShortName}</p>
+                  <p>{selectedRoute.routeLongName}</p>
                    {/*{rawStopByTripData !== undefined && (
                      <p>{JSON.stringify(rawStopByTripData)}</p>
-                  )}
-                   {tripData !== undefined && 
-                     <>
-                        <p>{tripData[0].trip_id}</p>
-                        <p>{tripData[0].trip_headsign}</p>
-                     </>
-                  } */}
-                  {/* {rawTripData !== undefined && (
-                     <p>{JSON.stringify(rawTripData)}</p>
-                  )} */}
+                   )} */}
                </div>
             </Container>
          </main>

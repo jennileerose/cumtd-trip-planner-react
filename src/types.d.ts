@@ -6,6 +6,26 @@ export type RouteDetails = {
     routeTextColor: string
 }
 
+export type BasicRoutes = {
+    routeID: string,
+    routeLongName: string
+}
+
+export type SubRoutes = {
+    routeID: string,
+    routeType: string,
+}
+
+export type TripDataBySubRouteType = {
+    routeType: string
+    routeData: tripsByDirection[]
+}
+
+export type TripsByDirection = {
+    direction: string,
+    trips: tripDetails[]
+}
+
 export type CUMTDRoute = {
     time: string,
     changesetID: string,
