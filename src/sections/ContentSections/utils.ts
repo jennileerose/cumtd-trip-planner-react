@@ -2,7 +2,8 @@ import { LatLngExpression } from 'leaflet';
 import tripDataByRouteID from '../../staticData/trips.json'
 import stopTimesByTripID from '../../staticData/stop_times.json'
 import stopsByStopID from '../../staticData/stops.json'
-import { tripDetails, StopTimesByTrip, StopDetailsFromStaticData, SubRoutes, TripDataBySubRouteType, TripsByDirection } from '../../types';
+import { TripDetails, StopTimesByTrip, StopDetailsFromStaticData, SubRoutes, TripDataBySubRouteType, TripsByDirection, TimeTableRowInfo } from '../../types';
+import { TimePointConstants } from '../../staticData/timepoints';
 
 // attempt to get lat and lon for future use of leaflet.js
 export function getStopCoords(
@@ -269,8 +270,8 @@ export function getSubRoutesList(routeIDFromSelect: string): SubRoutes[] {
 }
 
 // combines stops by trip and stop info data into the trips array.
-export function arrangeRouteTripArrays(routeID: string): tripDetails[] {
-  const tripArray = [] as tripDetails[]
+export function arrangeRouteTripArrays(routeID: string): TripDetails[] {
+  const tripArray = [] as TripDetails[]
   let stopArray = [] as StopTimesByTrip[]
   const stopTimes = stopTimesByTripID as any[]
   let stopInfoArray = [] as StopDetailsFromStaticData[]
@@ -330,15 +331,15 @@ export function arrangeRouteTripArrays(routeID: string): tripDetails[] {
 }
 
 // takes trip array data and sorts it by direction
-export function sortTripsByDirection(tripArray: tripDetails[]): TripsByDirection[] {
-  let eastTrips = [] as tripDetails[]
-  let westTrips = [] as tripDetails[]
-  let northTrips = [] as tripDetails[]
-  let southTrips = [] as tripDetails[]
-  let aTrips = [] as tripDetails[]
-  let bTrips = [] as tripDetails[]
-  let cTrips = [] as tripDetails[]
-  let uTrips = [] as tripDetails[]
+export function sortTripsByDirection(tripArray: TripDetails[]): TripsByDirection[] {
+  let eastTrips = [] as TripDetails[]
+  let westTrips = [] as TripDetails[]
+  let northTrips = [] as TripDetails[]
+  let southTrips = [] as TripDetails[]
+  let aTrips = [] as TripDetails[]
+  let bTrips = [] as TripDetails[]
+  let cTrips = [] as TripDetails[]
+  let uTrips = [] as TripDetails[]
   let sortedTrips = [] as TripsByDirection[]
 
   tripArray.forEach((trip) => {
@@ -400,7 +401,7 @@ export function sortTripsByDirection(tripArray: tripDetails[]): TripsByDirection
 // functions to select from static data trip file and retun to the routes component
 export function getTripData(routeIDs: SubRoutes[]): TripDataBySubRouteType[] {
   let tripDataByRoutes = [] as TripDataBySubRouteType[]
-  let tempTripArray = [] as tripDetails[]
+  let tempTripArray = [] as TripDetails[]
   let tempTripArrayByDirection = [] as TripsByDirection[]
   // Applies  to Link, Navy, Raven, and Blue routes
   if(routeIDs.length === 1) {
@@ -421,15 +422,15 @@ export function getTripData(routeIDs: SubRoutes[]): TripDataBySubRouteType[] {
     }
     tempTripArray = []
   } else {
-    let WkDayDaytimeRoutes = [] as tripDetails[]
-    let WkDayEveningRoutes = [] as tripDetails[]
-    let WkDayLateNightRoutes = [] as tripDetails[]
-    let SatDaytimeRoutes = [] as tripDetails[]
-    let SatEveningRoutes = [] as tripDetails[]
-    let SatLateNightRoutes = [] as tripDetails[]
-    let SunDaytimeRoutes = [] as tripDetails[]
-    let SunEveningRoutes = [] as tripDetails[]
-    let SunLateNightRoutes = [] as tripDetails[]
+    let WkDayDaytimeRoutes = [] as TripDetails[]
+    let WkDayEveningRoutes = [] as TripDetails[]
+    let WkDayLateNightRoutes = [] as TripDetails[]
+    let SatDaytimeRoutes = [] as TripDetails[]
+    let SatEveningRoutes = [] as TripDetails[]
+    let SatLateNightRoutes = [] as TripDetails[]
+    let SunDaytimeRoutes = [] as TripDetails[]
+    let SunEveningRoutes = [] as TripDetails[]
+    let SunLateNightRoutes = [] as TripDetails[]
     routeIDs.forEach((route) => {
       switch (route.routeType) {
         case 'WkDayDaytime':
@@ -508,37 +509,37 @@ export function getTripData(routeIDs: SubRoutes[]): TripDataBySubRouteType[] {
       WkDayEveningSortedByDirection = []
     }
     if(WkDayLateNightRoutes.length !== 0) {
-      let WkDayLateNightgSortedByDirection = sortTripsByDirection(WkDayEveningRoutes)
+      let WkDayLateNightgSortedByDirection = sortTripsByDirection(WkDayLateNightRoutes)
       tripDataByRoutes.push({routeType: 'WkDayLateNight', routeData: WkDayLateNightgSortedByDirection})
       WkDayLateNightgSortedByDirection = []
     }
     if(SatDaytimeRoutes.length !== 0) {
-      let SatDaytimeSortedByDirection = sortTripsByDirection(WkDayEveningRoutes)
+      let SatDaytimeSortedByDirection = sortTripsByDirection(SatDaytimeRoutes)
       tripDataByRoutes.push({routeType: 'SatDaytime', routeData: SatDaytimeSortedByDirection})
       SatDaytimeSortedByDirection = []
     }
     if(SatEveningRoutes.length !== 0) {
-      let SatEveningSortedByDirection = sortTripsByDirection(WkDayEveningRoutes)
+      let SatEveningSortedByDirection = sortTripsByDirection(SatEveningRoutes)
       tripDataByRoutes.push({routeType: 'SatEvening', routeData: SatEveningSortedByDirection})
       SatEveningSortedByDirection = []
     }
     if(SatLateNightRoutes.length !== 0) {
-      let SatLateNightSortedByDirection = sortTripsByDirection(WkDayEveningRoutes)
+      let SatLateNightSortedByDirection = sortTripsByDirection(SatLateNightRoutes)
       tripDataByRoutes.push({routeType: 'SatLateNight', routeData: SatLateNightSortedByDirection})
       SatLateNightSortedByDirection = []
     }
     if(SunDaytimeRoutes.length !== 0) {
-      let SunDaytimeSortedByDirection = sortTripsByDirection(WkDayEveningRoutes)
+      let SunDaytimeSortedByDirection = sortTripsByDirection(SunDaytimeRoutes)
       tripDataByRoutes.push({routeType: 'SunDaytime', routeData: SunDaytimeSortedByDirection})
       SunDaytimeSortedByDirection = []
     }
     if(SunEveningRoutes.length !== 0) {
-      let SunEveningSortedByDirection = sortTripsByDirection(WkDayEveningRoutes)
+      let SunEveningSortedByDirection = sortTripsByDirection(SunEveningRoutes)
       tripDataByRoutes.push({routeType: 'SunEvening', routeData: SunEveningSortedByDirection})
       SunEveningSortedByDirection = []
     }
     if(SunLateNightRoutes.length !== 0) {
-      let SunLateNightSortedByDirection = sortTripsByDirection(WkDayEveningRoutes)
+      let SunLateNightSortedByDirection = sortTripsByDirection(SunLateNightRoutes)
       tripDataByRoutes.push({routeType: 'SunLateNight', routeData: SunLateNightSortedByDirection})
       SunLateNightSortedByDirection = []
     }
@@ -549,9 +550,84 @@ export function getTripData(routeIDs: SubRoutes[]): TripDataBySubRouteType[] {
 }
 
 // takes the full list of trip data and pares it down to just the timepoint stops
-export function getTimetableStopData(fullTripsList: TripDataBySubRouteType): TripDataBySubRouteType[] {
-  console.log(fullTripsList)
-  let timetableStops = [] as TripDataBySubRouteType[]
+export function getTimetableStopData(routeID: string, fullTripsList: TripDataBySubRouteType[]): TimeTableRowInfo[] {
+  /*********
+   * Inconsisitencies I've noticed:
+   * 1). 9A has Fox & Devonshire in the data but the 9B does not despite the stop being listed in the book and on mtd.org as a time point in both directions. REF timepoints.js under BROWN
+   * 2). I do not have an easy way to deterimine which route trips are UI semesters only and which others operate only during breaks. The only ones I know for sure are the Silver & Illini Limited are ones that run on UI breaks
+   * 3) On the Navy Weekday Carle Fields South is listed in the book with the stop code 1842 but the data has 1018 and the website matches that
+   * 4) The Silver Weekday late night is fridays only
+   */
+  // console.log(fullTripsList)
+  let timePointConstantsData = null
+  let timetableStops = [] as TimeTableRowInfo[]
+  let tempRouteID = routeID
+  let tempDirection = ''
+  let tempServiceType = ''
+  let tempTrip = {
+    tripID: '',
+    tripHeadSign: '',
+    routeID: '',
+    blockID: '',
+    shapeID: '',
+    serviceID: '',
+    direction: '',
+    stopTimesByTrip: [] as StopTimesByTrip[]
+  } as TripDetails
+  let tempStopTimesArray = [] as StopTimesByTrip[]
+  let searchForTimepoint = null
+
+  TimePointConstants.forEach((data) => {
+    if(data.basicRouteID === routeID) {
+      timePointConstantsData = {
+        basicRouteID: data.basicRouteID,
+        service: data.service
+      }
+    }
+  })
+
+  console.log(timePointConstantsData)
+
+  fullTripsList.forEach(((routeTripsBySubroute: TripDataBySubRouteType) => {
+    tempServiceType = routeTripsBySubroute.routeType
+    routeTripsBySubroute.routeData.forEach(((routeTripsByDirection: TripsByDirection) => {
+      tempDirection = routeTripsByDirection.direction
+      routeTripsByDirection.trips.forEach(((routeTripDetails: TripDetails) => {
+        routeTripDetails.stopTimesByTrip.forEach(((routeTripStopTimes: StopTimesByTrip) => {
+          routeTripStopTimes.stop_details.forEach(((stopDetail: StopDetailsFromStaticData) => {
+            // console.log(stopDetail) 
+            if(
+                tempServiceType === 'WkDayEvening' &&
+                tempDirection === '' &&
+                (
+                  stopDetail.stop_code === '' ||
+                  stopDetail.stop_code === '' ||
+                  stopDetail.stop_code === '' ||
+                  stopDetail.stop_code === '' ||
+                  stopDetail.stop_code === '' ||
+                  stopDetail.stop_code === '' ||
+                  stopDetail.stop_code === '' ||
+                  stopDetail.stop_code === ''
+                )              
+              ) {
+              console.log(stopDetail.stop_id, stopDetail.stop_code, stopDetail.stop_name, routeTripStopTimes.departure_time)
+            }
+          }))
+          // tempStopTimesArray.push(routeTripStopTimes)
+        }))
+        // tempTrip = {
+        //   tripID: routeTripDetails.tripID,
+        //   tripHeadSign: routeTripDetails.tripHeadSign,
+        //   routeID: routeTripDetails.routeID,
+        //   blockID: routeTripDetails.blockID,
+        //   shapeID: routeTripDetails.shapeID,
+        //   serviceID: routeTripDetails.serviceID,
+        //   direction: routeTripDetails.direction,
+        //   stopTimesByTrip: tempStopTimesArray
+        // }
+      }))
+    }))    
+  }))
 
   return timetableStops
 }

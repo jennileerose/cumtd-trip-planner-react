@@ -23,7 +23,27 @@ export type TripDataBySubRouteType = {
 
 export type TripsByDirection = {
     direction: string,
-    trips: tripDetails[]
+    trips: TripDetails[]
+}
+
+export type TripDetails = {
+    tripID: string,
+    tripHeadSign: string,
+    routeID: string,
+    blockID: string,
+    direction: string,
+    serviceID: string,
+    shapeID: string,
+    stopTimesByTrip: StopTimesByTrip[]
+}
+
+export type TimeTableRowInfo = {
+    routeID: string,
+    direction: string,
+    stopID: string,
+    stopName: string,
+    stopCode: string,
+    departureTime: string,
 }
 
 export type CUMTDRoute = {
@@ -104,17 +124,6 @@ export type StopTimesByTrip = {
     stop_details: StopDetailsFromStaticData[]
 }
 
-export type tripDetails = {
-    tripID: string,
-    tripHeadSign: string,
-    routeID: string,
-    blockID: string,
-    direction: string,
-    serviceID: string,
-    shapeID: string,
-    stopTimesByTrip: StopTimesByTrip[]
-}
-
 export type DepartureDetails = {
     stopID: string,
     headSign: string,
@@ -170,10 +179,4 @@ export type TripInfo = {
     direction: string,
     service_id: string,
     shape_id: string
-}
-
-export type TimeTableInfo = {
-    routeID: string,
-    direction: string,
-    departureTime: string,
 }
