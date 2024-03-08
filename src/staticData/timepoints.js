@@ -170,15 +170,15 @@ export const TimePointConstants = [
                 serviceType: 'SunDaytime',
                 direction: 'North',
                 stopIDs: [
-                    'WALMART:2',
-                    'MKTPLC:1',
-                    'IT:5',
-                    'PLAZA:4',
-                    'GRGIKE:1',
-                    'KBYSTE:2',
-                    'WDFLDCTS:5',
+                    'SWALMART:1',
                     'INDIGO:2',
-                    'SWALMART:1'
+                    'WDFLDCTS:5',
+                    'KBYSTE:2',
+                    'GRGIKE:1',
+                    'PLAZA:4',
+                    'IT:5',
+                    'MKTPLC:1',
+                    'WALMART:2'
                 ]
             },
             {
@@ -188,10 +188,10 @@ export const TimePointConstants = [
                     'WALMART:2',
                     'MKTPLC:1',
                     'IT:5',
-                    'PLAZA:4',
-                    'GRGIKE:1',
-                    'KBYSTE:2',
-                    'WDFLDCTS:5',
+                    'PLAZA:3',
+                    'GRGIKE:2',
+                    'KBYSTE:4',
+                    'WDFLDCTS:4',
                     'INDIGO:2',
                     'SWALMART:1'
                 ]
@@ -214,8 +214,8 @@ export const TimePointConstants = [
                 stopIDs: [
                     'WALMART:2',
                     'IT:5',
-                    'PLAZA:4',
-                    'GRGIKE:',
+                    'PLAZA:3',
+                    'GRGIKE:2',
                     'E14:2',
                 ]
             },
@@ -270,7 +270,7 @@ export const TimePointConstants = [
                     'MKTPLC:1',
                     'IT:1',
                     'IU:1',
-                    'PARACE:3',
+                    'FLVIN:3',
                     'SLVRVWTR:1'
                 ]
             },
@@ -367,9 +367,9 @@ export const TimePointConstants = [
                 direction: 'East',
                 stopIDs: [
                     'RNDBRNRD:2',
-                    'KBYCRSNT:1',
-                    'STEJOHN:1',
-                    'PLAZA:1',
+                    'KBYCRSNT:4',
+                    'STEJOHN:3',
+                    'PLAZA:2',
                     'IT:1'
                 ]  
             }
@@ -401,13 +401,13 @@ export const TimePointConstants = [
                     'JOHNGLDVW:2',
                     'PKLN:1',
                     'RNDBRNRD:2',
-                    'SPFLDWLS:',
+                    'SPFLDWLS:3',
                     'IT:1',
                     'IU:1',
                     'LSE:1',
                     'FLPHILO:3',
                     'WASHLRMN:2',
-                    'MNBRDY:7'
+                    'MNBRDY:2'
                 ]
             },
             {
@@ -647,7 +647,7 @@ export const TimePointConstants = [
                     'IT:1',
                     'CHCHORCD:3',
                     'LSE:1',
-                    'UNICTGRV:3',
+                    'UNICTGRV:9',
                     'BTSLRMN:2',
                     '150DOD:5'
                 ]  

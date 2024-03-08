@@ -2,7 +2,7 @@ import { LatLngExpression } from 'leaflet';
 import tripDataByRouteID from '../../staticData/trips.json'
 import stopTimesByTripID from '../../staticData/stop_times.json'
 import stopsByStopID from '../../staticData/stops.json'
-import { TripDetails, StopTimesByTrip, StopDetailsFromStaticData, SubRoutes, TripDataBySubRouteType, TripsByDirection, TimeTableRowInfo } from '../../types';
+import { TripDetails, StopTimesByTrip, StopDetailsFromStaticData, SubRoutes, TripDataBySubRouteType, TripsByDirection, TimeTableRowInfo, TimeTableStopData, TimeTableConstants, TimeTableConstantsServices, TimeTable } from '../../types';
 import { TimePointConstants } from '../../staticData/timepoints';
 
 // attempt to get lat and lon for future use of leaflet.js
@@ -559,77 +559,70 @@ export function getTimetableStopData(basicRouteID: string, fullTripsList: TripDa
    * 4) The Silver Weekday late night is fridays only
    */
   // console.log(fullTripsList)
-  let timePointConstantsData = null
+  let timePointConstantsData = {
+    basicRouteID: '',
+    service: [{
+        serviceType: '',
+        direction: '',
+        stopIDs: [] as string[]
+    }] 
+  } as TimeTableConstants
+  let timeTableServices = [] as TimeTableConstantsServices[]
   let timetableStops = [] as TimeTableRowInfo[]
-  let tempBasicRouteID = basicRouteID
+  const tempBasicRouteID = basicRouteID
   let tempActualRouteID = ''
   let tempDirection = ''
   let tempServiceType = ''
-  let tempTrip = {
-    tripID: '',
-    tripHeadSign: '',
-    routeID: '',
-    blockID: '',
-    shapeID: '',
-    serviceID: '',
-    direction: '',
-    stopTimesByTrip: [] as StopTimesByTrip[]
-  } as TripDetails
-  let tempStopTimesArray = [] as StopTimesByTrip[]
-  let searchForTimepoint = null
+  let tempTimetableStopData = [] as TimeTableStopData[]
+  let tempTimetableRow = [] as TimeTableRowInfo[]
+  let tempTimeTables = [] as TimeTable[]
 
   TimePointConstants.forEach((data) => {
     if(data.basicRouteID === basicRouteID) {
+      data.service.forEach((routeService => {
+        timeTableServices.push({
+          serviceType: routeService.serviceType,
+          direction: routeService.direction,
+          stopIDs: routeService.stopIDs
+        })
+      }))
       timePointConstantsData = {
         basicRouteID: data.basicRouteID,
-        service: data.service
+        service: timeTableServices
       }
     }
   })
-
-  console.log(timePointConstantsData)
-
-  fullTripsList.forEach(((routeTripsBySubroute: TripDataBySubRouteType) => {
-    tempServiceType = routeTripsBySubroute.routeType
-    routeTripsBySubroute.routeData.forEach(((routeTripsByDirection: TripsByDirection) => {
-      tempDirection = routeTripsByDirection.direction
-      routeTripsByDirection.trips.forEach(((routeTripDetails: TripDetails) => {
-        routeTripDetails.stopTimesByTrip.forEach(((routeTripStopTimes: StopTimesByTrip) => {
-          routeTripStopTimes.stop_details.forEach(((stopDetail: StopDetailsFromStaticData) => {
-            // console.log(stopDetail) 
-            // console.log(tempDirection, tempServiceType)
-            if(
-                tempServiceType === 'WkDayDaytime' &&
-                tempDirection === 'North' &&
-                (
-                  stopDetail.stop_code === '' ||
-                  stopDetail.stop_code === '' ||
-                  stopDetail.stop_code === '' ||
-                  stopDetail.stop_code === '' ||
-                  stopDetail.stop_code === '' ||
-                  stopDetail.stop_code === '' ||
-                  stopDetail.stop_code === '' ||
-                  stopDetail.stop_code === ''
-                )              
-              ) {
-              console.log(stopDetail.stop_id, stopDetail.stop_code, stopDetail.stop_name, routeTripStopTimes.departure_time)
-            }
-          }))
-          // tempStopTimesArray.push(routeTripStopTimes)
-        }))
-        // tempTrip = {
-        //   tripID: routeTripDetails.tripID,
-        //   tripHeadSign: routeTripDetails.tripHeadSign,
-        //   routeID: routeTripDetails.routeID,
-        //   blockID: routeTripDetails.blockID,
-        //   shapeID: routeTripDetails.shapeID,
-        //   serviceID: routeTripDetails.serviceID,
-        //   direction: routeTripDetails.direction,
-        //   stopTimesByTrip: tempStopTimesArray
-        // }
-      }))
-    }))    
+  //this is a weird first attempt to get the data we need. I think it may be inside out
+  // console.log(timePointConstantsData)
+  // console.log(tempBasicRouteID)
+  timePointConstantsData.service.forEach((service => {
+    tempDirection = service.direction
+    tempServiceType = service.serviceType
+    service.stopIDs.forEach((timetableStopID) => {
+      fullTripsList.forEach((list) => {
+        // console.log(tempDirection, tempServiceType, timetableStopID, list.routeType)
+        list.routeData.forEach((tripsByDirection: TripsByDirection) => {
+          // console.log(tripsByDirection)
+          tripsByDirection.trips.forEach((trip) => {
+            // console.log(trip.tripID)
+            trip.stopTimesByTrip.forEach((stopTime) => {
+              // console.log(stopTime)
+              if(stopTime.stop_id === timetableStopID) {
+                console.log(stopTime.stop_id)
+              }
+            })
+          })
+        })
+      })
+    })
   }))
 
   return timetableStops
 }
+
+// This function takes timetable data and formats it by translating any 24+ hour timestamps and also sorts the table by times and ALSO marks hopper and alt routes
+export function getFormattedtimetableData(timetableData: any[]): any[] {
+  let formattedTimetableData = [] as any[]
+
+  return formattedTimetableData
+} 

@@ -7,7 +7,7 @@ import { GET_ROUTES } from '../../api'
 import { BasicRoutes } from '../../types'
 import { Container, useColorMode, Select, Flex, Box, Button } from '@chakra-ui/react'
 import { colors } from '../../theme/colors'
-import {getTripData, getRouteList, getSubRoutesList, getTimetableStopData} from './utils'
+import {getTripData, getRouteList, getSubRoutesList, getTimetableStopData, getFormattedtimetableData} from './utils'
 
 export default function RouteInformation(): ReactElement {
    const colorMode = useColorMode()
@@ -26,6 +26,9 @@ export default function RouteInformation(): ReactElement {
       let tripData = getTripData(routeIDsAndTypes)
       // console.log('selected trip data', tripData)
       let timetableData = getTimetableStopData(selectedRoute.routeID, tripData)
+      // Now that I have the timetable data I need to check it against time translations, put it in order, and flag any hoppers/alt trips
+      const formattedTimetable = getFormattedtimetableData(timetableData)
+      console.log('blank formatted timetable ignore this for now', formattedTimetable)
    }
 
    const setDataAsType = (data: any) => {
