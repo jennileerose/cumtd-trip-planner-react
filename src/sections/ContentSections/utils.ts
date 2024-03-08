@@ -550,7 +550,7 @@ export function getTripData(routeIDs: SubRoutes[]): TripDataBySubRouteType[] {
 }
 
 // takes the full list of trip data and pares it down to just the timepoint stops
-export function getTimetableStopData(routeID: string, fullTripsList: TripDataBySubRouteType[]): TimeTableRowInfo[] {
+export function getTimetableStopData(basicRouteID: string, fullTripsList: TripDataBySubRouteType[]): TimeTableRowInfo[] {
   /*********
    * Inconsisitencies I've noticed:
    * 1). 9A has Fox & Devonshire in the data but the 9B does not despite the stop being listed in the book and on mtd.org as a time point in both directions. REF timepoints.js under BROWN
@@ -561,7 +561,8 @@ export function getTimetableStopData(routeID: string, fullTripsList: TripDataByS
   // console.log(fullTripsList)
   let timePointConstantsData = null
   let timetableStops = [] as TimeTableRowInfo[]
-  let tempRouteID = routeID
+  let tempBasicRouteID = basicRouteID
+  let tempActualRouteID = ''
   let tempDirection = ''
   let tempServiceType = ''
   let tempTrip = {
@@ -578,7 +579,7 @@ export function getTimetableStopData(routeID: string, fullTripsList: TripDataByS
   let searchForTimepoint = null
 
   TimePointConstants.forEach((data) => {
-    if(data.basicRouteID === routeID) {
+    if(data.basicRouteID === basicRouteID) {
       timePointConstantsData = {
         basicRouteID: data.basicRouteID,
         service: data.service
@@ -596,9 +597,10 @@ export function getTimetableStopData(routeID: string, fullTripsList: TripDataByS
         routeTripDetails.stopTimesByTrip.forEach(((routeTripStopTimes: StopTimesByTrip) => {
           routeTripStopTimes.stop_details.forEach(((stopDetail: StopDetailsFromStaticData) => {
             // console.log(stopDetail) 
+            // console.log(tempDirection, tempServiceType)
             if(
-                tempServiceType === 'WkDayEvening' &&
-                tempDirection === '' &&
+                tempServiceType === 'WkDayDaytime' &&
+                tempDirection === 'North' &&
                 (
                   stopDetail.stop_code === '' ||
                   stopDetail.stop_code === '' ||

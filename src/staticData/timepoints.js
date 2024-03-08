@@ -105,10 +105,10 @@ export const TimePointConstants = [
                     'WALMART:2',
                     'MKTPLC:1',
                     'IT:5',
-                    'PLAZA:4',
-                    'GRGIKE:1',
-                    'KBYSTE:2',
-                    'WDFLDCTS:5',
+                    'PLAZA:3',
+                    'GRGIKE:2',
+                    'KBYSTE:4',
+                    'WDFLDCTS:4',
                     'INDIGO:2',
                     'SWALMART:1'
                 ]
@@ -135,10 +135,10 @@ export const TimePointConstants = [
                     'WALMART:2',
                     'MKTPLC:1',
                     'IT:5',
-                    'PLAZA:4',
-                    'GRGIKE:1',
-                    'KBYSTE:2',
-                    'WDFLDCTS:5',
+                    'PLAZA:3',
+                    'GRGIKE:2',
+                    'KBYSTE:4',
+                    'WDFLDCTS:4',
                     'INDIGO:2',
                     'SWALMART:1'
                 ]
@@ -161,8 +161,8 @@ export const TimePointConstants = [
                 stopIDs: [
                     'WALMART:2',
                     'IT:5',
-                    'PLAZA:4',
-                    'GRGIKE:',
+                    'PLAZA:3',
+                    'GRGIKE:2:',
                     'E14:2',
                 ]
             },
@@ -719,61 +719,97 @@ export const TimePointConstants = [
                 serviceType: 'SatDaytime',
                 direction: 'West',
                 stopIDs: [
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    ''
+                    'UWALMART:2',
+                    'MNBRDY:7',
+                    'WASHLRMN:1',
+                    'LSE:2',
+                    'PKWRT:',
+                    '5THBRD:4',
+                    'IT:2',
+                    'BLOMHD:1',
+                    'BRADMATS:1',
+                    'RNDBRNRD:2'
                 ]  
             },
             {
                 serviceType: 'SatDaytime',
                 direction: 'East',
                 stopIDs: [
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    ''
+                    'RNDBRNRD:2',
+                    'BRADMATS:3',
+                    'BLOMPNR:1',
+                    'IT:1',
+                    '5THBRD:2',
+                    'PKWRT:6',
+                    'LSE:1',
+                    'WASHLRMN:6',
+                    'MNBRDY:2',
+                    'UWALMART:2'
                 ]  
             },
             {
                 serviceType: 'SatEvening',
                 direction: 'West',
                 stopIDs: [
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    ''
+                    'UWALMART:2',
+                    'MNBRDY:7',
+                    'WASHLRMN:1',
+                    'LSE:2',
+                    'PKWRT:',
+                    '5THBRD:4',
+                    'IT:2',
+                    'BLOMHD:1',
+                    'BRADMATS:1',
+                    'RNDBRNRD:2'
                 ]  
             },
             {
                 serviceType: 'SatEvening',
                 direction: 'East',
                 stopIDs: [
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    ''
+                    'RNDBRNRD:2',
+                    'BRADMATS:3',
+                    'BLOMPNR:1',
+                    'IT:1',
+                    '5THBRD:2',
+                    'PKWRT:6',
+                    'LSE:1',
+                    'WASHLRMN:6',
+                    'MNBRDY:2',
+                    'UWALMART:2'
                 ]  
+            },
+            {
+                serviceType: 'SunDaytime',
+                direction: 'West',
+                stopIDs: [
+                    'UWALMART:2',
+                    'MNBRDY:7',
+                    'WASHLRMN:1',
+                    'LSE:2',
+                    'PKWRT:1',
+                    '5THBRD:4',
+                    'IT:2',
+                    'BLOMHD:1',
+                    'BRADMATS:1',
+                    'RNDBRNRD:2'
+                ]
+            },
+            {
+                serviceType: 'SunDaytime',
+                direction: 'East',
+                stopIDs: [
+                    'RNDBRNRD:2',
+                    'BRADMATS:3',
+                    'BLOMPNR:1',
+                    'IT:1',
+                    '5THBRD:2',
+                    'PKWRT:6',
+                    'LSE:1',
+                    'WASHLRMN:6',
+                    'MNBRDY:2',
+                    'UWALMART:2'
+                ]
             },
         ]
     },
@@ -922,56 +958,42 @@ export const TimePointConstants = [
                 serviceType: 'SatDaytime',
                 direction: 'North',
                 stopIDs: [
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    ''
+                    'UNICTGRV:9',
+                    'LSE:2',
+                    'CNHMPKNS:1',
+                    'ARPRTCNGHM:6'
                 ]
             },
             {
                 serviceType: 'SatDaytime',
                 direction: 'South',
                 stopIDs: [
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    ''
+                    'ARPRTCNGHM:6',
+                    'BNFLDCLMBA:4',
+                    'CNHMPKNS:6',
+                    'LSE:1',
+                    'UNICTGRV:9'
                 ]
             },
             {
                 serviceType: 'SunDaytime',
                 direction: 'North',
                 stopIDs: [
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    ''
+                    'UNICTGRV:9',
+                    'LSE:2',
+                    'CNHMPKNS:1',
+                    'ARPRTCNGHM:6'
                 ]
             },
             {
                 serviceType: 'SunDaytime',
                 direction: 'South',
                 stopIDs: [
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    ''
+                    'ARPRTCNGHM:6',
+                    'BNFLDCLMBA:4',
+                    'CNHMPKNS:6',
+                    'LSE:1',
+                    'UNICTGRV:9'
                 ]
             },
         ]
@@ -1043,140 +1065,100 @@ export const TimePointConstants = [
                 serviceType: 'SatDaytime',
                 direction: 'West',
                 stopIDs: [
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    ''
+                    'ODSS:1',
+                    'PAR:2',
+                    'IU:2',
+                    'IT:5'
                 ]
             },
             {
                 serviceType: 'SatDaytime',
                 direction: 'East',
                 stopIDs: [
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    ''
+                    'IT:5',
+                    'IU:1',
+                    'FAR:1',
+                    'ODSS:1'
                 ]
             },
             {
                 serviceType: 'SatEvening',
                 direction: 'West',
                 stopIDs: [
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    ''
+                    'ODSS:1',
+                    'PAR:2',
+                    'IU:2',
+                    'IT:5'
                 ]
             },
             {
                 serviceType: 'SatEvening',
                 direction: 'East',
                 stopIDs: [
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    ''
+                    'IT:5',
+                    'IU:1',
+                    'FAR:1',
+                    'ODSS:1'
                 ]
             },
             {
                 serviceType: 'SatLateNight',
                 direction: 'West',
                 stopIDs: [
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    ''
+                    'ODSS:1',
+                    'PAR:2',
+                    'IU:2',
+                    'IT:5'
                 ]
             },
             {
                 serviceType: 'SatLateNight',
                 direction: 'East',
                 stopIDs: [
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    ''
+                    'IT:5',
+                    'IU:1',
+                    'FAR:1',
+                    'ODSS:1'
                 ]
             },
             {
                 serviceType: 'SunDaytime',
                 direction: 'West',
                 stopIDs: [
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    ''
+                    'ODSS:1',
+                    'PAR:2',
+                    'IU:2',
+                    'IT:5'
                 ]
             },
             {
                 serviceType: 'SunDaytime',
                 direction: 'East',
                 stopIDs: [
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    ''
+                    'IT:5',
+                    'IU:1',
+                    'FAR:1',
+                    'ODSS:1'
                 ]
             },
             {
                 serviceType: 'SunLateNight',
                 direction: 'West',
                 stopIDs: [
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    ''
+                    'ODSS:1',
+                    'PAR:2',
+                    'IU:2',
+                    'IT:5'
                 ]
             },
             {
                 serviceType: 'SunLateNight',
                 direction: 'East',
                 stopIDs: [
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    ''
+                    'IT:5',
+                    'IU:1',
+                    'FAR:1',
+                    'ODSS:1'
                 ]
             },
         ]
@@ -1244,112 +1226,80 @@ export const TimePointConstants = [
                 serviceType: 'SatDaytime',
                 direction: 'North',
                 stopIDs: [
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    ''
+                    'VETMED:1',
+                    'PAR:2',
+                    'IU:1',
+                    'LSE:8'
                 ]
             },
             {
                 serviceType: 'SatDaytime',
                 direction: 'South',
                 stopIDs: [
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    ''
+                    'LSE:8',
+                    'IU:9',
+                    'FAR:1',
+                    'VETMED:1'
                 ]
             },
             {
                 serviceType: 'SatEvening',
                 direction: 'North',
                 stopIDs: [
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    ''
+                    'VETMED:1',
+                    'PAR:2',
+                    'IU:1',
+                    'LSE:8'
                 ]
             },
             {
                 serviceType: 'SatEvening',
                 direction: 'South',
                 stopIDs: [
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    ''
+                    'LSE:8',
+                    'IU:9',
+                    'FAR:1',
+                    'VETMED:1'
                 ]
             },
            {
                 serviceType: 'SunDaytime',
                 direction: 'North',
                 stopIDs: [
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    ''
+                    'VETMED:1',
+                    'PAR:2',
+                    'IU:1',
+                    'LSE:8'
                 ]
             },
             {
                 serviceType: 'SunDaytime',
                 direction: 'South',
                 stopIDs: [
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    ''
+                    'LSE:8',
+                    'IU:9',
+                    'FAR:1',
+                    'VETMED:1'
                 ]
             },
             {
                 serviceType: 'SunEvening',
                 direction: 'North',
                 stopIDs: [
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    ''
+                    'VETMED:1',
+                    'PAR:2',
+                    'IU:1',
+                    'LSE:8'
                 ]
             },
             {
                 serviceType: 'SunEvening',
                 direction: 'South',
                 stopIDs: [
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    ''
+                    'LSE:8',
+                    'IU:9',
+                    'FAR:1',
+                    'VETMED:1'
                 ]
             },
         ]
@@ -1397,84 +1347,54 @@ export const TimePointConstants = [
                 serviceType: 'SatDaytime',
                 direction: 'North',
                 stopIDs: [
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    ''
+                    'PLAZA:4',
+                    'IU:1',
+                    'LSE:8'
                 ]
             },
             {
                 serviceType: 'SatDaytime',
                 direction: 'South',
                 stopIDs: [
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    ''
+                    'LSE:8',
+                    'IU:9',
+                    'PLAZA:3'
                 ]
             },
             {
                 serviceType: 'SatEvening',
                 direction: 'North',
                 stopIDs: [
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    ''
+                    'PLAZA:4',
+                    'IU:1',
+                    'LSE:8'
                 ]
             },
             {
                 serviceType: 'SatEvening',
                 direction: 'South',
                 stopIDs: [
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    ''
+                    'LSE:8',
+                    'IU:9',
+                    'PLAZA:3'
                 ]
             },
             {
                 serviceType: 'SunDaytime',
                 direction: 'North',
                 stopIDs: [
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    ''
+                    'PLAZA:4',
+                    'IU:1',
+                    'LSE:8'
                 ]
             },
             {
                 serviceType: 'SunDaytime',
                 direction: 'South',
                 stopIDs: [
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    ''
+                    'LSE:8',
+                    'IU:9',
+                    'PLAZA:3'
                 ]
             },
         ]
@@ -1542,84 +1462,53 @@ export const TimePointConstants = [
                 serviceType: 'SatDaytime',
                 direction: 'A',
                 stopIDs: [
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    ''
+                    'RNDBRNRD:1',
+                    'KBYMYFR:3',
+                    'YMCA:1',
+                    'WLMDNCN:1'
                 ]
             },
             {
                 serviceType: 'SatDaytime',
                 direction: 'B',
                 stopIDs: [
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    ''
+                    'RNDBRNRD:2',
+                    'PKLN:1',
+                    'CLTNPMNA:1',
+                    'WLMDNCN:4',
+                    'KBYDNCN:6',
+                    'KBYMYFR:2'
                 ]
             },
             {
                 serviceType: 'SatEvening',
                 direction: 'A',
                 stopIDs: [
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    ''
+                    'RNDBRNRD:1',
+                    'KBYMYFR:3',
+                    'YMCA:1',
+                    'WLMDNCN:1'
                 ]
             },
             {
                 serviceType: 'SatEvening',
                 direction: 'B',
                 stopIDs: [
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    ''
-                ]
-            },
-            {
-                serviceType: 'SunDaytime',
-                direction: 'A',
-                stopIDs: [
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    ''
+                    'RNDBRNRD:2',
+                    'CLTNPMNA:1',
+                    'WLMDNCN:4',
+                    'KBYDNCN:6',
+                    'KBYMYFR:2'
                 ]
             },
             {
                 serviceType: 'SunDaytime',
                 direction: 'B',
                 stopIDs: [
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    ''
+                    'RNDBRNRD:2',
+                    'WLMDNCN:',
+                    'YMCA:1',
+                    'KBYMYFR:2'
                 ]
             },
         ]
@@ -1695,87 +1584,55 @@ export const TimePointConstants = [
                 ]
             },
             {
-                serviceType: 'SatDaytime',
-                direction: 'North',
-                stopIDs: [
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    ''
-                ]
-            },
-            {
-                serviceType: 'SatDaytime',
-                direction: 'South',
-                stopIDs: [
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    ''
-                ]
-            },
-            {
                 serviceType: 'SatEvening',
                 direction: 'North',
                 stopIDs: [
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    ''
+                    'PAR:2',
+                    'ISR:2',
+                    'GRGLIB:2',
+                    '3RDDAN:3',
+                    'IU:1',
+                    'UNIGWN:2',
+                    'LNCLNKLRNY:'
                 ]
             },
             {
                 serviceType: 'SatEvening',
                 direction: 'South',
                 stopIDs: [
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    ''
+                    'LNCLNKLRNY:1',
+                    'GWNCLK:4',
+                    'IU:9',
+                    '3RDDAN:8',
+                    'GRGLIB:1',
+                    'ISR:1',
+                    'PAR:2'
                 ]
             },
             {
-                serviceType: 'SunDaytime',
+                serviceType: 'SunEvening',
                 direction: 'North',
                 stopIDs: [
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    ''
+                    'PAR:2',
+                    'ISR:2',
+                    'GRGLIB:2',
+                    '3RDDAN:3',
+                    'IU:1',
+                    'UNIGWN:2',
+                    'LNCLNKLRNY:1'
                 ]
             },
             {
-                serviceType: 'SunDaytime',
+                serviceType: 'SunEvening',
                 direction: 'South',
                 stopIDs: [
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    ''
+                    'LNCLNKLRNY:1',
+                    'GWNCLK:4',
+                    'IU:9',
+                    '3RDDAN:8',
+                    'GRGLIB:1',
+                    'ISR:1',
+                    'PAR:2'
                 ]
             },
         ]
@@ -1827,84 +1684,60 @@ export const TimePointConstants = [
                 serviceType: 'SatDaytime',
                 direction: 'North',
                 stopIDs: [
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    ''
+                    'ARC:2',
+                    'IU:1',
+                    'UNIGWN:2',
+                    'LNCLNKLRNY:1'
                 ]
             },
             {
                 serviceType: 'SatDaytime',
                 direction: 'South',
                 stopIDs: [
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    ''
+                    'LNCLNKLRNY:1',
+                    'GWNCLK:4',
+                    'IU:9',
+                    'ARC:2'
                 ]
             },
             {
                 serviceType: 'SatEvening',
                 direction: 'North',
                 stopIDs: [
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    ''
+                    'ARC:2',
+                    'IU:1',
+                    'UNIGWN:2',
+                    'LNCLNKLRNY:1'
                 ]
             },
             {
                 serviceType: 'SatEvening',
                 direction: 'South',
                 stopIDs: [
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    ''
+                    'LNCLNKLRNY:1',
+                    'GWNCLK:4',
+                    'IU:9',
+                    'ARC:2'
                 ]
             },
             {
                 serviceType: 'SunDaytime',
                 direction: 'North',
                 stopIDs: [
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    ''
+                    'ARC:2',
+                    'IU:1',
+                    'UNIGWN:2',
+                    'LNCLNKLRNY:1'
                 ]
             },
             {
                 serviceType: 'SunDaytime',
                 direction: 'South',
                 stopIDs: [
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    ''
+                    'LNCLNKLRNY:1',
+                    'GWNCLK:4',
+                    'IU:9',
+                    'ARC:2'
                 ]
             }
         ]
