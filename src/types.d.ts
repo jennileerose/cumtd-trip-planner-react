@@ -37,6 +37,16 @@ export type TripDetails = {
     stopTimesByTrip: StopTimesByTrip[]
 }
 
+export type MainTimeTableTabs = {
+    label: string,
+    content: DirectionTimeTableTabs[]
+}
+
+export type DirectionTimeTableTabs = {
+    label: string,
+    content: string | TimeTable
+}
+
 export type TimeTable = {
     baseRouteID: string,
     serviceType: string,
@@ -58,10 +68,14 @@ export type TimeTableRowInfo = {
     rowStops: TimeTableStopData[]
 }
 
+export type DirectionsWithTTStopIDs = {
+    directionLabel: string,
+    stopIDs: string[]
+}
+
 export type TimeTableConstantsServices = {
     serviceType: string,
-    direction: string,
-    stopIDs: string[]
+    directions: DirectionsWithTTStopIDs[] 
 }
 
 export type TimeTableConstants = {

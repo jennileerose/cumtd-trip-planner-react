@@ -2,8 +2,36 @@ import { LatLngExpression } from 'leaflet';
 import tripDataByRouteID from '../../staticData/trips.json'
 import stopTimesByTripID from '../../staticData/stop_times.json'
 import stopsByStopID from '../../staticData/stops.json'
-import { TripDetails, StopTimesByTrip, StopDetailsFromStaticData, SubRoutes, TripDataBySubRouteType, TripsByDirection, TimeTableRowInfo, TimeTableStopData, TimeTableConstants, TimeTableConstantsServices, TimeTable } from '../../types';
-import { TimePointConstants } from '../../staticData/timepoints';
+import { TripDetails, StopTimesByTrip, StopDetailsFromStaticData, SubRoutes, TripDataBySubRouteType, TripsByDirection, TimeTableRowInfo, TimeTableStopData, TimeTableConstants, TimeTableConstantsServices, TimeTable, MainTimeTableTabs, DirectionTimeTableTabs } from '../../types';
+
+// Function to convert uppercase route IDs into camel Case
+export function camelCase(str: string) {
+  // Using replace method with regEx
+  return str.replace(/(?:^\w|[A-Z]|\b\w)/g, function (word, index) {
+      return index == 0 ? word.toUpperCase() : word.toLowerCase();
+  }).replace(/\s+/g, '');
+}
+
+// function to color illi limited, green express and silver limited the same as their main services
+export function getVariantColor(basicRouteID: string): string {
+  let colorString = ''
+
+  switch (basicRouteID) {
+    case 'GREEN EXPRESS':
+      colorString = 'GREEN'
+      break;
+    case 'SILVER LIMITED':
+      colorString = 'SILVER'
+      break;
+    case 'ILLINI LIMITED':
+      colorString = 'ILLINI'
+      break;
+    default:
+      colorString = basicRouteID
+      break;
+  }
+  return colorString
+}
 
 // attempt to get lat and lon for future use of leaflet.js
 export function getStopCoords(
@@ -549,6 +577,55 @@ export function getTripData(routeIDs: SubRoutes[]): TripDataBySubRouteType[] {
 
 }
 
+export function setupRouteServiceTabs(baseRouteID: string, timetableConstants: TimeTableConstants): MainTimeTableTabs[] {
+  let tempTimeTableTabs = [] as MainTimeTableTabs[]
+  let tempLabelService = ''
+  let tempLabelDirections = [] as DirectionTimeTableTabs[]
+  timetableConstants.service.forEach((service) => {
+      switch (service.serviceType) {
+          case 'WkDayDaytime':
+              tempLabelService = 'Weekday Day '
+              break;
+          case 'WkDayEvening':
+              tempLabelService = 'Weekday Evening '
+              break; 
+          case 'WkDayLateNight':
+              tempLabelService = 'Weekday Late Night '
+              break;
+          case 'SatDaytime':
+              tempLabelService = 'Saturday Day '
+              break;
+          case 'SatEvening':
+              tempLabelService = 'Saturday Evening '
+              break;
+          case 'SatLateNight':
+              tempLabelService = 'Saturday Late Night '
+              break;
+          case 'SunDaytime':
+              tempLabelService = 'Sunday Day '
+              break;
+          case 'SunEvening':
+              tempLabelService = 'Sunday Evening '
+              break;
+          case 'SunLateNight':
+              tempLabelService = 'Sunday Late Night '
+              break;
+      }
+      service.directions.forEach((direction) => {
+        tempLabelDirections.push({
+          label: direction.directionLabel,
+          content: baseRouteID + ' ' + direction.directionLabel + ' ' + tempLabelService + ' Timetable goes here'
+        })
+      })
+      tempTimeTableTabs.push({
+          label:  tempLabelService,
+          content: tempLabelDirections
+      })
+      tempLabelDirections = []
+  })
+  return tempTimeTableTabs
+}
+
 // takes the full list of trip data and pares it down to just the timepoint stops
 export function getTimetableStopData(basicRouteID: string, fullTripsList: TripDataBySubRouteType[]): TimeTableRowInfo[] {
   /*********
@@ -559,63 +636,40 @@ export function getTimetableStopData(basicRouteID: string, fullTripsList: TripDa
    * 4) The Silver Weekday late night is fridays only
    */
   // console.log(fullTripsList)
-  let timePointConstantsData = {
-    basicRouteID: '',
-    service: [{
-        serviceType: '',
-        direction: '',
-        stopIDs: [] as string[]
-    }] 
-  } as TimeTableConstants
-  let timeTableServices = [] as TimeTableConstantsServices[]
   let timetableStops = [] as TimeTableRowInfo[]
-  const tempBasicRouteID = basicRouteID
-  let tempActualRouteID = ''
-  let tempDirection = ''
-  let tempServiceType = ''
-  let tempTimetableStopData = [] as TimeTableStopData[]
-  let tempTimetableRow = [] as TimeTableRowInfo[]
-  let tempTimeTables = [] as TimeTable[]
+  // const tempBasicRouteID = basicRouteID
+  // let tempActualRouteID = ''
+  // let tempDirection = ''
+  // let tempServiceType = ''
+  // let tempTimetableStopData = [] as TimeTableStopData[]
+  // let tempTimetableRow = [] as TimeTableRowInfo[]
+  // let tempTimeTables = [] as TimeTable[]
 
-  TimePointConstants.forEach((data) => {
-    if(data.basicRouteID === basicRouteID) {
-      data.service.forEach((routeService => {
-        timeTableServices.push({
-          serviceType: routeService.serviceType,
-          direction: routeService.direction,
-          stopIDs: routeService.stopIDs
-        })
-      }))
-      timePointConstantsData = {
-        basicRouteID: data.basicRouteID,
-        service: timeTableServices
-      }
-    }
-  })
+  
   //this is a weird first attempt to get the data we need. I think it may be inside out
   // console.log(timePointConstantsData)
   // console.log(tempBasicRouteID)
-  timePointConstantsData.service.forEach((service => {
-    tempDirection = service.direction
-    tempServiceType = service.serviceType
-    service.stopIDs.forEach((timetableStopID) => {
-      fullTripsList.forEach((list) => {
+  // timePointConstantsData.service.forEach((service => {
+  //   tempDirection = service.direction
+  //   tempServiceType = service.serviceType
+  //   service.stopIDs.forEach((timetableStopID) => {
+  //     fullTripsList.forEach((list) => {
         // console.log(tempDirection, tempServiceType, timetableStopID, list.routeType)
-        list.routeData.forEach((tripsByDirection: TripsByDirection) => {
+        // list.routeData.forEach((tripsByDirection: TripsByDirection) => {
           // console.log(tripsByDirection)
-          tripsByDirection.trips.forEach((trip) => {
+          // tripsByDirection.trips.forEach((trip) => {
             // console.log(trip.tripID)
-            trip.stopTimesByTrip.forEach((stopTime) => {
+            // trip.stopTimesByTrip.forEach((stopTime) => {
               // console.log(stopTime)
-              if(stopTime.stop_id === timetableStopID) {
-                console.log(stopTime.stop_id)
-              }
-            })
-          })
-        })
-      })
-    })
-  }))
+  //             if(stopTime.stop_id === timetableStopID) {
+  //               console.log(stopTime.stop_id)
+  //             }
+  //           })
+  //         })
+  //       })
+  //     })
+  //   })
+  // }))
 
   return timetableStops
 }
