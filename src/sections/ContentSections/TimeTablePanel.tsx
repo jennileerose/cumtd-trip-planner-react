@@ -29,11 +29,12 @@ export default function TimeTablePanel(
 
         return (
             <>
-                <h3 className="timetable_header">{timetableTitle}</h3>
+                {/* <h3 className="timetable_header">{timetableTitle}</h3> */}
                 {timetableHeaders !== undefined && timeTableRows !== undefined &&
                 <table>
+                    <caption>{timetableTitle + ' Timetable'}</caption>
                     <thead>
-                        <tr>
+                        <tr role="columnheader">
                             {timetableHeaders.map((header: TimeTableStopData, index: number) => (
                                 <th key={index} className={colorMode.colorMode === 'light' ? "table_header_light" : "table_header_dark"}>
                                     {header.stopName}

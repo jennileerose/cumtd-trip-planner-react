@@ -69,7 +69,7 @@ export default function TimetablesTabs(
                     <>
                         <div id="service-tabs" className="tab">
                             {serviceTabs.map((tab, index) => (
-                                <button className="tablinks" key={index.toString() + '-service-button'} onClick={() => openServiceTab(index)} id="defaultOpen">{tab.label}</button>
+                                <button className="tablinks" key={index.toString() + '-service-button'} onClick={() => openServiceTab(index)} id={index === 0 ? "defaultOpen" : index.toString()+'-button'}>{tab.label}</button>
                             ))}
                         </div>
                         {serviceTabs.map((tab, index) => (

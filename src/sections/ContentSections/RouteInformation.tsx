@@ -76,7 +76,7 @@ export default function RouteInformation(): ReactElement {
                <Flex direction="column">
                   <Box>
                      <h2>Route Information</h2>
-                     <p>Please select a route from the drop-down menu</p>
+                     <p>Please select a route from the drop-down menu. Once selected, click Show timetables and then select from the list on the left side.</p>
                      {routes !== undefined && (
                         <>
                         <Flex direction="row" flexWrap="wrap">
