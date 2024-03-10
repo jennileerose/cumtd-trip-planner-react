@@ -52,6 +52,12 @@ export function getStopCoords(
   return stopCoordinates
 }
 
+export function setupStopList(fetchedData: any[]): any[] {
+  let returnArray = [] as any[]
+
+  return returnArray
+}
+
 // returns a simplified trip list for the route selection dropdown
 export function getRouteList(): {routeID: string, routeLongName: string}[] {
   const routesList = [
@@ -887,8 +893,6 @@ export function getDepartureRows(tripsByService: TripDataBySubRouteType, directi
     tempStopTimesByTrip = []
   })
 
-  console.log(tempFilteredTripArray)
-
   tempFilteredTripArray.forEach((trip) => {
     trip.stopTimesByTrip.forEach((stop) => {
       unsortedDepartures.push({
@@ -916,6 +920,7 @@ export function getDepartureRows(tripsByService: TripDataBySubRouteType, directi
     } else {
       unsortedTimeTableRowData.push({
         tripID: trip.tripID,
+        routeID: 'nonhopper',
         departures: unsortedDepartures
       })
     }
@@ -941,6 +946,7 @@ export function getDepartureRows(tripsByService: TripDataBySubRouteType, directi
     })
     unsortedTimeTableRowData2.push({
       tripID: row.tripID,
+      routeID: row.routeID,
       departures: unsortedDepartures2
     })
     unsortedDepartures2 = []

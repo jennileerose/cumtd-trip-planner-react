@@ -47,6 +47,13 @@ export type DirectionTimeTableTabs = {
     content: string
 }
 
+export type TimeTableTabs = {
+    label: string,
+    serviceIndex: number,
+    directionIndex: number,
+    title: string
+}
+
 export type TimeTable = {
     tableHeaders: TimeTableStopData[],
     tripRows: TimeTableRowInfo[]

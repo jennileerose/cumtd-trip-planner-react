@@ -1,6 +1,6 @@
 import React, { useState, useEffect, ReactElement } from 'react'
 import { Departure, DirectionsWithTTStopIDs, TimeTableRowInfo, TimeTableStopData, TripDataBySubRouteType } from '../../types'
-import { Flex, Box, Thead, Td, Tbody, TableContainer, Table, Tr, Th, Tfoot } from '@chakra-ui/react'
+import { useColorMode} from '@chakra-ui/react'
 // import { colors } from '../../theme/colors'
 import { getDepartureRows, getTimetableStopData } from './utils'
 
@@ -17,6 +17,7 @@ export default function TimeTablePanel(
         timetableTitle: string
     }): ReactElement {
 
+        const colorMode = useColorMode()
         const [timetableHeaders, setTimetableHeaders] = useState<TimeTableStopData[]>()
         const [timeTableRows, setTimetableRows] = useState<TimeTableRowInfo[]>()
 
@@ -30,42 +31,36 @@ export default function TimeTablePanel(
             <>
                 <h3 className="timetable_header">{timetableTitle}</h3>
                 {timetableHeaders !== undefined && timeTableRows !== undefined &&
-                    <TableContainer>
-                        <Table variant='striped'>
-                            <Thead>
-                                <Tr>
-                                    {timetableHeaders.map((header: TimeTableStopData, index: number) => (
-                                        <Th key={index}>
-                                            <Flex direction="column">
-                                                <Box>
-                                                    {header.stopName}
-                                                </Box>
-                                                <Box>
-                                                    {header.stopCode}
-                                                </Box>
-                                            </Flex>
-                                        </Th>
-                                    ))}
-                                </Tr>
-                            </Thead>
-                            <Tbody>
-                                {timeTableRows.map((rowData: TimeTableRowInfo, rowDataIndex: number) => (
-                                    <Tr key={rowDataIndex}>
-                                        {rowData.departures.map((departuresData: Departure, departuresIndex: number) => (
-                                            <Td key={departuresIndex} className={rowData.routeID}>
-                                                {departuresData.departureTime}
-                                            </Td>
-                                        ))}
-                                    </Tr>
+                <table>
+                    <thead>
+                        <tr>
+                            {timetableHeaders.map((header: TimeTableStopData, index: number) => (
+                                <th key={index} className={colorMode.colorMode === 'light' ? "table_header_light" : "table_header_dark"}>
+                                    {header.stopName}
+                                </th>
+                            ))}
+                        </tr>
+                        <tr>
+                            {timetableHeaders.map((header: TimeTableStopData, index: number) => (
+                                <th key={index} className={colorMode.colorMode === 'light' ? "table_header_light" : "table_header_dark"}>
+                                    {header.stopCode}
+                                </th>
+                            ))}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {timeTableRows.map((rowData: TimeTableRowInfo, rowDataIndex: number) => (
+                            <tr key={rowDataIndex}>
+                                {rowData.departures.map((departuresData: Departure, departuresIndex: number) => (
+                                    <td key={departuresIndex} className={departuresData.departureTime === '-' ? 'timetable_times' : rowData.routeID}>
+                                        {departuresData.departureTime}
+                                    </td>
                                 ))}
-                            </Tbody>
-                            <Tfoot>
-                                <Tr>
-                                    <Th>Route notes will go here</Th>
-                                </Tr>
-                            </Tfoot>
-                        </Table>
-                    </TableContainer>
+                            </tr>
+                        ))}
+                    </tbody>
+                    
+                </table>
                 }
             </>
         )
