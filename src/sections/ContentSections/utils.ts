@@ -800,8 +800,6 @@ export function sortTripsByDeparture(trips: TimeTableRowInfo[]): DateConversion[
   let tempTrips = [] as DateConversion[]
   let paredTempTrips = [] as DateConversion[]
   let tempSortedTrips = [] as DateConversion[]
-  let tripIndexHolder = 0
-  let newTripIndexHolder = 0
 
   trips.forEach((trip, tripIndex) => {
     trip.departures.forEach((departure) => {
@@ -819,14 +817,11 @@ export function sortTripsByDeparture(trips: TimeTableRowInfo[]): DateConversion[
     })
   })
 
-  tempTrips.forEach((tempTrip) => {
-    tripIndexHolder = tempTrip.tripIndex
-    if(tripIndexHolder === newTripIndexHolder) {
-      paredTempTrips.push(tempTrip)
-      newTripIndexHolder = newTripIndexHolder + 1
-    }
-  })
+  const key = 'tripIndex'
 
+  paredTempTrips = [...new Map(tempTrips.map(item =>
+    [item[key], item])).values()];
+  
   tempSortedTrips = paredTempTrips.sort((a, b) => a.translatedTime.getTime() - b.translatedTime.getTime())
 
   return tempSortedTrips

@@ -15,7 +15,7 @@ export default function BasicTripPlanner(): ReactElement {
           <Container variant="mainContent">
           <div className="flex-item">
               <h2>Trip Planner</h2>
-              <p>This app is a work in progress...return soon for more features!</p>
+              <p>This app is a work in progress and this feature has not yet been implemented.</p>
           </div>
           </Container>
         </main>

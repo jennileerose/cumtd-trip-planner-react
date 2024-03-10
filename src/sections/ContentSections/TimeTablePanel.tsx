@@ -22,14 +22,16 @@ export default function TimeTablePanel(
         const [timeTableRows, setTimetableRows] = useState<TimeTableRowInfo[]>()
 
         useEffect(() => {
-            setTimetableHeaders(getTimetableStopData(timetableConstantsServicesByDirection.stopIDs))
-            setTimetableRows(getDepartureRows(tripsByService, timetableConstantsServicesByDirection.directionLabel, timetableConstantsServicesByDirection.stopIDs))
+            if(tripsByService !== undefined) {
+                setTimetableHeaders(getTimetableStopData(timetableConstantsServicesByDirection.stopIDs))
+                setTimetableRows(getDepartureRows(tripsByService, timetableConstantsServicesByDirection.directionLabel, timetableConstantsServicesByDirection.stopIDs))
+            }
+            
         }, [basicRouteID, timetableConstantsServicesByDirection, tripsByService])
       
 
         return (
             <>
-                {/* <h3 className="timetable_header">{timetableTitle}</h3> */}
                 {timetableHeaders !== undefined && timeTableRows !== undefined &&
                 <table>
                     <caption>{timetableTitle + ' Timetable'}</caption>
@@ -41,13 +43,6 @@ export default function TimeTablePanel(
                                 </th>
                             ))}
                         </tr>
-                        {/* <tr>
-                            {timetableHeaders.map((header: TimeTableStopData, index: number) => (
-                                <th key={index} className={colorMode.colorMode === 'light' ? "table_header_light" : "table_header_dark"}>
-                                    {header.stopCode}
-                                </th>
-                            ))}
-                        </tr> */}
                     </thead>
                     <tbody>
                         <tr>

@@ -443,7 +443,7 @@ export const TimePointConstants = [
                             'JOHNGLDVW:2',
                             'PKLN:1',
                             'RNDBRNRD:2',
-                            'SPFLDWLS:',
+                            'SPFLDWLS:3',
                             'IT:1',
                             'IU:1',
                             'LSE:1',
@@ -802,7 +802,7 @@ export const TimePointConstants = [
                             'MNBRDY:7',
                             'WASHLRMN:1',
                             'LSE:2',
-                            'PKWRT:',
+                            'PKWRT:1',
                             '5THBRD:4',
                             'IT:2',
                             'BLOMHD:1',
@@ -837,7 +837,7 @@ export const TimePointConstants = [
                             'MNBRDY:7',
                             'WASHLRMN:1',
                             'LSE:2',
-                            'PKWRT:',
+                            'PKWRT:1',
                             '5THBRD:4',
                             'IT:2',
                             'BLOMHD:1',
@@ -1460,27 +1460,27 @@ export const TimePointConstants = [
     {
         basicRouteID: 'SILVER LIMITED',
         service: [
-            {
-                serviceType: 'WkDayDaytime',
-                directions: [
-                    {
-                        directionLabel: 'North',
-                        stopIDs: [
-                            'PAR:2',
-                            'IU:1',
-                            'LSE:8'
-                        ] 
-                    },
-                    {
-                        directionLabel: 'South',
-                        stopIDs: [
-                            'LSE:8',
-                            'IU:1',
-                            'PAR:2'
-                        ]
-                    }
-                ]
-            },
+            // {
+            //     serviceType: 'WkDayDaytime',
+            //     directions: [
+            //         {
+            //             directionLabel: 'North',
+            //             stopIDs: [
+            //                 'PAR:2',
+            //                 'IU:1',
+            //                 'LSE:8'
+            //             ] 
+            //         },
+            //         {
+            //             directionLabel: 'South',
+            //             stopIDs: [
+            //                 'LSE:8',
+            //                 'IU:1',
+            //                 'PAR:2'
+            //             ]
+            //         }
+            //     ]
+            // },
             {
                 serviceType: 'WkDayEvening',
                 directions: [
@@ -1693,7 +1693,7 @@ export const TimePointConstants = [
                         directionLabel: 'B',
                         stopIDs: [
                             'RNDBRNRD:2',
-                            'WLMDNCN:',
+                            'WLMDNCN:4',
                             'YMCA:1',
                             'KBYMYFR:2'
                         ]
@@ -1887,7 +1887,7 @@ export const TimePointConstants = [
                         stopIDs: [
                             'LNCLNKLRNY:1',
                             'GWNCLK:4',
-                            'IU:',
+                            'IU:1',
                             'ARC:2'
                         ]
                     }
