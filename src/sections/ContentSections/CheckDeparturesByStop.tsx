@@ -96,7 +96,6 @@ export default function CheckDeparturesByStop(): ReactElement {
     }, [stopData])
 
   const selectStop = (stopArrayIndex: string) => {
-    // console.log(stopArrayIndex)
     const index = Number(stopArrayIndex)
     let stopInfo = {} as StopDetails
     if(stops !== undefined) {
@@ -120,7 +119,6 @@ export default function CheckDeparturesByStop(): ReactElement {
   }
 
   const getDeparturesByStop = (stopID: string) => {
-    console.log(stopID)
     if(stopID !== 'none') {
       fetch(GET_DEPARTURE_BY_STOP + stopID)
      .then(resp => resp.json())
@@ -183,7 +181,6 @@ export default function CheckDeparturesByStop(): ReactElement {
         rqst: data.rqst,
         departures: tempDepartureArray
       }
-      console.log(departureListObject.departures)
       setDepartureDataStopHeader(selectedStop.stopName)
       setDepartureData(departureListObject)
     } else {
@@ -221,7 +218,6 @@ export default function CheckDeparturesByStop(): ReactElement {
             })
           }
         })
-        console.log(tempArray)
       } else {
         stops.stops.forEach((searchStop, searchStopIndex) => {
           // if(searchStop.stopName.includes(searchValue)) {
@@ -348,9 +344,12 @@ export default function CheckDeparturesByStop(): ReactElement {
               <Box>
                 <Flex direction="column">
                   <Box>
+                  {departureData?.departures.length === 0 && (
+                        <p>There are no departures at this time</p>
+                    )}
                     {departureData === undefined && (
                         <p>No data to display</p>
-                      )}
+                    )}
                     {departureData !== undefined &&
                       departureData.departures.map((departure, index) => (
                         <Flex key={index} marginTop="0.25em" border="1px solid" borderColor={colorMode.colorMode === 'light' ? colors.richBlack : colors.coolWhite}>
