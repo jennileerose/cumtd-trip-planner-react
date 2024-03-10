@@ -1,6 +1,6 @@
 import React, { useState, useEffect, ReactElement } from 'react'
 import { TimeTableConstants, TimeTableTabs, TripDataBySubRouteType } from '../../types'
-// import {  } from '@chakra-ui/react'
+import { useColorMode } from '@chakra-ui/react'
 import {
     // getVariantColor,
     setupRouteServiceTabs
@@ -20,8 +20,7 @@ export default function TimetablesTabs(
 
         // const [colorVariant, setColorVariant] = useState<string>()
         const [serviceTabs, setServiceTabs] = useState<TimeTableTabs[]>()
-
-
+        const colorMode = useColorMode()
         const openServiceTab = (index: number) => {
             if(serviceTabs !== undefined) {
                 let i = 0
@@ -67,7 +66,7 @@ export default function TimetablesTabs(
             <>
                 {serviceTabs !== undefined && (
                     <>
-                        <div id="service-tabs" className="tab">
+                        <div id="service-tabs" className={colorMode.colorMode === 'light' ? "tab_light" : "tab_dark"}>
                             {serviceTabs.map((tab, index) => (
                                 <button className="tablinks" key={index.toString() + '-service-button'} onClick={() => openServiceTab(index)} id={index === 0 ? "defaultOpen" : index.toString()+'-button'}>{tab.label}</button>
                             ))}
