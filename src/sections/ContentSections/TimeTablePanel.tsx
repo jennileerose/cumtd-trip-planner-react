@@ -41,15 +41,22 @@ export default function TimeTablePanel(
                                 </th>
                             ))}
                         </tr>
-                        <tr>
+                        {/* <tr>
                             {timetableHeaders.map((header: TimeTableStopData, index: number) => (
                                 <th key={index} className={colorMode.colorMode === 'light' ? "table_header_light" : "table_header_dark"}>
                                     {header.stopCode}
                                 </th>
                             ))}
-                        </tr>
+                        </tr> */}
                     </thead>
                     <tbody>
+                        <tr>
+                            {timetableHeaders.map((header: TimeTableStopData, index: number) => (
+                                <td key={index} className={colorMode.colorMode === 'light' ? "table_header_light" : "table_header_dark"}>
+                                    {header.stopCode}
+                                </td>
+                            ))}
+                        </tr>
                         {timeTableRows.map((rowData: TimeTableRowInfo, rowDataIndex: number) => (
                             <tr key={rowDataIndex}>
                                 {rowData.departures.map((departuresData: Departure, departuresIndex: number) => (

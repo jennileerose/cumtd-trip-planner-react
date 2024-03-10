@@ -47,7 +47,8 @@ export default {
         colors.richBlack,
         colors.coolWhite
       )(props),
-      padding: '1.5em',
+      // padding: '1.5em',
+      padding: '0.5em',
       overflow: 'auto',
       justifyContent: 'flex-start',
       border: '1px solid',
