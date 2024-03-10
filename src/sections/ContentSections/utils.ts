@@ -897,9 +897,20 @@ export function getDepartureRows(tripsByService: TripDataBySubRouteType, directi
       })
     })
     if(trip.routeID.includes("HOPPER")) {
+      let routeVariantName = ''
+      switch (trip.routeID) {
+        case 'GREENHOPPER EVENING':
+          routeVariantName = 'GREENHOPPER'
+          break;
+        case 'GREENHOPPER EVENING SATURDAY':
+          routeVariantName = 'GREENHOPPER'
+          break;
+        default:
+          routeVariantName = trip.routeID
+      }
       unsortedTimeTableRowData.push({
         tripID: trip.tripID,
-        routeID: trip.routeID,
+        routeID: routeVariantName.toLowerCase(),
         departures: unsortedDepartures
       })
     } else {

@@ -28,7 +28,7 @@ export default function TimeTablePanel(
 
         return (
             <>
-                <p>{timetableTitle}</p>
+                <h3 className="timetable_header">{timetableTitle}</h3>
                 {timetableHeaders !== undefined && timeTableRows !== undefined &&
                     <TableContainer>
                         <Table variant='striped'>

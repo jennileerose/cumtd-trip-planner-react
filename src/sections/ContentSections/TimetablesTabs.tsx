@@ -29,11 +29,9 @@ export default function TimetablesTabs(
             <>
                 {serviceTabs !== undefined && (
                 <Tabs
-                    isFitted
                     orientation="vertical"
                     variant={colorVariant}
                     defaultIndex={0}
-                    isManual
                     id="outer-service-tabs"
                 >
                     <TabList role="tablist">
@@ -43,13 +41,11 @@ export default function TimetablesTabs(
                     </TabList>
                     <TabPanels>
                     {serviceTabs.map((tab, index) => (
-                        <TabPanel p={4} key={index} role="tabpanel">
+                        <TabPanel key={index} role="tabpanel">
                             <Tabs
-                                isFitted
                                 orientation='vertical'
                                 variant="innerTabs"
                                 defaultIndex={0}
-                                isManual
                                 id="inner-direction-tabs"
                             >
                                 <TabList>
@@ -59,7 +55,7 @@ export default function TimetablesTabs(
                                 </TabList>
                                 <TabPanels>
                                     {tab.content.map((directionTab, directionIndex) => (
-                                        <TabPanel p={4} key={directionIndex}>
+                                        <TabPanel key={directionIndex}>
                                             <TimeTablePanel
                                                 basicRouteID={basicRouteID}
                                                 timetableConstantsServicesByDirection={timetableConstants.service[index].directions[directionIndex]}

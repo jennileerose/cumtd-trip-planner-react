@@ -7,9 +7,9 @@ export default {
     parts: ['tab', 'tablist', 'tabpanels', 'tabpanel'],
     baseStyle: (props: Dict<any>) => ({
         tab: {
-            fontSize: '0.75em',
+            fontSize: '0.5em',
             fontWeight: 'bold',
-            padding: '2em',
+            padding: '0 1em 0 1em',
             border: 'solid 1px',
             borderRadius: '0',
             borderColor: mode(
@@ -45,15 +45,18 @@ export default {
             }
         },
         tablist: {
-            // padding: '1em'
+            padding: '0',
+            width: '50%',
+            // bg: colors.AliceBlue,
         },
         tabpanels: {
             padding: '0.5em',
             fontWeight: 'bold',
-            border: 'solid 1px'
+            border: 'solid 1px',
+            // bg: '#ff0000',
         },
         tabpanel: {
-            padding: '1.5em'
+            // padding: '1.5em'
         }
     }),
 
@@ -64,7 +67,7 @@ export default {
                 fontWeight: 'bold',
                 border: 'solid 1px',
                 borderRadius: '0',
-                padding: '2em',
+                padding: '0 1em 0 1em',
                 _hover: {
                     bg: mode(
                         colors.carolinaBlue,
@@ -89,7 +92,18 @@ export default {
                     )(props),
                     color: mode(colors.richBlack, colors.coolWhite)(props),
                 }
-            }
+            },
+            tabpanel: {
+                padding: '0',
+                margin: '0',
+                // bg: '#00ff00'
+            },
+            tabpanels: {
+                padding: '0',
+                fontWeight: 'bold',
+                border: 'solid 1px',
+                // bg: '#ff0000',
+            },
         }),
         YELLOW: {
             tab: {
@@ -97,7 +111,7 @@ export default {
                 fontWeight: 'bold',
                 border: 'solid 1px',
                 borderRadius: '0',
-                padding: '2em',
+                padding: '0 1em 0 1em',
                 _hover: {
                     bg: colors.mtdYellow,
                     color: colors.mtdYellowText
@@ -118,7 +132,7 @@ export default {
                 fontWeight: 'bold',
                 border: 'solid 1px',
                 borderRadius: '0',
-                padding: '2em',
+                padding: '0 1em 0 1em',
                 _hover: {
                     bg: colors.mtdRed,
                     color: colors.mtdRedText 
@@ -139,7 +153,7 @@ export default {
                 fontWeight: 'bold',
                 border: 'solid 1px',
                 borderRadius: '0',
-                padding: '2em',
+                padding: '0 1em 0 1em',
                 _hover: {
                     bg: colors.mtdLavender,
                     color: colors.mtdLavenderText
@@ -160,7 +174,7 @@ export default {
                 fontWeight: 'bold',
                 border: 'solid 1px',
                 borderRadius: '0',
-                padding: '2em',
+                padding: '0 1em 0 1em',
                 _hover: {
                     bg: colors.mtdBlue,
                     color: colors.mtdBlueText
@@ -181,7 +195,7 @@ export default {
                 fontWeight: 'bold',
                 border: 'solid 1px',
                 borderRadius: '0',
-                padding: '2em',
+                padding: '0 1em 0 1em',
                 _hover: {
                     bg: colors.mtdGreen,
                     color: colors.mtdGreenText
@@ -202,7 +216,7 @@ export default {
                 fontWeight: 'bold',
                 border: 'solid 1px',
                 borderRadius: '0',
-                padding: '2em',
+                padding: '0 1em 0 1em',
                 _hover: {
                     bg: colors.mtdOrange,
                     color: colors.mtdOrangeText
@@ -223,7 +237,7 @@ export default {
                 fontWeight: 'bold',
                 border: 'solid 1px',
                 borderRadius: '0',
-                padding: '2em',
+                padding: '0 1em 0 1em',
                 _hover: {
                     bg: colors.mtdGrey,
                     color: colors.mtdGreyText
@@ -244,7 +258,7 @@ export default {
                 fontWeight: 'bold',
                 border: 'solid 1px',
                 borderRadius: '0',
-                padding: '2em',
+                padding: '0 1em 0 1em',
                 _hover: {
                     bg: colors.mtdBronze,
                     color: colors.mtdBronzeText
@@ -265,7 +279,7 @@ export default {
                 fontWeight: 'bold',
                 border: 'solid 1px',
                 borderRadius: '0',
-                padding: '2em',
+                padding: '0 1em 0 1em',
                 _hover: {
                     bg: colors.mtdBrown,
                     color: colors.mtdBrownText 
@@ -286,7 +300,7 @@ export default {
                 fontWeight: 'bold',
                 border: 'solid 1px',
                 borderRadius: '0',
-                padding: '2em',
+                padding: '0 1em 0 1em',
                 _hover: {
                     bg: colors.mtdGold,
                     color: colors.mtdGoldText
@@ -307,7 +321,7 @@ export default {
                 fontWeight: 'bold',
                 border: 'solid 1px',
                 borderRadius: '0',
-                padding: '2em',
+                padding: '0 1em 0 1em',
                 _hover: {
                     bg: colors.mtdRuby,
                     color: colors.mtdRubyText
@@ -328,7 +342,7 @@ export default {
                 fontWeight: 'bold',
                 border: 'solid 1px',
                 borderRadius: '0',
-                padding: '2em',
+                padding: '0 1em 0 1em',
                 _hover: {
                     bg: colors.mtdTeal,
                     color: colors.mtdTealText
@@ -349,7 +363,7 @@ export default {
                 fontWeight: 'bold',
                 border: 'solid 1px',
                 borderRadius: '0',
-                padding: '2em',
+                padding: '0 1em 0 1em',
                 _hover: {
                     bg: colors.mtdSilver,
                     color: colors.mtdSilverText
@@ -370,7 +384,7 @@ export default {
                 fontWeight: 'bold',
                 border: 'solid 1px',
                 borderRadius: '0',
-                padding: '2em',
+                padding: '0 1em 0 1em',
                 _hover: {
                     bg: colors.mtdNavy,
                     color: colors.mtdNavyText
@@ -391,7 +405,7 @@ export default {
                 fontWeight: 'bold',
                 border: 'solid 1px',
                 borderRadius: '0',
-                padding: '2em',
+                padding: '0 1em 0 1em',
                 _hover: {
                     bg: colors.mtdPink,
                     color: colors.mtdPinkText
@@ -412,7 +426,7 @@ export default {
                 fontWeight: 'bold',
                 border: 'solid 1px',
                 borderRadius: '0',
-                padding: '2em',
+                padding: '0 1em 0 1em',
                 _hover: {
                     bg: colors.mtdLime,
                     color: colors.mtdLimeText
@@ -433,7 +447,7 @@ export default {
                 fontWeight: 'bold',
                 border: 'solid 1px',
                 borderRadius: '0',
-                padding: '2em',
+                padding: '0 1em 0 1em',
                 _hover: {
                     bg: colors.mtdRaven,
                     color: colors.mtdRavenText
@@ -454,7 +468,7 @@ export default {
                 fontWeight: 'bold',
                 border: 'solid 1px',
                 borderRadius: '0',
-                padding: '2em',
+                padding: '0 1em 0 1em',
                 _hover: {
                     bg: colors.mtdIllini,
                     color: colors.mtdIlliniText
@@ -475,7 +489,7 @@ export default {
                 fontWeight: 'bold',
                 border: 'solid 1px',
                 borderRadius: '0',
-                padding: '2em',
+                padding: '0 1em 0 1em',
                 _hover: {
                     bg: colors.mtdLink,
                     color: colors.mtdLinkText

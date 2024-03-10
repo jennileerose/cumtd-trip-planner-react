@@ -23,20 +23,22 @@ export default function RouteInformation(): ReactElement {
 
    // called via button after selecting a route
    const getTimetableData = () => {
-      // get all the subroutes based on the selected Base routes color
-      const routeIDsAndTypes = getSubRoutesList(selectedRoute.routeID)
-      // get the data and pass it to the timetables component
-      setFullTripsList(getTripData(routeIDsAndTypes))
-      let tempTimePointConstantsData = {} as TimeTableConstants
-      TimePointConstants.forEach((data) => {
-         if(data.basicRouteID === selectedRoute.routeID) {
-            tempTimePointConstantsData = {
-               basicRouteID: data.basicRouteID,
-               service: data.service
+      if(selectedRoute.routeID !== 'none') {
+         // get all the subroutes based on the selected Base routes color
+         const routeIDsAndTypes = getSubRoutesList(selectedRoute.routeID)
+         // get the data and pass it to the timetables component
+         setFullTripsList(getTripData(routeIDsAndTypes))
+         let tempTimePointConstantsData = {} as TimeTableConstants
+         TimePointConstants.forEach((data) => {
+            if(data.basicRouteID === selectedRoute.routeID) {
+               tempTimePointConstantsData = {
+                  basicRouteID: data.basicRouteID,
+                  service: data.service
+               }
             }
-         }
-      })
-      setTimePointConstantsData(tempTimePointConstantsData)
+         })
+         setTimePointConstantsData(tempTimePointConstantsData)
+      }
    }
 
    const setDataAsType = (data: any) => {
