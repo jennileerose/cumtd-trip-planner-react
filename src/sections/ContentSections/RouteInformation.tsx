@@ -1,75 +1,48 @@
-// import '../../App.css'
 import Header from '../header'
 import Footer from '../footer'
 import Navigation from '../navigation'
 import React, { useState, useEffect, ReactElement } from 'react'
 import { GET_ROUTES } from '../../api'
-import { CUMTDRoute, RouteDetails } from '../../types'
-import { Container, useColorMode, Select, Flex, Box } from '@chakra-ui/react'
+import { BasicRoutes, TimeTableConstants, TripDataBySubRouteType } from '../../types'
+import { Container, useColorMode, Select, Flex, Box, Button, Spacer } from '@chakra-ui/react'
 import { colors } from '../../theme/colors'
+import {getTripData, getRouteList, getSubRoutesList} from './utils'
+import TimetablesTabs from './TimetablesTabs'
+import { TimePointConstants } from '../../staticData/timepoints';
 
 export default function RouteInformation(): ReactElement {
    const colorMode = useColorMode()
-  const [routes, setRoutes] = useState<CUMTDRoute>()
-   const [selectedRoute, setSelectedRoute] = useState<RouteDetails>({
-      routeColor: 'none',
+   const [routes, setRoutes] = useState<BasicRoutes[]>()
+   const [selectedRoute, setSelectedRoute] = useState<BasicRoutes>({
       routeID: 'none',
       routeLongName: 'no routes found',
-      routeShortName: '',
-      routeTextColor: 'none'
    })
+   const [fullTripsList, setFullTripsList] = useState<TripDataBySubRouteType[]>()
+   const [timePointConstantsData, setTimePointConstantsData] = useState<TimeTableConstants>()
    const data = null
 
-   const setDataAsType = (data: any) => {
-      if(data !== null || data !== undefined) {
-         let routeListObject = {} as CUMTDRoute
-         let tempRouteInfo = {} as RouteDetails
-         const tempRouteArray = [] as RouteDetails[]
-         data.routes.forEach((routeData: any) => {
-            tempRouteInfo = {
-               routeColor: routeData.route_color,
-               routeID: routeData.route_id,
-               routeLongName: routeData.route_long_name,
-               routeShortName: routeData.route_short_name,
-               routeTextColor: routeData.route_text_color
+   // called via button after selecting a route
+   const getTimetableData = () => {
+      if(selectedRoute.routeID !== 'none') {
+         // get all the subroutes based on the selected Base routes color
+         const routeIDsAndTypes = getSubRoutesList(selectedRoute.routeID)
+         // get the data and pass it to the timetables component
+         setFullTripsList(getTripData(routeIDsAndTypes))
+         let tempTimePointConstantsData = {} as TimeTableConstants
+         TimePointConstants.forEach((data) => {
+            if(data.basicRouteID === selectedRoute.routeID) {
+               tempTimePointConstantsData = {
+                  basicRouteID: data.basicRouteID,
+                  service: data.service
+               }
             }
-            tempRouteArray.push(tempRouteInfo)
          })
-         routeListObject = {
-            time: data.time,
-            changesetID: data.changeset_id,
-            newChangeset: data.new_changeset,
-            status: data.status,
-            rqst: data.rqst,
-            routes: tempRouteArray
-         }
-         setRoutes(routeListObject)
-      } else {
-         setRoutes({
-            time: '',
-            changesetID: '',
-            newChangeset: false,
-            status: {
-               code: 500,
-               msg: 'error',
-            },
-            rqst: {
-               method: 'none',
-               params: {
-                     routeID: 'no routes found'
-               }
-            },
-            routes: [
-               {
-                  routeColor: 'none',
-                  routeID: 'none',
-                  routeLongName: 'no routes found',
-                  routeShortName: '',
-                  routeTextColor: 'none'
-               }
-            ]
-         })
+         setTimePointConstantsData(tempTimePointConstantsData)
       }
+   }
+
+   const setDataAsType = (data: any) => {
+      setRoutes(getRouteList())
    }
 
    useEffect(() => {
@@ -80,19 +53,18 @@ export default function RouteInformation(): ReactElement {
 
    const SelectRoute = (routeArrayIndex: string) => {
       const index = Number(routeArrayIndex)
-      let routeInfo = {} as RouteDetails
+      let routeInfo = {} as BasicRoutes
       if(routes !== undefined) {
-         routeInfo =  routes.routes[index]
+         routeInfo =  routes[index]
       } else {
          routeInfo = {
-            routeColor: 'none',
             routeID: 'none',
             routeLongName: 'no routes found',
-            routeShortName: 0,
-            routeTextColor: 'none'
          }
       }
       setSelectedRoute(routeInfo)
+      setFullTripsList(undefined)
+      setTimePointConstantsData(undefined)
    }
   return (
    <div id="outer-content" className={colorMode.colorMode === 'light' ? "light-body-styles" : "dark-body-styles"}>
@@ -101,36 +73,49 @@ export default function RouteInformation(): ReactElement {
          <Navigation />
          <main role="main">
             <Container variant="mainContent">
-               <h2>Route Information</h2>
-               <p>Please select a route from the drop-down menu</p>
-               {routes !== undefined && (
-                  <>
-                  <Flex direction="row" flexWrap="wrap">
-                     <Box>
-                        <label className="input-label" htmlFor="route-dropdown">Routes</label>
-                     </Box>
-                     <Box>
-                        <Select
-                           className="dropdown-option"
-                           bg={colorMode.colorMode === 'light' ? colors.AliceBlue: colors.prussianBlue}
-                           border="1px solid"
-                           borderColor={colorMode.colorMode === 'light' ? colors.richBlack: colors.coolWhite}
-                           color={colorMode.colorMode === 'light' ? colors.richBlack: colors.coolWhite}
-                           placeholder='Select A Route'
-                           id="route-dropdown"
-                           onChange={(e) => { SelectRoute(e.target.value); }}
-                        >
-                           {routes.routes.map((route, index) => (
-                              <option key={index} value={index}>{route.routeLongName}</option>
-                           ))}
-                        </Select>
-                     </Box>
-                  </Flex>
-                  </>
-               )}
-               <div id="route-info">
-                  <p>{selectedRoute.routeLongName} {selectedRoute.routeShortName}</p>
-               </div>
+               <Flex direction="column">
+                  <Box>
+                     <h2>Route Information</h2>
+                     <p>Please select a route from the drop-down menu. Once selected, click Show timetables and then select from the list on the left side.</p>
+                     {routes !== undefined && (
+                        <>
+                        <Flex direction="row" flexWrap="wrap">
+                           <Box>
+                              <label className="input-label" htmlFor="route-dropdown">Routes</label>
+                           </Box>
+                           <Box>
+                              <Select
+                                 className="dropdown-option"
+                                 bg={colorMode.colorMode === 'light' ? colors.AliceBlue: colors.prussianBlue}
+                                 border="1px solid"
+                                 borderColor={colorMode.colorMode === 'light' ? colors.richBlack: colors.coolWhite}
+                                 color={colorMode.colorMode === 'light' ? colors.richBlack: colors.coolWhite}
+                                 placeholder='Select A Route'
+                                 id="route-dropdown"
+                                 onChange={(e) => { SelectRoute(e.target.value); }}
+                              >
+                                 {routes.map((route, index) => (
+                                    <option key={index} value={index}>{route.routeLongName}</option>
+                                 ))}
+                              </Select>
+                           </Box>
+                           <Box>
+                              <Button variant="primary" onClick={() => getTimetableData()}>Show Timetables</Button>
+                           </Box>
+                        </Flex>
+                        </>
+                     )}
+                  </Box>
+                  <Spacer />
+                  <br />
+                  <Box>
+                     <div id="route-info">
+                        {fullTripsList !== undefined && timePointConstantsData && (
+                           <TimetablesTabs basicRouteID={timePointConstantsData.basicRouteID} timetableConstants = {timePointConstantsData} fullTripsList = {fullTripsList} />
+                        )}
+                     </div>
+                  </Box>
+               </Flex>
             </Container>
          </main>
          <Footer />

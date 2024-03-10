@@ -33,7 +33,6 @@ export default function CheckDeparturesByStop(): ReactElement {
   const [departureData, setDepartureData] = useState<RouteDeparture>()
 
   const setStopDataAsType = (data: any) => {
-    // console.log(data)
     if(data !== null || data !== undefined) {
       let stopListObject = {} as CUMTDStop
       let tempStopInfo = {} as StopDetails

@@ -6,6 +6,91 @@ export type RouteDetails = {
     routeTextColor: string
 }
 
+export type BasicRoutes = {
+    routeID: string,
+    routeLongName: string
+}
+
+export type SubRoutes = {
+    routeID: string,
+    routeType: string,
+}
+
+export type TripDataBySubRouteType = {
+    routeType: string
+    routeData: tripsByDirection[]
+}
+
+export type TripsByDirection = {
+    direction: string,
+    trips: TripDetails[]
+}
+
+export type TripDetails = {
+    tripID: string,
+    tripHeadSign: string,
+    routeID: string,
+    blockID: string,
+    direction: string,
+    serviceID: string,
+    shapeID: string,
+    stopTimesByTrip: StopTimesByTrip[]
+}
+
+export type MainTimeTableTabs = {
+    label: string,
+    content: DirectionTimeTableTabs[]
+}
+
+export type DirectionTimeTableTabs = {
+    label: string,
+    content: string
+}
+
+export type TimeTableTabs = {
+    label: string,
+    serviceIndex: number,
+    directionIndex: number,
+    title: string
+}
+
+export type TimeTable = {
+    tableHeaders: TimeTableStopData[],
+    tripRows: TimeTableRowInfo[]
+}
+
+export type TimeTableStopData = {
+    stopID: string,
+    stopName: string,
+    stopCode: string,
+}
+
+export type Departure = {
+    stopID: string,
+    departureTime: string
+}
+
+export type TimeTableRowInfo = {
+    tripID: string,
+    routeID?: string,
+    departures: Departure[]
+}
+
+export type DirectionsWithTTStopIDs = {
+    directionLabel: string,
+    stopIDs: string[]
+}
+
+export type TimeTableConstantsServices = {
+    serviceType: string,
+    directions: DirectionsWithTTStopIDs[] 
+}
+
+export type TimeTableConstants = {
+    basicRouteID: string,
+    service: TimeTableConstantsServices[]
+}
+
 export type CUMTDRoute = {
     time: string,
     changesetID: string,
@@ -55,14 +140,33 @@ export type CUMTDStop = {
     stops: StopDetails[]
 }
 
-export type tripDetails = {
-    tripID: string,
-    tripHeadSign: string,
-    routeID: string,
-    blockID: string,
-    direction: string,
-    serviceID: string,
-    shapeID: string,
+export type StopDetailsFromStaticData = {
+    stop_id:  string,
+    stop_code:  string,
+    stop_name:  string,
+    stop_desc:  string,
+    stop_lat:  string,
+    stop_lon:  string,
+    zone_id:  string,
+    stop_url:  string,
+    location_type:  string,
+    parent_station: string,
+    stop_timezone:  string,
+    wheelchair_boarding:  string,
+    platform_code:  string
+}
+
+export type StopTimesByTrip = {
+    trip_id:  string,
+    arrival_time:  string,
+    departure_time:  string,
+    stop_id:  string,
+    stop_sequence:  number,
+    stop_headsign:  string,
+    pickup_type:  number,
+    drop_off_type:  number,
+    timepoint:  number,
+    stop_details: StopDetailsFromStaticData[]
 }
 
 export type DepartureDetails = {
@@ -111,3 +215,19 @@ export type StopSearchDetails = {
     index: number,
     value: string
 }
+
+export type TripInfo = {
+    trip_id: string,
+    trip_headsign: string,
+    route_id: string,
+    block_id: string,
+    direction: string,
+    service_id: string,
+    shape_id: string
+}
+
+export type DateConversion = {
+    tripIndex: number,
+    tripID: string,
+    translatedTime: Date
+  }

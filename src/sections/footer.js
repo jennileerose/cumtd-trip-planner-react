@@ -64,7 +64,7 @@ const Footer = () => {
             </Box>
          </Flex>
         <div className="copyright-statement">
-           <p>Copyright <span className="far fa-copyright" aria-label="copyright symbol"></span> 2023, Jennilee Benda - Data fetched from <a href="https://developer.cumtd.com/" rel="noreferrer" target="_blank" className={colorMode.colorMode === 'light' ? 'statement-link-light' : 'statement-link-dark'}>CUMTD API</a> and this is not an officially <a href="https://mtd.org/" rel="noreferrer" target="_blank" className={colorMode.colorMode === 'light' ? 'statement-link-light' : 'statement-link-dark'}>CUTMD</a> approved application. Background generated on <a href="http://patternico.com/" rel="noreferrer" target="_blank" className={colorMode.colorMode === 'light' ? 'statement-link-light' : 'statement-link-dark'}>Seamless Pattern Maker</a></p>
+           <p>Copyright <span className="far fa-copyright" aria-label="copyright symbol"></span> 2023, Jennilee Rose - Data fetched from <a href="https://developer.cumtd.com/" rel="noreferrer" target="_blank" className={colorMode.colorMode === 'light' ? 'statement-link-light' : 'statement-link-dark'}>CUMTD API</a> and this is not an officially <a href="https://mtd.org/" rel="noreferrer" target="_blank" className={colorMode.colorMode === 'light' ? 'statement-link-light' : 'statement-link-dark'}>CUTMD</a> approved application. Background generated on <a href="http://patternico.com/" rel="noreferrer" target="_blank" className={colorMode.colorMode === 'light' ? 'statement-link-light' : 'statement-link-dark'}>Seamless Pattern Maker</a></p>
         </div>
         </Container>
      </footer>
