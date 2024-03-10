@@ -1,11 +1,10 @@
-// import '../../App.css'
 import Header from '../header'
 import Footer from '../footer'
 import Navigation from '../navigation'
 import React, { useState, useEffect, ReactElement } from 'react'
 import { GET_ROUTES } from '../../api'
-import { BasicRoutes, DirectionsWithTTStopIDs, TimeTableConstants, TimeTableConstantsServices, TripDataBySubRouteType } from '../../types'
-import { Container, useColorMode, Select, Flex, Box, Button } from '@chakra-ui/react'
+import { BasicRoutes, TimeTableConstants, TripDataBySubRouteType } from '../../types'
+import { Container, useColorMode, Select, Flex, Box, Button, Spacer } from '@chakra-ui/react'
 import { colors } from '../../theme/colors'
 import {getTripData, getRouteList, getSubRoutesList} from './utils'
 import TimetablesTabs from './TimetablesTabs'
@@ -105,6 +104,8 @@ export default function RouteInformation(): ReactElement {
                         </>
                      )}
                   </Box>
+                  <Spacer />
+                  <br />
                   <Box>
                      <div id="route-info">
                         {fullTripsList !== undefined && timePointConstantsData && (

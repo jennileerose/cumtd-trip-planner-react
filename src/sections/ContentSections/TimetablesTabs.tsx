@@ -1,10 +1,10 @@
 import React, { useState, useEffect, ReactElement } from 'react'
 import { MainTimeTableTabs, TimeTableConstants, TripDataBySubRouteType } from '../../types'
-import { useColorMode, Select, Flex, Box, Button, Tabs, TabList, Tab, TabPanels, TabPanel } from '@chakra-ui/react'
-import { colors } from '../../theme/colors'
-import {camelCase, getVariantColor, setupRouteServiceTabs} from './utils'
+import { Tabs, TabList, Tab, TabPanels, TabPanel } from '@chakra-ui/react'
+import { getVariantColor, setupRouteServiceTabs} from './utils'
+import TimeTablePanel from './TimeTablePanel'
 
-export default function Timetables(
+export default function TimetablesTabs(
     {
         basicRouteID,
         timetableConstants, 
@@ -15,11 +15,9 @@ export default function Timetables(
         fullTripsList: TripDataBySubRouteType[]
     }): ReactElement {
 
-        const colorMode = useColorMode()
         const [colorVariant, setColorVariant] = useState<string>()
         const [serviceTabs, setServiceTabs] = useState<MainTimeTableTabs[]>()
-        console.log('timetable constants', timetableConstants)
-        console.log('fullTripsList', fullTripsList)
+
         useEffect(() => {
             setColorVariant(getVariantColor(basicRouteID))
             let tempDummyTableData = setupRouteServiceTabs(basicRouteID, timetableConstants)
@@ -29,21 +27,31 @@ export default function Timetables(
 
         return (
             <>
-                {/* <p>{camelCase(basicRouteID)}</p> */}
-                {/*{rawStopByTripData !== undefined && (
-                    <p>{JSON.stringify(rawStopByTripData)}</p>
-                )} */}
                 {serviceTabs !== undefined && (
-                <Tabs isFitted orientation="vertical" variant={colorVariant}>
-                    <TabList>
+                <Tabs
+                    isFitted
+                    orientation="vertical"
+                    variant={colorVariant}
+                    defaultIndex={0}
+                    isManual
+                    id="outer-service-tabs"
+                >
+                    <TabList role="tablist">
                     {serviceTabs.map((tab, index) => (
                         <Tab key={index}>{tab.label} </Tab>
                     ))}
                     </TabList>
                     <TabPanels>
                     {serviceTabs.map((tab, index) => (
-                        <TabPanel p={4} key={index}>
-                            <Tabs isFitted orientation='vertical' variant="innerTabs">
+                        <TabPanel p={4} key={index} role="tabpanel">
+                            <Tabs
+                                isFitted
+                                orientation='vertical'
+                                variant="innerTabs"
+                                defaultIndex={0}
+                                isManual
+                                id="inner-direction-tabs"
+                            >
                                 <TabList>
                                     {tab.content.map((directionTab, directionIndex) => (
                                         <Tab key={directionIndex}>{directionTab.label}</Tab>
@@ -51,7 +59,14 @@ export default function Timetables(
                                 </TabList>
                                 <TabPanels>
                                     {tab.content.map((directionTab, directionIndex) => (
-                                        <TabPanel p={4} key={directionIndex}>{directionTab.content}</TabPanel>
+                                        <TabPanel p={4} key={directionIndex}>
+                                            <TimeTablePanel
+                                                basicRouteID={basicRouteID}
+                                                timetableConstantsServicesByDirection={timetableConstants.service[index].directions[directionIndex]}
+                                                tripsByService={fullTripsList[index]}
+                                                timetableTitle={directionTab.content}
+                                             />
+                                        </TabPanel>
                                     ))}
                                 </TabPanels>
                             </Tabs>

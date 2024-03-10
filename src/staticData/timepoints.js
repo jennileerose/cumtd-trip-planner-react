@@ -176,7 +176,7 @@ export const TimePointConstants = [
                             'WALMART:2',
                             'IT:5',
                             'PLAZA:3',
-                            'GRGIKE:2:',
+                            'GRGIKE:2',
                             'E14:2',
                         ]
                     }
@@ -235,7 +235,7 @@ export const TimePointConstants = [
                             'WALMART:2',
                             'IT:5',
                             'PLAZA:3',
-                            'GRGIKE:2:',
+                            'GRGIKE:2',
                             'E14:2',
                         ]
                     }
@@ -1714,7 +1714,8 @@ export const TimePointConstants = [
                             'VETMED:1',
                             'PAR:2',
                             'IU:1',
-                            'FAR:1'
+                            'FAR:1',
+                            'VETMED:1'
                         ]
                     },
                 ]

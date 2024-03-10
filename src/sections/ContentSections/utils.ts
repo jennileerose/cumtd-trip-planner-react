@@ -2,13 +2,21 @@ import { LatLngExpression } from 'leaflet';
 import tripDataByRouteID from '../../staticData/trips.json'
 import stopTimesByTripID from '../../staticData/stop_times.json'
 import stopsByStopID from '../../staticData/stops.json'
-import { TripDetails, StopTimesByTrip, StopDetailsFromStaticData, SubRoutes, TripDataBySubRouteType, TripsByDirection, TimeTableRowInfo, TimeTableStopData, TimeTableConstants, TimeTableConstantsServices, TimeTable, MainTimeTableTabs, DirectionTimeTableTabs } from '../../types';
+import { TripDetails, StopTimesByTrip, StopDetailsFromStaticData, SubRoutes, TripDataBySubRouteType, TripsByDirection, TimeTableRowInfo, TimeTableStopData, TimeTableConstants, MainTimeTableTabs, DirectionTimeTableTabs, Departure, DateConversion } from '../../types';
+
+  /*********
+   * Inconsisitencies I've noticed:
+   * 1). 9A has Fox & Devonshire in the data but the 9B does not despite the stop being listed in the book and on mtd.org as a time point in both directions. REF timepoints.js under BROWN
+   * 2). I do not have an easy way to deterimine which route trips are UI semesters only and which others operate only during breaks. The only ones I know for sure are the Silver & Illini Limited are ones that run on UI breaks
+   * 3) On the Navy Weekday Carle Fields South is listed in the book with the stop code 1842 but the data has 1018 and the website matches that
+   * 4) The Silver Weekday late night is fridays only
+   */
 
 // Function to convert uppercase route IDs into camel Case
 export function camelCase(str: string) {
   // Using replace method with regEx
   return str.replace(/(?:^\w|[A-Z]|\b\w)/g, function (word, index) {
-      return index == 0 ? word.toUpperCase() : word.toLowerCase();
+      return index === 0 ? word.toUpperCase() : word.toLowerCase();
   }).replace(/\s+/g, '');
 }
 
@@ -37,7 +45,6 @@ export function getVariantColor(basicRouteID: string): string {
 export function getStopCoords(
   stopPoints: any[]
 ): LatLngExpression[] {
-  console.log('stop points', stopPoints)
   const stopCoordinates = [] as LatLngExpression[]
   stopPoints.forEach((stop) => {
     stopCoordinates.push([stop.stop_lat, stop.stop_lon] as LatLngExpression)
@@ -580,7 +587,9 @@ export function getTripData(routeIDs: SubRoutes[]): TripDataBySubRouteType[] {
 export function setupRouteServiceTabs(baseRouteID: string, timetableConstants: TimeTableConstants): MainTimeTableTabs[] {
   let tempTimeTableTabs = [] as MainTimeTableTabs[]
   let tempLabelService = ''
+  let tempRouteName = ''
   let tempLabelDirections = [] as DirectionTimeTableTabs[]
+  let tempServiceNumber = ''
   timetableConstants.service.forEach((service) => {
       switch (service.serviceType) {
           case 'WkDayDaytime':
@@ -611,10 +620,144 @@ export function setupRouteServiceTabs(baseRouteID: string, timetableConstants: T
               tempLabelService = 'Sunday Late Night '
               break;
       }
+      switch (baseRouteID) {
+        case 'YELLOW':
+          if(service.serviceType === 'WkDayDaytime') {
+            tempServiceNumber = '1'
+          } else {
+            tempServiceNumber = '100'
+          }
+          tempRouteName = camelCase(baseRouteID)
+          break;
+        case 'RED':
+          if(service.serviceType === 'WkDayDaytime') {
+            tempServiceNumber = '2'
+          } else {
+            tempServiceNumber = '20'
+          }
+          tempRouteName = camelCase(baseRouteID)
+          break;
+        case 'LAVENDER':
+          if(service.serviceType === 'WkDayDaytime') {
+            tempServiceNumber = '3'
+          } else {
+            tempServiceNumber = '30'
+          }
+          tempRouteName = camelCase(baseRouteID)
+          break;
+        case 'BLUE':
+          tempServiceNumber = '4'
+          tempRouteName = camelCase(baseRouteID)
+           break;
+        case 'GREEN':
+          if(service.serviceType === 'WkDayDaytime') {
+            tempServiceNumber = '5'
+          } else {
+            tempServiceNumber = '50'
+          }
+          tempRouteName = camelCase(baseRouteID)
+          break;
+        case 'GREEN EXPRESS':
+          tempServiceNumber = '5'
+          tempRouteName = 'Green Express'
+           break;
+        case 'ORANGE':
+          tempServiceNumber = '6'
+          tempRouteName = camelCase(baseRouteID)
+           break;
+        case 'GREY':
+          if(service.serviceType === 'WkDayDaytime') {
+            tempServiceNumber = '7'
+          } else {
+            tempServiceNumber = '70'
+          }
+          tempRouteName = camelCase(baseRouteID)
+           break;
+        case 'BRONZE':
+          tempServiceNumber = '8'
+          tempRouteName = camelCase(baseRouteID)
+           break;
+        case 'BROWN':
+          tempServiceNumber = '9'
+          tempRouteName = camelCase(baseRouteID)
+           break;
+        case 'GOLD':
+          tempServiceNumber = '10'
+          tempRouteName = camelCase(baseRouteID)
+           break;
+        case 'RUBY':
+          if(service.serviceType === 'WkDayDaytime') {
+            tempServiceNumber = '11'
+          } else {
+            tempServiceNumber = '110'
+          }
+          tempRouteName = camelCase(baseRouteID)
+           break;
+        case 'TEAL':
+          if(service.serviceType === 'WkDayDaytime') {
+            tempServiceNumber = '12'
+          } else {
+            tempServiceNumber = '120'
+          }
+          tempRouteName = camelCase(baseRouteID)
+           break;
+        case 'SILVER':
+          if(service.serviceType === 'WkDayDaytime') {
+            tempServiceNumber = '13'
+          } else {
+            tempServiceNumber = '130'
+          }
+          tempRouteName = camelCase(baseRouteID)
+           break;
+        case 'SILVER LIMITED':
+          if(service.serviceType === 'WkDayDaytime') {
+            tempServiceNumber = '13'
+          } else {
+            tempServiceNumber = '130'
+          }
+          tempRouteName = 'Silver Limited'
+           break;
+        case 'NAVY':
+          tempServiceNumber = '14'
+          tempRouteName = camelCase(baseRouteID)
+          break;
+        case 'PINK':
+          tempServiceNumber = '16'
+          tempRouteName = camelCase(baseRouteID)
+          break;
+        case 'LIME':
+          tempServiceNumber = '180'
+          tempRouteName = camelCase(baseRouteID)
+           break;
+        case 'RAVEN':
+          tempServiceNumber = '21'
+          tempRouteName = camelCase(baseRouteID)
+           break;
+        case 'ILLINI':
+          if(service.serviceType === 'WkDayDaytime') {
+            tempServiceNumber = '22'
+          } else {
+            tempServiceNumber = '220'
+          }
+          tempRouteName = camelCase(baseRouteID)
+            break;
+        case 'ILLINI LIMITED':
+          if(service.serviceType === 'WkDayDaytime') {
+            tempServiceNumber = '22'
+          } else {
+            tempServiceNumber = '220'
+          }
+          tempRouteName = 'Illini Limited'
+          break;
+        case 'LINK':
+          tempServiceNumber = '24'
+          tempRouteName = camelCase(baseRouteID)
+          break;
+     }
       service.directions.forEach((direction) => {
         tempLabelDirections.push({
           label: direction.directionLabel,
-          content: baseRouteID + ' ' + direction.directionLabel + ' ' + tempLabelService + ' Timetable goes here'
+          content: tempServiceNumber + ' ' + tempRouteName + ' ' + direction.directionLabel + ' ' + tempLabelService
         })
       })
       tempTimeTableTabs.push({
@@ -626,57 +769,213 @@ export function setupRouteServiceTabs(baseRouteID: string, timetableConstants: T
   return tempTimeTableTabs
 }
 
-// takes the full list of trip data and pares it down to just the timepoint stops
-export function getTimetableStopData(basicRouteID: string, fullTripsList: TripDataBySubRouteType[]): TimeTableRowInfo[] {
-  /*********
-   * Inconsisitencies I've noticed:
-   * 1). 9A has Fox & Devonshire in the data but the 9B does not despite the stop being listed in the book and on mtd.org as a time point in both directions. REF timepoints.js under BROWN
-   * 2). I do not have an easy way to deterimine which route trips are UI semesters only and which others operate only during breaks. The only ones I know for sure are the Silver & Illini Limited are ones that run on UI breaks
-   * 3) On the Navy Weekday Carle Fields South is listed in the book with the stop code 1842 but the data has 1018 and the website matches that
-   * 4) The Silver Weekday late night is fridays only
-   */
-  // console.log(fullTripsList)
-  let timetableStops = [] as TimeTableRowInfo[]
-  // const tempBasicRouteID = basicRouteID
-  // let tempActualRouteID = ''
-  // let tempDirection = ''
-  // let tempServiceType = ''
-  // let tempTimetableStopData = [] as TimeTableStopData[]
-  // let tempTimetableRow = [] as TimeTableRowInfo[]
-  // let tempTimeTables = [] as TimeTable[]
+// takes the full list of stop data and pares it down to just the timepoint stops
+export function getTimetableStopData(headerStopIDs: string[]): TimeTableStopData[] {
 
-  
-  //this is a weird first attempt to get the data we need. I think it may be inside out
-  // console.log(timePointConstantsData)
-  // console.log(tempBasicRouteID)
-  // timePointConstantsData.service.forEach((service => {
-  //   tempDirection = service.direction
-  //   tempServiceType = service.serviceType
-  //   service.stopIDs.forEach((timetableStopID) => {
-  //     fullTripsList.forEach((list) => {
-        // console.log(tempDirection, tempServiceType, timetableStopID, list.routeType)
-        // list.routeData.forEach((tripsByDirection: TripsByDirection) => {
-          // console.log(tripsByDirection)
-          // tripsByDirection.trips.forEach((trip) => {
-            // console.log(trip.tripID)
-            // trip.stopTimesByTrip.forEach((stopTime) => {
-              // console.log(stopTime)
-  //             if(stopTime.stop_id === timetableStopID) {
-  //               console.log(stopTime.stop_id)
-  //             }
-  //           })
-  //         })
-  //       })
-  //     })
-  //   })
-  // }))
+  const timeTableHeaders = [] as TimeTableStopData[]
 
-  return timetableStops
+  headerStopIDs.forEach((timepointStopIDs) => {
+    stopsByStopID.forEach((stop) => {
+      if(stop.stop_id === timepointStopIDs) {
+        timeTableHeaders.push({
+          stopID: stop.stop_id,
+          stopName: stop.stop_name,
+          stopCode: stop.stop_code
+        })
+      }
+    })
+  })
+
+  return timeTableHeaders
+}
+
+export function sortTripsByDeparture(trips: TimeTableRowInfo[]): DateConversion[] {
+
+  let tempTrips = [] as DateConversion[]
+  let paredTempTrips = [] as DateConversion[]
+  let tempSortedTrips = [] as DateConversion[]
+  let tripIndexHolder = 0
+  let newTripIndexHolder = 0
+
+  trips.forEach((trip, tripIndex) => {
+    trip.departures.forEach((departure) => {
+      if(departure.departureTime !== "0") {
+        let timeStr = departure.departureTime
+        let translatedTime = new Date(), time = timeStr.split(/:|-/g);
+        translatedTime.setHours(parseInt(time[0]));
+        translatedTime.setMinutes(parseInt(time[1]));
+        tempTrips.push({
+          tripIndex: tripIndex,
+          tripID: trip.tripID,
+          translatedTime: translatedTime
+        })
+      }
+    })
+  })
+
+  tempTrips.forEach((tempTrip) => {
+    tripIndexHolder = tempTrip.tripIndex
+    if(tripIndexHolder === newTripIndexHolder) {
+      paredTempTrips.push(tempTrip)
+      newTripIndexHolder = newTripIndexHolder + 1
+    }
+  })
+
+  tempSortedTrips = paredTempTrips.sort((a, b) => a.translatedTime.getTime() - b.translatedTime.getTime())
+
+  return tempSortedTrips
+}
+
+// filter to catch stops that are listed in the departures list
+function filterIt(arr: Departure[], searchKey: string) {
+  return arr.filter(function(obj) {
+    return obj['stopID'].includes(searchKey);
+  });
 }
 
 // This function takes timetable data and formats it by translating any 24+ hour timestamps and also sorts the table by times and ALSO marks hopper and alt routes
-export function getFormattedtimetableData(timetableData: any[]): any[] {
-  let formattedTimetableData = [] as any[]
+export function getDepartureRows(tripsByService: TripDataBySubRouteType, direction: string, timetableStopIDs: string[]): TimeTableRowInfo[] {
+
+  let formattedTimetableData = [] as TimeTableRowInfo[]
+  let unsortedDepartures = [] as Departure[]
+  let unsortedDepartures2 = [] as Departure[]
+  let sortedDepartureData = [] as Departure[]
+  let sortedTripInfo = [] as DateConversion[]
+  let unsortedTimeTableRowData = [] as TimeTableRowInfo[]
+  let unsortedTimeTableRowData2 = [] as TimeTableRowInfo[]
+  let allTripsByDirection = [] as TripDetails[]
+  let tempStopTimesByTrip = [] as StopTimesByTrip[]
+  let tempFilteredTripArray = [] as TripDetails[]
+
+  tripsByService.routeData.forEach((routeData) => {
+    if(routeData.direction === direction) {
+      routeData.trips.forEach((trip: TripDetails) => {
+        allTripsByDirection.push(trip)
+      })
+    }
+  })
+
+  allTripsByDirection.forEach((trip) => {
+    trip.stopTimesByTrip.forEach((stopTime) => {
+      timetableStopIDs.forEach((timepointStopID) => {
+        if(stopTime.stop_id === timepointStopID) {
+          tempStopTimesByTrip.push({
+            trip_id:  stopTime.trip_id,
+            arrival_time:  stopTime.arrival_time,
+            departure_time:  stopTime.departure_time,
+            stop_id:  stopTime.stop_id,
+            stop_sequence:  stopTime.stop_sequence,
+            stop_headsign:  stopTime.stop_headsign,
+            pickup_type:  stopTime.pickup_type,
+            drop_off_type:  stopTime.drop_off_type,
+            timepoint:  stopTime.timepoint,
+            stop_details: stopTime.stop_details
+          })
+        }
+      })
+    })
+    tempFilteredTripArray.push({
+      tripID: trip.tripID,
+      tripHeadSign: trip.tripHeadSign,
+      routeID: trip.routeID,
+      blockID: trip.blockID,
+      direction: trip.direction,
+      serviceID: trip.serviceID,
+      shapeID: trip.shapeID,
+      stopTimesByTrip: tempStopTimesByTrip
+    })
+    tempStopTimesByTrip = []
+  })
+
+  console.log(tempFilteredTripArray)
+
+  tempFilteredTripArray.forEach((trip) => {
+    trip.stopTimesByTrip.forEach((stop) => {
+      unsortedDepartures.push({
+        stopID: stop.stop_id,
+        departureTime: stop.departure_time
+      })
+    })
+    if(trip.routeID.includes("HOPPER")) {
+      unsortedTimeTableRowData.push({
+        tripID: trip.tripID,
+        routeID: trip.routeID,
+        departures: unsortedDepartures
+      })
+    } else {
+      unsortedTimeTableRowData.push({
+        tripID: trip.tripID,
+        departures: unsortedDepartures
+      })
+    }
+    
+    unsortedDepartures = []
+  })
+
+  // add dash string to stops in this timetable that aren't visited
+  unsortedTimeTableRowData.forEach((row) => {
+    timetableStopIDs.forEach((timepointStopID) => {
+      let filteredRows = filterIt(row.departures, timepointStopID)
+      if(filteredRows.length !== 0) {
+        unsortedDepartures2.push({
+          stopID: filteredRows[0].stopID,
+          departureTime: filteredRows[0].departureTime
+        })
+      } else {
+        unsortedDepartures2.push({
+          stopID: timepointStopID,
+          departureTime: '0'
+        })
+      }
+    })
+    unsortedTimeTableRowData2.push({
+      tripID: row.tripID,
+      departures: unsortedDepartures2
+    })
+    unsortedDepartures2 = []
+  })
+
+  // call the sorting function to sort the trips
+  sortedTripInfo = sortTripsByDeparture(unsortedTimeTableRowData2)
+
+  // use the sorted DateConversion object to set up the final timetable data
+  sortedTripInfo.forEach((sorted) => {
+    unsortedTimeTableRowData2.forEach((row) => {
+      if(sorted.tripID === row.tripID) {
+        row.departures.forEach((rowDeparture) => {
+          let translatedTime = ''
+          let time = rowDeparture.departureTime.split(':')
+          let hour = time[0]
+          if(parseInt(hour) > 24){
+            translatedTime = (parseInt(hour) - 24).toString() + ':' + time[1]
+          } else if (rowDeparture.departureTime === '0') {
+            translatedTime = '-'
+          } else {
+            translatedTime = time[0] + ':' + time[1]
+          }
+          sortedDepartureData.push({
+            stopID: rowDeparture.stopID,
+            departureTime: translatedTime
+          })
+        })
+        if(row.routeID !== undefined) {
+          formattedTimetableData.push({
+            tripID: row.tripID,
+            routeID: row.routeID,
+            departures: sortedDepartureData
+          })
+        } else {
+          formattedTimetableData.push({
+            tripID: row.tripID,
+            routeID: 'NonHopper',
+            departures: sortedDepartureData
+          })
+        }
+        
+        sortedDepartureData = []
+      }
+    })
+  })
 
   return formattedTimetableData
 } 
