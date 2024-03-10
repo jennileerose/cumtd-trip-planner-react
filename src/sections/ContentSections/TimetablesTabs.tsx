@@ -47,7 +47,6 @@ export default function TimetablesTabs(
         useEffect(() => {
             // setColorVariant(getVariantColor(basicRouteID))
             let tempDummyTableData = setupRouteServiceTabs(basicRouteID, timetableConstants)
-            console.log(tempDummyTableData)
             let fullServiceList = [] as TimeTableTabs[]
             tempDummyTableData.forEach((service, serviceIndex) => {
                 service.content.forEach((direction, directionIndex) => {
@@ -60,6 +59,7 @@ export default function TimetablesTabs(
                 })
             })
             setServiceTabs(fullServiceList)
+            
             }, [basicRouteID, timetableConstants, timetableConstants.basicRouteID, timetableConstants.service])
       
 
